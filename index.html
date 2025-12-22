@@ -6,6 +6,10 @@
   <title>Malhar Kharat — Author</title>
   <meta name="description" content="Official author website of Malhar Kharat. Explore books, upcoming releases, and updates." />
 
+  <meta property="og:title" content="Malhar Kharat — Author" />
+  <meta property="og:description" content="Books, upcoming releases, and updates." />
+  <meta property="og:type" content="website" />
+
   <style>
     :root{
       --bg:#0b0c10;
@@ -79,6 +83,7 @@
       width:84px;height:84px;border-radius:18px;object-fit:cover;
       border:1px solid var(--line);
     }
+
     .tag{
       display:inline-block;
       font-size:12px;color:var(--muted);
@@ -110,6 +115,10 @@
     .footer{
       margin-top:40px;text-align:center;color:var(--muted);font-size:13px
     }
+
+    /* simple list styling for upcoming */
+    .ul-clean{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .ul-clean li{margin:6px 0}
   </style>
 </head>
 
@@ -125,10 +134,13 @@
         <a href="#books">Books</a>
         <a href="#upcoming">Upcoming</a>
         <a href="#about">About</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#newsletter">Updates</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
 
+    <!-- HERO -->
     <div class="hero">
       <div class="card">
         <div class="author">
@@ -140,7 +152,7 @@
         </div>
 
         <p class="sub" style="margin-top:12px">
-          I write about discipline, identity, and the unseen work required to build a meaningful life.
+          I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
         </p>
 
         <a class="btn primary" href="#books">Explore books</a>
@@ -155,14 +167,16 @@
 
       <div class="card">
         <h2>Now / Next</h2>
-        <p class="sub"><strong>Kill the 0 Days</strong> — building consistency, one day at a time.</p>
-        <p class="sub"><strong>The Unseen Work</strong> — identity × reps × time.</p>
+        <p class="sub">
+          If you’ve ever felt stuck between “I want more” and “I don’t know how to start” — you’re in the right place.
+        </p>
         <span class="tag">Consistency</span>
-        <span class="tag">Habits</span>
+        <span class="tag">Clarity</span>
         <span class="tag">Self-trust</span>
       </div>
     </div>
 
+    <!-- BOOKS -->
     <section id="books" class="card" style="margin-top:22px">
       <h2>Books</h2>
       <p class="sub">Official links to my published books.</p>
@@ -191,32 +205,113 @@
       </div>
     </section>
 
+    <!-- UPCOMING -->
     <section id="upcoming" class="card" style="margin-top:22px">
       <h2>Upcoming</h2>
+      <p class="sub">What I’m writing next (and what’s coming soon):</p>
+
+      <div class="book" style="padding:18px">
+        <ul class="ul-clean">
+          <li><strong>The Unseen Work</strong> — discipline, identity, and showing up when it’s hard.</li>
+          <li><strong>The Mind After Midnight</strong> — late-night honesty, clarity, and reflection.</li>
+          <li><strong>Kill the 0 Days</strong> — consistency, momentum, and winning the day in small ways.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="card" style="margin-top:22px">
+      <h2>About the Author</h2>
+
+      <p class="sub">
+        I’m Malhar Kharat — and I didn’t start writing because it looked cool. I started because I needed clarity.
+        I needed something that felt real when motivation was gone.
+      </p>
+
+      <p class="sub">
+        My background is built on structured thinking, problem-solving, and discipline — and I bring that same energy into my books:
+        practical ideas, clean thinking, and simple actions that compound over time.
+      </p>
+
+      <p class="sub">
+        A lot of my work comes from living through uncertainty: learning how to rebuild momentum, how to stop overthinking,
+        and how to become someone you can trust — not just for one week, but for years.
+      </p>
+
+      <p class="sub" style="margin-bottom:0">
+        When I’m not writing, I’m training, building projects, learning, and refining the habits that make progress feel normal.
+      </p>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="card" style="margin-top:22px">
+      <h2>What Readers Say</h2>
+
       <div class="split">
         <div class="book" style="padding:18px">
-          <h3>Kill the 0 Days</h3>
-          <p class="sub">A short, hard-hitting guide to consistency—no motivation required.</p>
-          <span class="tag">Micro-discipline</span>
-          <span class="tag">Momentum</span>
+          <p class="sub">
+            “This didn’t feel like a self-help book. It felt like someone finally put my thoughts into words.
+            Clear, honest, and grounding.”
+          </p>
+          <strong>— Leena</strong>
         </div>
+
         <div class="book" style="padding:18px">
-          <h3>The Unseen Work</h3>
-          <p class="sub">Habits that beat procrastination. Identity × Reps × Time.</p>
-          <span class="tag">Habits</span>
-          <span class="tag">Identity</span>
+          <p class="sub">
+            “What stood out was the simplicity. No over-promising. Just practical perspective that actually sticks.”
+          </p>
+          <strong>— Kaustubh Rai</strong>
+        </div>
+
+        <div class="book" style="padding:18px">
+          <p class="sub">
+            “There’s a calm confidence in the writing. It makes you want to act quietly, not announce your goals.”
+          </p>
+          <strong>— James Walker</strong>
+        </div>
+
+        <div class="book" style="padding:18px">
+          <p class="sub">
+            “I read this during a period of burnout. It helped me slow down, reset, and move forward without pressure.”
+          </p>
+          <strong>— Daniel Hughes</strong>
         </div>
       </div>
     </section>
 
-    <section id="about" class="card" style="margin-top:22px">
-      <h2>About</h2>
+    <!-- ADD REVIEW / MORE REVIEWS -->
+    <section id="reviews" class="card" style="margin-top:22px">
+      <h2>Add a Review</h2>
+
       <p class="sub">
-        I’m Malhar Kharat. I write for people who want real progress without fake motivation.
-        My work focuses on discipline, clarity, and becoming someone you can trust.
+        If one of my books helped you — even a small shift in perspective — feel free to share your thoughts.
+      </p>
+
+      <a class="btn" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Feedback%20for%20Malhar%20Kharat">
+        Send a review
+      </a>
+
+      <p class="sub" style="margin-top:10px">
+        Selected feedback may be featured here with your permission.
       </p>
     </section>
 
+    <!-- NEWSLETTER / EMAIL SIGNUP PLACEHOLDER -->
+    <section id="newsletter" class="card" style="margin-top:22px">
+      <h2>Get Early Chapters & Updates</h2>
+      <p class="sub">
+        Occasional notes on discipline, writing, and upcoming releases. No spam. No noise.
+      </p>
+
+      <!-- MailerLite / ConvertKit embed code will go here -->
+      <div class="book" style="padding:18px">
+        <p class="sub" style="margin-bottom:0">
+          Email signup is being connected. Once you create your MailerLite embedded form, paste the embed code here.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
     <section id="contact" class="card" style="margin-top:22px">
       <h2>Contact</h2>
       <p class="sub">For collaborations, media, or updates:</p>
@@ -235,7 +330,3 @@
   </script>
 </body>
 </html>
-
-
-
-
