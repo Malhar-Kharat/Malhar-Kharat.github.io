@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Malhar Kharat — Author</title>
+  <meta name="description" content="Official author website of Malhar Kharat. Explore books, upcoming releases, and updates." />
+
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#101218;
+      --text:#e9e9ee;
+      --muted:#a8a9b3;
+      --line:#232633;
+      --accent:#c7ff5a;
+      --max:980px;
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:radial-gradient(1200px 800px at 70% -10%, #18203a 0%, var(--bg) 55%);
+      color:var(--text);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 60px}
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:12px 16px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(16,18,24,.7);
+      backdrop-filter:blur(10px);
+      position:sticky;top:14px;z-index:10;
+    }
+    .brand{display:flex;gap:10px;align-items:center;text-decoration:none}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+    .links a{
+      margin-left:10px;text-decoration:none;color:var(--muted);
+      padding:6px 10px;border-radius:999px
+    }
+    .links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+    .hero{
+      margin-top:22px;
+      display:grid;grid-template-columns:1.2fr .8fr;gap:18px
+    }
+    @media(max-width:860px){.hero{grid-template-columns:1fr}}
+    .card{
+      border:1px solid var(--line);
+      background:rgba(16,18,24,.75);
+      border-radius:var(--r);
+      padding:22px
+    }
+    h1{margin:0 0 10px;font-size:42px;line-height:1.1}
+    h2{margin:0 0 10px}
+    h3{margin-bottom:6px}
+    .sub{color:var(--muted);margin-bottom:14px}
+    .btn{
+      display:inline-block;margin-top:6px;margin-right:8px;
+      padding:10px 14px;border-radius:12px;
+      border:1px solid var(--line);
+      text-decoration:none
+    }
+    .btn.primary{border-color:var(--accent)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    .tag{
+      display:inline-block;
+      font-size:12px;color:var(--muted);
+      border:1px solid var(--line);
+      padding:4px 8px;border-radius:999px;margin-right:6px
+    }
+    .footer{
+      margin-top:40px;text-align:center;color:var(--muted);font-size:13px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="nav">
+      <a class="brand" href="#">
+        <span class="dot"></span>
+        <strong>Malhar Kharat</strong>
+      </a>
+      <div class="links">
+        <a href="#books">Books</a>
+        <a href="#upcoming">Upcoming</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <h1>Author of modern self-help & reflective nonfiction.</h1>
+        <p class="sub">
+          I write about discipline, identity, and the unseen work required to build a meaningful life.
+        </p>
+        <a class="btn primary" href="#books">Explore books</a>
+        <a class="btn" href="#upcoming">Upcoming releases</a>
+      </div>
+
+      <div class="card">
+        <h2>Current focus</h2>
+        <p class="sub"><strong>The Unseen Work</strong> — a book about consistency, self-trust, and showing up.</p>
+        <span class="tag">Discipline</span>
+        <span class="tag">Habits</span>
+        <span class="tag">Identity</span>
+      </div>
+    </div>
+
+    <section id="books" class="card" style="margin-top:22px">
+      <h2>Books</h2>
+      <div class="grid">
+
+        <div>
+          <h3>The Luck Blueprint</h3>
+          <p class="sub">A practical guide to building momentum, clarity, and better decisions.</p>
+          <a class="btn" href="https://amzn.eu/d/97oAgIP" target="_blank">Buy on Amazon</a>
+        </div>
+
+        <div>
+          <h3>Why Not To Be Rich</h3>
+          <p class="sub">A contrarian take on ambition, success, and what “rich” really means.</p>
+          <a class="btn" href="https://amzn.eu/d/isqC5Rg" target="_blank">Buy on Amazon</a>
+        </div>
+
+        <div>
+          <h3>Echoes Of Youth</h3>
+          <p class="sub">Reflections on growth, emotions, and the quiet lessons of becoming.</p>
+          <a class="btn" href="https://amzn.eu/d/h0XX5MM" target="_blank">Buy on Amazon</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="upcoming" class="card" style="margin-top:22px">
+      <h2>Upcoming</h2>
+      <p class="sub"><strong>The Unseen Work</strong> — coming soon.</p>
+    </section>
+
+    <section id="about" class="card" style="margin-top:22px">
+      <h2>About</h2>
+      <p class="sub">
+        I’m Malhar Kharat. I write for people who want real progress without fake motivation.
+        My work focuses on discipline, clarity, and becoming someone you can trust.
+      </p>
+    </section>
+
+    <section id="contact" class="card" style="margin-top:22px">
+      <h2>Contact</h2>
+      <p class="sub">For collaborations, media, or updates:</p>
+      <a class="btn" href="mailto:your@email.com">Email</a>
+      <a class="btn" href="https://instagram.com/malhar__k" target="_blank">Instagram</a>
+    </section>
+
+    <div class="footer">
+      © <span id="y"></span> Malhar Kharat • Built on GitHub Pages
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>  
+
+
+
+
+
