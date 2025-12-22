@@ -1,332 +1,296 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Malhar Kharat — Author</title>
-  <meta name="description" content="Official author website of Malhar Kharat. Explore books, upcoming releases, and updates." />
 
-  <meta property="og:title" content="Malhar Kharat — Author" />
-  <meta property="og:description" content="Books, upcoming releases, and updates." />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="Official author website of Malhar Kharat. Books on discipline, clarity, habits, and identity.">
 
   <style>
     :root{
       --bg:#0b0c10;
-      --card:#101218;
-      --text:#e9e9ee;
-      --muted:#a8a9b3;
-      --line:#232633;
-      --accent:#c7ff5a;
-      --max:980px;
-      --r:18px;
+      --card:#12141a;
+      --text:#e8e9ed;
+      --muted:#9aa0a6;
+      --accent:#9effa1;
+      --radius:18px;
+      --max:1100px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
-      background:radial-gradient(1200px 800px at 70% -10%, #18203a 0%, var(--bg) 55%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(1200px 600px at top, #111827, #0b0c10);
       color:var(--text);
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      line-height:1.6;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 60px}
 
-    .nav{
-      display:flex;justify-content:space-between;align-items:center;gap:10px;
-      padding:12px 16px;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(16,18,24,.7);
-      backdrop-filter:blur(10px);
-      position:sticky;top:14px;z-index:10;
+    a{color:inherit;text-decoration:none}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      backdrop-filter: blur(14px);
+      background:rgba(11,12,16,.6);
+      border-bottom:1px solid #1f2937;
     }
-    .brand{display:flex;gap:10px;align-items:center;text-decoration:none}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
-    .links{display:flex;flex-wrap:wrap}
-    .links a{
-      margin-left:10px;text-decoration:none;color:var(--muted);
-      padding:6px 10px;border-radius:999px
+
+    nav{
+      max-width:var(--max);
+      margin:auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
-    .links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+
+    nav .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:600;
+    }
+
+    nav .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 12px var(--accent);
+    }
+
+    nav .links a{
+      margin-left:18px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    section{
+      max-width:var(--max);
+      margin:auto;
+      padding:60px 20px;
+      animation: fadeUp .8s ease both;
+    }
+
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(20px)}
+      to{opacity:1; transform:none}
+    }
 
     .card{
-      border:1px solid var(--line);
-      background:rgba(16,18,24,.75);
-      border-radius:var(--r);
-      padding:22px
+      background:linear-gradient(180deg, #141821, #0f1117);
+      border:1px solid #1f2937;
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:0 30px 80px rgba(0,0,0,.4);
     }
 
     .hero{
-      margin-top:22px;
-      display:grid;grid-template-columns:1.15fr .85fr;gap:18px;
-      align-items:stretch;
-    }
-    @media(max-width:860px){.hero{grid-template-columns:1fr}}
-
-    h1{margin:0 0 10px;font-size:42px;line-height:1.1}
-    h2{margin:0 0 10px}
-    h3{margin:0 0 8px}
-
-    .sub{color:var(--muted);margin:0 0 14px}
-    .btn{
-      display:inline-block;margin-top:10px;margin-right:10px;
-      padding:10px 14px;border-radius:12px;
-      border:1px solid var(--line);
-      text-decoration:none
-    }
-    .btn.primary{border-color:var(--accent)}
-    .btn:hover{background:rgba(255,255,255,.04)}
-
-    .author{
-      display:flex;gap:14px;align-items:center;
-    }
-    .author img{
-      width:84px;height:84px;border-radius:18px;object-fit:cover;
-      border:1px solid var(--line);
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
     }
 
-    .tag{
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+    }
+
+    .hero h1{
+      font-size:44px;
+      margin:0 0 10px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      max-width:520px;
+    }
+
+    .tags span{
       display:inline-block;
-      font-size:12px;color:var(--muted);
-      border:1px solid var(--line);
-      padding:4px 8px;border-radius:999px;margin-right:6px;margin-top:8px
+      margin:6px 6px 0 0;
+      padding:6px 12px;
+      border-radius:999px;
+      background:#0f172a;
+      border:1px solid #1f2937;
+      font-size:12px;
+      color:#cbd5f5;
     }
 
-    .books-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px;
+    .btn{
+      display:inline-block;
+      margin-top:16px;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid var(--accent);
+      color:#051b0a;
+      background:var(--accent);
+      font-weight:600;
+      transition:.3s;
     }
-    @media(max-width:900px){.books-grid{grid-template-columns:1fr}}
+
+    .btn.outline{
+      background:transparent;
+      color:var(--accent);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 30px rgba(158,255,161,.3);
+    }
+
+    h2{margin-bottom:10px}
+    h3{margin-top:0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px;
+    }
+
     .book{
-      border:1px solid var(--line);
-      background:rgba(16,18,24,.55);
-      border-radius:18px;padding:16px;
-    }
-    .cover{
-      width:100%;aspect-ratio:2/3;border-radius:14px;
-      border:1px solid var(--line);object-fit:cover;
-      margin-bottom:12px;
-      background:rgba(0,0,0,.2);
+      transition:.4s;
+      perspective:1000px;
     }
 
-    .split{
-      display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px;
-    }
-    @media(max-width:860px){.split{grid-template-columns:1fr}}
-
-    .footer{
-      margin-top:40px;text-align:center;color:var(--muted);font-size:13px
+    .book:hover{
+      transform:rotateY(-6deg) translateY(-6px);
     }
 
-    /* simple list styling for upcoming */
-    .ul-clean{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    .ul-clean li{margin:6px 0}
+    .book img{
+      width:100%;
+      border-radius:12px;
+      margin-bottom:14px;
+    }
+
+    .muted{color:var(--muted)}
+
+    iframe{
+      width:100%;
+      min-height:720px;
+      border:none;
+      border-radius:14px;
+    }
+
+    footer{
+      padding:40px 20px;
+      text-align:center;
+      color:#6b7280;
+      font-size:14px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <div class="nav">
-      <a class="brand" href="#">
-        <span class="dot"></span>
-        <strong>Malhar Kharat</strong>
-      </a>
-      <div class="links">
-        <a href="#books">Books</a>
-        <a href="#upcoming">Upcoming</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Reviews</a>
-        <a href="#newsletter">Updates</a>
-        <a href="#contact">Contact</a>
-      </div>
+<header>
+  <nav>
+    <div class="logo">
+      <div class="dot"></div>
+      Malhar Kharat
+    </div>
+    <div class="links">
+      <a href="#books">Books</a>
+      <a href="#upcoming">Upcoming</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#signup">Updates</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="card">
+    <h1>Malhar Kharat</h1>
+    <p>Author of modern self-help & reflective nonfiction.</p>
+    <p>I write about discipline, identity, and the quiet work that changes your life when nobody is watching.</p>
+
+    <div class="tags">
+      <span>Discipline</span>
+      <span>Clarity</span>
+      <span>Habits</span>
+      <span>Identity</span>
     </div>
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="card">
-        <div class="author">
-          <img src="assets/author.jpg" alt="Malhar Kharat author portrait" />
-          <div>
-            <h1 style="margin:0 0 6px">Malhar Kharat</h1>
-            <p class="sub">Author of modern self-help & reflective nonfiction.</p>
-          </div>
-        </div>
-
-        <p class="sub" style="margin-top:12px">
-          I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
-        </p>
-
-        <a class="btn primary" href="#books">Explore books</a>
-        <a class="btn" href="#upcoming">Upcoming releases</a>
-
-        <div>
-          <span class="tag">Discipline</span>
-          <span class="tag">Mindset</span>
-          <span class="tag">Growth</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Now / Next</h2>
-        <p class="sub">
-          If you’ve ever felt stuck between “I want more” and “I don’t know how to start” — you’re in the right place.
-        </p>
-        <span class="tag">Consistency</span>
-        <span class="tag">Clarity</span>
-        <span class="tag">Self-trust</span>
-      </div>
-    </div>
-
-    <!-- BOOKS -->
-    <section id="books" class="card" style="margin-top:22px">
-      <h2>Books</h2>
-      <p class="sub">Official links to my published books.</p>
-
-      <div class="books-grid">
-        <div class="book">
-          <img class="cover" src="assets/luck-blueprint.jpg" alt="The Luck Blueprint cover" />
-          <h3>The Luck Blueprint</h3>
-          <p class="sub">Practical self-help for building momentum, clarity, and better decisions.</p>
-          <a class="btn primary" href="https://amzn.eu/d/97oAgIP" target="_blank" rel="noopener">Buy on Amazon</a>
-        </div>
-
-        <div class="book">
-          <img class="cover" src="assets/why-not-to-be-rich.jpg" alt="Why Not To Be Rich cover" />
-          <h3>Why Not To Be Rich</h3>
-          <p class="sub">A contrarian take on ambition, success, and what “rich” really means.</p>
-          <a class="btn primary" href="https://amzn.eu/d/isqC5Rg" target="_blank" rel="noopener">Buy on Amazon</a>
-        </div>
-
-        <div class="book">
-          <img class="cover" src="assets/echoes-of-youth.jpg" alt="Echoes Of Youth cover" />
-          <h3>Echoes Of Youth</h3>
-          <p class="sub">Reflections on growth, emotions, and the quiet lessons of becoming.</p>
-          <a class="btn primary" href="https://amzn.eu/d/h0XX5MM" target="_blank" rel="noopener">Buy on Amazon</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- UPCOMING -->
-    <section id="upcoming" class="card" style="margin-top:22px">
-      <h2>Upcoming</h2>
-      <p class="sub">What I’m writing next (and what’s coming soon):</p>
-
-      <div class="book" style="padding:18px">
-        <ul class="ul-clean">
-          <li><strong>The Unseen Work</strong> — discipline, identity, and showing up when it’s hard.</li>
-          <li><strong>The Mind After Midnight</strong> — late-night honesty, clarity, and reflection.</li>
-          <li><strong>Kill the 0 Days</strong> — consistency, momentum, and winning the day in small ways.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="card" style="margin-top:22px">
-      <h2>About the Author</h2>
-
-      <p class="sub">
-        I’m Malhar Kharat — and I didn’t start writing because it looked cool. I started because I needed clarity.
-        I needed something that felt real when motivation was gone.
-      </p>
-
-      <p class="sub">
-        My background is built on structured thinking, problem-solving, and discipline — and I bring that same energy into my books:
-        practical ideas, clean thinking, and simple actions that compound over time.
-      </p>
-
-      <p class="sub">
-        A lot of my work comes from living through uncertainty: learning how to rebuild momentum, how to stop overthinking,
-        and how to become someone you can trust — not just for one week, but for years.
-      </p>
-
-      <p class="sub" style="margin-bottom:0">
-        When I’m not writing, I’m training, building projects, learning, and refining the habits that make progress feel normal.
-      </p>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="card" style="margin-top:22px">
-      <h2>What Readers Say</h2>
-
-      <div class="split">
-        <div class="book" style="padding:18px">
-          <p class="sub">
-            “This didn’t feel like a self-help book. It felt like someone finally put my thoughts into words.
-            Clear, honest, and grounding.”
-          </p>
-          <strong>— Leena</strong>
-        </div>
-
-        <div class="book" style="padding:18px">
-          <p class="sub">
-            “What stood out was the simplicity. No over-promising. Just practical perspective that actually sticks.”
-          </p>
-          <strong>— Kaustubh Rai</strong>
-        </div>
-
-        <div class="book" style="padding:18px">
-          <p class="sub">
-            “There’s a calm confidence in the writing. It makes you want to act quietly, not announce your goals.”
-          </p>
-          <strong>— James Walker</strong>
-        </div>
-
-        <div class="book" style="padding:18px">
-          <p class="sub">
-            “I read this during a period of burnout. It helped me slow down, reset, and move forward without pressure.”
-          </p>
-          <strong>— Daniel Hughes</strong>
-        </div>
-      </div>
-    </section>
-
-    <!-- ADD REVIEW / MORE REVIEWS -->
-    <section id="reviews" class="card" style="margin-top:22px">
-      <h2>Add a Review</h2>
-
-      <p class="sub">
-        If one of my books helped you — even a small shift in perspective — feel free to share your thoughts.
-      </p>
-
-      <a class="btn" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Feedback%20for%20Malhar%20Kharat">
-        Send a review
-      </a>
-
-      <p class="sub" style="margin-top:10px">
-        Selected feedback may be featured here with your permission.
-      </p>
-    </section>
-
-    <!-- NEWSLETTER / EMAIL SIGNUP PLACEHOLDER -->
-    <section id="newsletter" class="card" style="margin-top:22px">
-      <h2>Get Early Chapters & Updates</h2>
-      <p class="sub">
-        Occasional notes on discipline, writing, and upcoming releases. No spam. No noise.
-      </p>
-
-      <!-- MailerLite / ConvertKit embed code will go here -->
-      <div class="book" style="padding:18px">
-        <p class="sub" style="margin-bottom:0">
-          Email signup is being connected. Once you create your MailerLite embedded form, paste the embed code here.
-        </p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="card" style="margin-top:22px">
-      <h2>Contact</h2>
-      <p class="sub">For collaborations, media, or updates:</p>
-      <a class="btn" href="mailto:kharatmalhar.mk@gmail.com">Email</a>
-      <a class="btn" href="https://instagram.com/malhar__k" target="_blank" rel="noopener">Instagram</a>
-    </section>
-
-    <div class="footer">
-      © <span id="y"></span> Malhar Kharat • Built on GitHub Pages
-    </div>
-
+    <a href="#books" class="btn">Explore books</a>
+    <a href="#signup" class="btn outline">Join free updates</a>
   </div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <div class="card">
+    <h3>Now / Next</h3>
+    <p>If you’ve ever felt stuck between “I want more” and “I don’t know how to start” — you’re in the right place.</p>
+  </div>
+</section>
+
+<section id="books">
+  <h2>Books</h2>
+  <div class="grid">
+    <div class="card book">
+      <img src="assets/luck-blueprint.jpg" alt="The Luck Blueprint">
+      <h3>The Luck Blueprint</h3>
+      <p class="muted">Momentum, clarity, and better decisions.</p>
+      <a class="btn outline" href="https://amzn.eu/d/97oAgIP" target="_blank">Buy on Amazon</a>
+    </div>
+
+    <div class="card book">
+      <img src="assets/why-not-to-be-rich.jpg" alt="Why Not To Be Rich">
+      <h3>Why Not To Be Rich</h3>
+      <p class="muted">A contrarian take on ambition and success.</p>
+      <a class="btn outline" href="https://amzn.eu/d/isqC5Rg" target="_blank">Buy on Amazon</a>
+    </div>
+
+    <div class="card book">
+      <img src="assets/echoes-of-youth.jpg" alt="Echoes of Youth">
+      <h3>Echoes of Youth</h3>
+      <p class="muted">Reflections on growth and becoming.</p>
+      <a class="btn outline" href="https://amzn.eu/d/h0XX5MM" target="_blank">Buy on Amazon</a>
+    </div>
+  </div>
+</section>
+
+<section id="upcoming">
+  <h2>Upcoming</h2>
+  <div class="card">
+    <ul>
+      <li><strong>The Unseen Work</strong> — discipline, identity, and showing up when it’s hard.</li>
+      <li><strong>The Mind After Midnight</strong> — late-night clarity and reflection.</li>
+      <li><strong>Kill the 0 Days</strong> — consistency, momentum, and winning small.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About the Author</h2>
+  <div class="card">
+    <p>I didn’t start writing because it looked cool. I started because I needed clarity — something that held up when motivation disappeared.</p>
+    <p>My background is rooted in structured thinking, problem-solving, and discipline. I bring that same mindset into my writing: practical ideas, clean thinking, and actions that compound quietly over time.</p>
+    <p>I’ve studied and worked in technical and analytical environments, where consistency and systems matter more than hype — and that philosophy runs through every book I write.</p>
+  </div>
+</section>
+
+<section id="reviews">
+  <h2>What Readers Say</h2>
+  <div class="grid">
+    <div class="card">“Clear, honest, and grounding.”<br><strong>— Leena</strong></div>
+    <div class="card">“No over-promising. Just clarity.”<br><strong>— Kaustubh Rai</strong></div>
+    <div class="card">“Makes you act quietly.”<br><strong>— James Walker</strong></div>
+    <div class="card">“Helped me reset without pressure.”<br><strong>— Daniel Hughes</strong></div>
+  </div>
+</section>
+
+<section id="signup">
+  <h2>Get Early Chapters & Updates</h2>
+  <div class="card">
+    <p class="muted">Short notes on discipline, clarity, and upcoming books. No spam.</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevhGSWSlvoLke52m2LP0i1lXJBXwZSdcEKu34yfYdNyJPv7A/viewform?embedded=true"></iframe>
+  </div>
+</section>
+
+<footer>
+  © 2025 Malhar Kharat · Built on GitHub Pages
+</footer>
+
 </body>
 </html>
