@@ -1,296 +1,672 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Malhar Kharat — Author</title>
-
-  <meta name="description" content="Official author website of Malhar Kharat. Books on discipline, clarity, habits, and identity.">
+  <meta name="description" content="Official author website of Malhar Kharat. Books, upcoming releases, and reader updates." />
 
   <style>
     :root{
-      --bg:#0b0c10;
-      --card:#12141a;
-      --text:#e8e9ed;
-      --muted:#9aa0a6;
-      --accent:#9effa1;
-      --radius:18px;
+      --bg:#07080c;
+      --card:#0f121a;
+      --text:#e9e9ee;
+      --muted:#a8a9b3;
+      --line:#242a3a;
+      --accent:#c7ff5a;
+      --accent2:#6ee7ff;
       --max:1100px;
+      --r:20px;
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --glow: 0 0 0 1px rgba(199,255,90,.14), 0 18px 70px rgba(0,0,0,.55);
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(1200px 600px at top, #111827, #0b0c10);
       color:var(--text);
-      line-height:1.6;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(900px 600px at 18% 10%, rgba(110,231,255,.16), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(199,255,90,.12), transparent 55%),
+        radial-gradient(1100px 700px at 60% 120%, rgba(122,92,255,.10), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
     }
-
     a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:10;
-      backdrop-filter: blur(14px);
-      background:rgba(11,12,16,.6);
-      border-bottom:1px solid #1f2937;
+    /* Top nav */
+    .nav{
+      position:fixed; left:0; right:0; top:14px; z-index:50;
+      display:flex; justify-content:center; pointer-events:none;
     }
-
-    nav{
-      max-width:var(--max);
-      margin:auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    .nav-inner{
+      pointer-events:auto;
+      width:min(var(--max), calc(100% - 36px));
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(10,12,18,.55);
+      backdrop-filter: blur(12px);
+      border-radius:999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
     }
-
-    nav .logo{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:600;
-    }
-
-    nav .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:var(--accent);
-      box-shadow:0 0 12px var(--accent);
-    }
-
-    nav .links a{
-      margin-left:18px;
-      font-size:14px;
+    .brand{display:flex;align-items:center;gap:10px;font-weight:650}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(199,255,90,.55)}
+    .links{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .links a{
       color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:14px;
+      transition:.2s;
+    }
+    .links a:hover{color:var(--text); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.06)}
+    .cta{
+      display:flex; gap:10px; align-items:center;
     }
 
-    section{
-      max-width:var(--max);
-      margin:auto;
-      padding:60px 20px;
-      animation: fadeUp .8s ease both;
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      font-weight:650;
+      transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease;
+      cursor:pointer;
     }
+    .btn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(199,255,90,.25);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(199,255,90,.95), rgba(110,231,255,.55));
+      color:#06110a;
+      border-color: rgba(199,255,90,.30);
+    }
+    .btn.small{padding:9px 12px; font-size:14px}
+    .btn.linklike{background:transparent;border-color:rgba(255,255,255,.10);color:var(--muted)}
+    .btn.linklike:hover{color:var(--text)}
 
-    @keyframes fadeUp{
-      from{opacity:0; transform:translateY(20px)}
-      to{opacity:1; transform:none}
+    /* Slide pages */
+    .pages{
+      height:100vh;
+      overflow-y:auto;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
+    }
+    .page{
+      scroll-snap-align:start;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding:92px 18px 56px;
+    }
+    .wrap{
+      width:min(var(--max), 100%);
+      margin:0 auto;
     }
 
     .card{
-      background:linear-gradient(180deg, #141821, #0f1117);
-      border:1px solid #1f2937;
-      border-radius:var(--radius);
-      padding:28px;
-      box-shadow:0 30px 80px rgba(0,0,0,.4);
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(16,18,28,.78), rgba(10,12,20,.62));
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:26px;
     }
 
+    /* Hero layout */
     .hero{
       display:grid;
       grid-template-columns:1.2fr .8fr;
-      gap:24px;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media(max-width:900px){ .hero{grid-template-columns:1fr} }
+    .hero h1{margin:0 0 10px; font-size:56px; line-height:1.05; letter-spacing:-.6px}
+    @media(max-width:520px){ .hero h1{font-size:44px} }
+    .sub{color:var(--muted); margin:0 0 14px}
+
+    .authorRow{
+      display:flex; gap:16px; align-items:center;
+      margin-bottom:12px;
+    }
+    .avatar{
+      width:108px;height:108px;border-radius:22px; object-fit:cover;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .tag{
+      display:inline-flex; align-items:center;
+      font-size:12px;color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      padding:5px 10px;border-radius:999px;
+      background:rgba(255,255,255,.03);
     }
 
-    @media(max-width:900px){
-      .hero{grid-template-columns:1fr}
-    }
+    /* Sections */
+    h2{margin:0 0 10px; font-size:30px}
+    h3{margin:0 0 8px}
 
-    .hero h1{
-      font-size:44px;
-      margin:0 0 10px;
-    }
-
-    .hero p{
-      color:var(--muted);
-      max-width:520px;
-    }
-
-    .tags span{
-      display:inline-block;
-      margin:6px 6px 0 0;
-      padding:6px 12px;
-      border-radius:999px;
-      background:#0f172a;
-      border:1px solid #1f2937;
-      font-size:12px;
-      color:#cbd5f5;
-    }
-
-    .btn{
-      display:inline-block;
-      margin-top:16px;
-      padding:12px 18px;
-      border-radius:999px;
-      border:1px solid var(--accent);
-      color:#051b0a;
-      background:var(--accent);
-      font-weight:600;
-      transition:.3s;
-    }
-
-    .btn.outline{
-      background:transparent;
-      color:var(--accent);
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 10px 30px rgba(158,255,161,.3);
-    }
-
-    h2{margin-bottom:10px}
-    h3{margin-top:0}
-
+    /* Grid + 3D cards */
     .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:22px;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+      margin-top:14px;
     }
+    @media(max-width:980px){ .grid{grid-template-columns:1fr} }
 
     .book{
-      transition:.4s;
-      perspective:1000px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      transform-style:preserve-3d;
+      will-change:transform;
+      position:relative;
+      overflow:hidden;
     }
-
-    .book:hover{
-      transform:rotateY(-6deg) translateY(-6px);
+    .book:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 200px at 20% 0%, rgba(199,255,90,.10), transparent 55%),
+                  radial-gradient(700px 240px at 90% 20%, rgba(110,231,255,.10), transparent 55%);
+      pointer-events:none;
+      opacity:.85;
     }
-
-    .book img{
+    .book:hover{box-shadow:var(--glow); border-color:rgba(199,255,90,.25); transform: translateY(-6px)}
+    .cover{
       width:100%;
-      border-radius:12px;
-      margin-bottom:14px;
+      aspect-ratio:2/3;
+      border-radius:14px;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      transform: translateZ(22px);
+      transition: transform .35s ease, filter .35s ease;
+      position:relative;
+      z-index:1;
+    }
+    .book:hover .cover{
+      transform: translateZ(36px) rotateX(6deg) rotateY(-10deg);
+      filter: saturate(1.12) contrast(1.06);
+    }
+    .book .meta{position:relative; z-index:1}
+    .book p{margin:0 0 12px; color:var(--muted)}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+    /* Upcoming cards (covers later) */
+    .up-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:14px;
+    }
+    @media(max-width:980px){ .up-grid{grid-template-columns:1fr} }
+    .placeholder{
+      width:100%;
+      aspect-ratio:2/3;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,.14);
+      background: rgba(255,255,255,.02);
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.35);
+      font-weight:650;
+      letter-spacing:.2px;
     }
 
-    .muted{color:var(--muted)}
+    /* About */
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:14px;
+      align-items:start;
+    }
+    @media(max-width:980px){ .split{grid-template-columns:1fr} }
 
+    /* Testimonials */
+    .t-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:14px;
+    }
+    @media(max-width:980px){ .t-grid{grid-template-columns:1fr} }
+    .quote{
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:18px;
+    }
+    .quote p{margin:0 0 12px; color:var(--muted)}
+    .quote strong{color:var(--text)}
+
+    /* Modal (Google Form popup) */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,.65);
+      z-index:100;
+      padding:18px;
+    }
+    .modal.show{display:flex}
+    .modal-card{
+      width:min(920px, 100%);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,12,20,.86);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .modal-head .title{font-weight:700}
+    .x{
+      width:38px;height:38px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .x:hover{border-color:rgba(199,255,90,.25)}
+    .modal-body{padding:0}
     iframe{
       width:100%;
-      min-height:720px;
-      border:none;
-      border-radius:14px;
+      height:78vh;
+      border:0;
+      display:block;
+      background:#fff;
     }
 
-    footer{
-      padding:40px 20px;
-      text-align:center;
-      color:#6b7280;
-      font-size:14px;
-    }
+    /* Reveal on scroll */
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    /* Small helper */
+    .note{color:rgba(255,255,255,.45); font-size:13px; margin-top:10px}
   </style>
 </head>
 
 <body>
 
-<header>
-  <nav>
-    <div class="logo">
-      <div class="dot"></div>
-      Malhar Kharat
-    </div>
-    <div class="links">
-      <a href="#books">Books</a>
-      <a href="#upcoming">Upcoming</a>
-      <a href="#about">About</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#signup">Updates</a>
-    </div>
-  </nav>
-</header>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Malhar Kharat</span>
+      </div>
 
-<section class="hero">
-  <div class="card">
-    <h1>Malhar Kharat</h1>
-    <p>Author of modern self-help & reflective nonfiction.</p>
-    <p>I write about discipline, identity, and the quiet work that changes your life when nobody is watching.</p>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#books">Books</a>
+        <a href="#upcoming">Upcoming</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+      </div>
 
-    <div class="tags">
-      <span>Discipline</span>
-      <span>Clarity</span>
-      <span>Habits</span>
-      <span>Identity</span>
-    </div>
-
-    <a href="#books" class="btn">Explore books</a>
-    <a href="#signup" class="btn outline">Join free updates</a>
-  </div>
-
-  <div class="card">
-    <h3>Now / Next</h3>
-    <p>If you’ve ever felt stuck between “I want more” and “I don’t know how to start” — you’re in the right place.</p>
-  </div>
-</section>
-
-<section id="books">
-  <h2>Books</h2>
-  <div class="grid">
-    <div class="card book">
-      <img src="assets/luck-blueprint.jpg" alt="The Luck Blueprint">
-      <h3>The Luck Blueprint</h3>
-      <p class="muted">Momentum, clarity, and better decisions.</p>
-      <a class="btn outline" href="https://amzn.eu/d/97oAgIP" target="_blank">Buy on Amazon</a>
-    </div>
-
-    <div class="card book">
-      <img src="assets/why-not-to-be-rich.jpg" alt="Why Not To Be Rich">
-      <h3>Why Not To Be Rich</h3>
-      <p class="muted">A contrarian take on ambition and success.</p>
-      <a class="btn outline" href="https://amzn.eu/d/isqC5Rg" target="_blank">Buy on Amazon</a>
-    </div>
-
-    <div class="card book">
-      <img src="assets/echoes-of-youth.jpg" alt="Echoes of Youth">
-      <h3>Echoes of Youth</h3>
-      <p class="muted">Reflections on growth and becoming.</p>
-      <a class="btn outline" href="https://amzn.eu/d/h0XX5MM" target="_blank">Buy on Amazon</a>
+      <div class="cta">
+        <button class="btn small primary" id="openFormTop">Get Updates</button>
+      </div>
     </div>
   </div>
-</section>
 
-<section id="upcoming">
-  <h2>Upcoming</h2>
-  <div class="card">
-    <ul>
-      <li><strong>The Unseen Work</strong> — discipline, identity, and showing up when it’s hard.</li>
-      <li><strong>The Mind After Midnight</strong> — late-night clarity and reflection.</li>
-      <li><strong>Kill the 0 Days</strong> — consistency, momentum, and winning small.</li>
-    </ul>
+  <!-- PAGES (slide-style) -->
+  <main class="pages">
+
+    <!-- HOME -->
+    <section class="page" id="home">
+      <div class="wrap">
+        <div class="hero">
+          <div class="card reveal">
+            <div class="authorRow">
+              <img class="avatar" src="assets/author.jpg" alt="Malhar Kharat author portrait" />
+              <div>
+                <h1 style="margin:0 0 8px">Malhar Kharat</h1>
+                <p class="sub" style="margin:0">Author of modern self-help & reflective nonfiction.</p>
+              </div>
+            </div>
+
+            <p class="sub">
+              I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
+            </p>
+
+            <div class="row">
+              <a class="btn primary" href="#books">Explore Books</a>
+              <button class="btn" id="openFormHero">Join Free Updates</button>
+              <a class="btn linklike" href="https://docs.google.com/forms/d/e/1FAIpQLSevhGSWSlvoLke52m2LP0i1lXJBXwZSdcEKu34yfYdNyJPv7A/viewform?usp=dialog" target="_blank" rel="noopener">
+                Open in new tab
+              </a>
+            </div>
+
+            <div class="tags">
+              <span class="tag">Discipline</span>
+              <span class="tag">Clarity</span>
+              <span class="tag">Habits</span>
+              <span class="tag">Identity</span>
+              <span class="tag">Consistency</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h2 style="margin:0 0 8px">Now / Next</h2>
+            <p class="sub">
+              If you’ve ever felt stuck between “I want more” and “I don’t know how to start” — you’re in the right place.
+            </p>
+            <div class="tags">
+              <span class="tag">No hype</span>
+              <span class="tag">Real systems</span>
+              <span class="tag">Quiet progress</span>
+            </div>
+            <p class="note">
+              Tip: scroll down — each section is a full “page”.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKS PAGE -->
+    <section class="page" id="books">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Books</h2>
+          <p class="sub">Official links to my published books.</p>
+
+          <div class="grid">
+            <div class="book" data-tilt>
+              <img class="cover" src="assets/luck-blueprint.jpg" alt="The Luck Blueprint cover">
+              <div class="meta">
+                <h3>The Luck Blueprint</h3>
+                <p>Practical self-help for building momentum, clarity, and better decisions.</p>
+                <div class="row">
+                  <a class="btn primary" href="https://amzn.eu/d/97oAgIP" target="_blank" rel="noopener">Buy on Amazon</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="book" data-tilt>
+              <img class="cover" src="assets/why-not-to-be-rich.jpg" alt="Why Not To Be Rich cover">
+              <div class="meta">
+                <h3>Why Not To Be Rich</h3>
+                <p>A contrarian take on ambition, success, and what “rich” really means.</p>
+                <div class="row">
+                  <a class="btn primary" href="https://amzn.eu/d/isqC5Rg" target="_blank" rel="noopener">Buy on Amazon</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="book" data-tilt>
+              <img class="cover" src="assets/echoes-of-youth.jpg" alt="Echoes Of Youth cover">
+              <div class="meta">
+                <h3>Echoes Of Youth</h3>
+                <p>Reflections on growth, emotions, and the quiet lessons of becoming.</p>
+                <div class="row">
+                  <a class="btn primary" href="https://amzn.eu/d/h0XX5MM" target="_blank" rel="noopener">Buy on Amazon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:16px">
+            <a class="btn" href="#upcoming">Next: Upcoming →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPCOMING PAGE -->
+    <section class="page" id="upcoming">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Upcoming</h2>
+          <p class="sub">Covers coming soon — you’ll upload later.</p>
+
+          <div class="up-grid">
+            <div class="book" data-tilt>
+              <div class="placeholder">COVER SOON</div>
+              <div class="meta" style="margin-top:14px">
+                <h3>The Unseen Work</h3>
+                <p>Identity × Reps × Time — the discipline that builds self-trust.</p>
+              </div>
+            </div>
+
+            <div class="book" data-tilt>
+              <div class="placeholder">COVER SOON</div>
+              <div class="meta" style="margin-top:14px">
+                <h3>Mind After Midnight</h3>
+                <p>Late-night honesty, clarity, and reflection when the world goes quiet.</p>
+              </div>
+            </div>
+
+            <div class="book" data-tilt>
+              <div class="placeholder">COVER SOON</div>
+              <div class="meta" style="margin-top:14px">
+                <h3>Kill the 0 Days</h3>
+                <p>Consistency without motivation — how to win the day in small ways.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:16px">
+            <a class="btn" href="#about">Next: About →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section class="page" id="about">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>About the Author</h2>
+          <p class="sub">
+            A personal story — why I write, what I studied, and what I’m building.
+          </p>
+
+          <div class="split">
+            <div class="card" style="padding:18px">
+              <div class="authorRow" style="margin-bottom:10px">
+                <img class="avatar" src="assets/author.jpg" alt="Malhar Kharat author portrait" style="width:120px;height:120px">
+                <div>
+                  <h3 style="margin:0">Malhar Kharat</h3>
+                  <p class="sub" style="margin:6px 0 0">Writer. Builder. Discipline-first.</p>
+                </div>
+              </div>
+
+              <p class="sub">
+                I didn’t start writing because it looked cool. I started writing because I needed clarity —
+                something that still works when motivation disappears.
+              </p>
+              <p class="sub">
+                For a long time, I was the kind of person who wanted big results but kept fighting inconsistency:
+                overthinking, starting late, stopping early, and restarting again.
+                Writing became my way of turning chaos into systems — and systems into progress.
+              </p>
+              <p class="sub" style="margin-bottom:0">
+                My books are built for people who are tired of hype and want something real:
+                simple actions, repeated honestly, until self-trust becomes your normal.
+              </p>
+            </div>
+
+            <div class="card" style="padding:18px">
+              <h3>Studies & credibility</h3>
+              <p class="sub">
+                I have an engineering background — which heavily shapes how I write:
+                structured thinking, problem-solving, and building systems that work in real life.
+              </p>
+
+              <div class="tags">
+                <span class="tag"><strong>Master’s</strong> — Automotive Engineering (Electric Vehicles focus)</span>
+                <span class="tag"><strong>Background</strong> — Automotive Technology Engineering</span>
+                <span class="tag"><strong>Style</strong> — Practical, systems-based writing</span>
+              </div>
+
+              <p class="sub" style="margin-top:14px">
+                In engineering, you don’t get results by “feeling motivated” — you get results by showing up,
+                measuring, improving, and repeating. That same discipline is the foundation of my work.
+              </p>
+
+              <div class="row">
+                <button class="btn primary" id="openFormAbout">Get updates</button>
+                <a class="btn linklike" href="#reviews">Next: Reviews →</a>
+              </div>
+
+              <p class="note">Want this section even more personal (India → UK journey, career, etc.)? Tell me and I’ll rewrite it in your voice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS + SIGNUP PAGE -->
+    <section class="page" id="reviews">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Reviews & Updates</h2>
+          <p class="sub">Social proof + free reader signup.</p>
+
+          <div class="split">
+            <div class="card" style="padding:18px">
+              <h3>What readers say</h3>
+              <p class="note">
+                Note: these are placeholder “early reader notes” until you paste real review screenshots/quotes.
+                Replace anytime.
+              </p>
+
+              <div class="t-grid">
+                <div class="quote">
+                  <p>“Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them.”</p>
+                  <strong>— Leena</strong>
+                </div>
+                <div class="quote">
+                  <p>“No over-promising. Practical perspective that stays in your head after you close the book.”</p>
+                  <strong>— Kaustubh Rai</strong>
+                </div>
+                <div class="quote">
+                  <p>“It’s calm writing — the kind that pushes you to act quietly instead of announcing your goals.”</p>
+                  <strong>— James Walker</strong>
+                </div>
+                <div class="quote">
+                  <p>“Helped me reset without pressure. It’s not loud motivation — it’s a clean mental shift.”</p>
+                  <strong>— Daniel Hughes</strong>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top:14px">
+                <a class="btn" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Review%20for%20Malhar%20Kharat">Add your review</a>
+              </div>
+            </div>
+
+            <div class="card" style="padding:18px">
+              <h3>Get Early Chapters & Updates</h3>
+              <p class="sub">
+                Free updates only when there’s something worth reading. No spam.
+              </p>
+
+              <div class="row">
+                <button class="btn primary" id="openFormReviews">Open signup (popup)</button>
+                <a class="btn linklike" href="https://docs.google.com/forms/d/e/1FAIpQLSevhGSWSlvoLke52m2LP0i1lXJBXwZSdcEKu34yfYdNyJPv7A/viewform?usp=dialog" target="_blank" rel="noopener">
+                  Open in new tab
+                </a>
+              </div>
+
+              <p class="note">
+                Your responses are saved in Google Forms/Sheets automatically (free).
+              </p>
+
+              <div class="row" style="margin-top:12px">
+                <a class="btn" href="mailto:kharatmalhar.mk@gmail.com">Contact</a>
+                <a class="btn" href="https://instagram.com/malhar__k" target="_blank" rel="noopener">Instagram</a>
+              </div>
+            </div>
+          </div>
+
+          <p class="note" style="text-align:center; margin-top:18px">
+            © <span id="y"></span> Malhar Kharat • Built on GitHub Pages
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL (Google Form popup) -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="title">Join Malhar Kharat — Reader Updates</div>
+        <button class="x" id="closeModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSevhGSWSlvoLke52m2LP0i1lXJBXwZSdcEKu34yfYdNyJPv7A/viewform?embedded=true">
+        </iframe>
+      </div>
+    </div>
   </div>
-</section>
 
-<section id="about">
-  <h2>About the Author</h2>
-  <div class="card">
-    <p>I didn’t start writing because it looked cool. I started because I needed clarity — something that held up when motivation disappeared.</p>
-    <p>My background is rooted in structured thinking, problem-solving, and discipline. I bring that same mindset into my writing: practical ideas, clean thinking, and actions that compound quietly over time.</p>
-    <p>I’ve studied and worked in technical and analytical environments, where consistency and systems matter more than hype — and that philosophy runs through every book I write.</p>
-  </div>
-</section>
+  <script>
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-<section id="reviews">
-  <h2>What Readers Say</h2>
-  <div class="grid">
-    <div class="card">“Clear, honest, and grounding.”<br><strong>— Leena</strong></div>
-    <div class="card">“No over-promising. Just clarity.”<br><strong>— Kaustubh Rai</strong></div>
-    <div class="card">“Makes you act quietly.”<br><strong>— James Walker</strong></div>
-    <div class="card">“Helped me reset without pressure.”<br><strong>— Daniel Hughes</strong></div>
-  </div>
-</section>
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
+      });
+    }, {threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
 
-<section id="signup">
-  <h2>Get Early Chapters & Updates</h2>
-  <div class="card">
-    <p class="muted">Short notes on discipline, clarity, and upcoming books. No spam.</p>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevhGSWSlvoLke52m2LP0i1lXJBXwZSdcEKu34yfYdNyJPv7A/viewform?embedded=true"></iframe>
-  </div>
-</section>
+    // Modal open/close
+    const modal = document.getElementById("modal");
+    const openButtons = ["openFormTop","openFormHero","openFormAbout","openFormReviews"]
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
 
-<footer>
-  © 2025 Malhar Kharat · Built on GitHub Pages
-</footer>
+    openButtons.forEach(btn => btn.addEventListener("click", ()=> modal.classList.add("show")));
+    document.getElementById("closeModal").addEventListener("click", ()=> modal.classList.remove("show"));
+    modal.addEventListener("click", (e)=> { if(e.target === modal) modal.classList.remove("show"); });
+    document.addEventListener("keydown", (e)=> { if(e.key === "Escape") modal.classList.remove("show"); });
+
+    // Subtle 3D tilt follow (lightweight, no library)
+    const tiltCards = document.querySelectorAll("[data-tilt]");
+    tiltCards.forEach(card=>{
+      card.addEventListener("mousemove", (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        const rx = (0.5 - y) * 8;
+        const ry = (x - 0.5) * 10;
+        card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      card.addEventListener("mouseleave", ()=>{
+        card.style.transform = "";
+      });
+    });
+  </script>
 
 </body>
 </html>
