@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-  
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -17,6 +16,7 @@
   <meta property="og:url" content="https://malhar-kharat.github.io/" />
   <meta property="og:image" content="https://malhar-kharat.github.io/assets/author.jpg" />
 
+  <!-- Schema: Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,58 +35,75 @@
     }
   }
   </script>
+
+  <!-- Schema: Book (The Unseen Work) -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Book",
-  "name": "The Luck Blueprint",
-  "author": {
-    "@type": "Person",
-    "name": "Malhar Kharat"
-  },
-  "url": "https://amzn.eu/d/97oAgIP",
-  "image": "https://malhar-kharat.github.io/assets/luck-blueprint.jpg",
-  "description": "A practical guide to building momentum, clarity, and better decisions through discipline.",
-  "bookFormat": "Paperback",
-  "inLanguage": "en",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Amazon KDP"
-  }
-}
-</script>
-
-
-
-
-  
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "itemReviewed": {
+  {
+    "@context": "https://schema.org",
     "@type": "Book",
-    "name": "The Luck Blueprint"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Leena"
-  },
-  "reviewBody": "Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them.",
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "5",
-    "bestRating": "5"
+    "name": "The Unseen Work",
+    "author": {
+      "@type": "Person",
+      "name": "Malhar Kharat"
+    },
+    "url": "https://amzn.eu/d/dkzlBwT",
+    "image": "https://malhar-kharat.github.io/assets/the-unseen-work.jpeg",
+    "description": "A quiet guide to discipline, self-trust, and progress built through Identity × Reps × Time.",
+    "bookFormat": "Paperback",
+    "inLanguage": "en",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Amazon KDP"
+    }
   }
-}
-</script>
+  </script>
 
-<meta name="google-site-verification" content="vT6tguKGqhnKfKjKc3zuu41Q9ijgQpaqkaLpUIhHbYc" />
-  
-  <style>
-    ...
-  </style>
-</head>
+  <!-- Schema: Book (The Luck Blueprint) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "The Luck Blueprint",
+    "author": {
+      "@type": "Person",
+      "name": "Malhar Kharat"
+    },
+    "url": "https://amzn.eu/d/97oAgIP",
+    "image": "https://malhar-kharat.github.io/assets/luck-blueprint.jpg",
+    "description": "A practical guide to building momentum, clarity, and better decisions through discipline.",
+    "bookFormat": "Paperback",
+    "inLanguage": "en",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Amazon KDP"
+    }
+  }
+  </script>
+
+  <!-- Schema: Review (example) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Book",
+      "name": "The Luck Blueprint"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Leena"
+    },
+    "reviewBody": "Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them.",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    }
+  }
+  </script>
+
+  <meta name="google-site-verification" content="vT6tguKGqhnKfKjKc3zuu41Q9ijgQpaqkaLpUIhHbYc" />
+
   <style>
     :root{
       --bg:#07080c;
@@ -100,6 +117,9 @@
       --r:20px;
       --shadow: 0 18px 70px rgba(0,0,0,.55);
       --glow: 0 0 0 1px rgba(199,255,90,.14), 0 18px 70px rgba(0,0,0,.55);
+
+      /* Dynamic nav height to prevent overlap on phones */
+      --navH: 84px;
     }
 
     *{box-sizing:border-box}
@@ -122,6 +142,7 @@
     .nav{
       position:fixed; left:0; right:0; top:14px; z-index:50;
       display:flex; justify-content:center; pointer-events:none;
+      padding-top: env(safe-area-inset-top);
     }
     .nav-inner{
       pointer-events:auto;
@@ -133,10 +154,24 @@
       backdrop-filter: blur(12px);
       border-radius:999px;
       box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      overflow:hidden;
     }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:650}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:650; flex:0 0 auto}
     .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(199,255,90,.55)}
-    .links{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+    /* IMPORTANT: prevent wrap on phones (causes overlap) */
+    .links{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex:1 1 auto;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      min-width:0;
+    }
+    .links::-webkit-scrollbar{ display:none; }
     .links a{
       color:var(--muted);
       padding:6px 10px;
@@ -144,11 +179,11 @@
       border:1px solid transparent;
       font-size:14px;
       transition:.2s;
+      white-space:nowrap;
+      flex:0 0 auto;
     }
     .links a:hover{color:var(--text); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.06)}
-    .cta{
-      display:flex; gap:10px; align-items:center;
-    }
+    .cta{display:flex; gap:10px; align-items:center; flex:0 0 auto}
 
     /* Buttons */
     .btn{
@@ -161,6 +196,7 @@
       font-weight:650;
       transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease;
       cursor:pointer;
+      white-space:nowrap;
     }
     .btn:hover{
       transform: translateY(-2px);
@@ -182,13 +218,14 @@
       overflow-y:auto;
       scroll-snap-type:y mandatory;
       scroll-behavior:smooth;
+      -webkit-overflow-scrolling: touch;
     }
     .page{
       scroll-snap-align:start;
       min-height:100vh;
       display:flex;
       align-items:center;
-      padding:92px 18px 56px;
+      padding: calc(var(--navH) + 22px) 18px 56px; /* KEY FIX */
     }
     .wrap{
       width:min(var(--max), 100%);
@@ -234,6 +271,12 @@
       border:1px solid rgba(255,255,255,.10);
       padding:5px 10px;border-radius:999px;
       background:rgba(255,255,255,.03);
+    }
+    .tag.live{
+      color:#06110a;
+      background: linear-gradient(135deg, rgba(199,255,90,.95), rgba(110,231,255,.55));
+      border-color: rgba(199,255,90,.35);
+      font-weight:800;
     }
 
     /* Sections */
@@ -289,7 +332,7 @@
     .book p{margin:0 0 12px; color:var(--muted)}
     .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
 
-    /* Upcoming cards (covers later) */
+    /* Upcoming cards */
     .up-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -336,7 +379,7 @@
     .quote p{margin:0 0 12px; color:var(--muted)}
     .quote strong{color:var(--text)}
 
-    /* Modal (Google Form popup) */
+    /* Modal */
     .modal{
       position:fixed; inset:0;
       display:none;
@@ -371,7 +414,6 @@
       display:flex; align-items:center; justify-content:center;
     }
     .x:hover{border-color:rgba(199,255,90,.25)}
-    .modal-body{padding:0}
     iframe{
       width:100%;
       height:78vh;
@@ -384,13 +426,11 @@
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease}
     .reveal.show{opacity:1; transform:none}
 
-    /* Small helper */
     .note{color:rgba(255,255,255,.45); font-size:13px; margin-top:10px}
   </style>
 </head>
 
 <body>
-
   <!-- NAV -->
   <div class="nav">
     <div class="nav-inner">
@@ -408,12 +448,12 @@
       </div>
 
       <div class="cta">
-        <button class="btn small primary" id="openFormTop">Get Updates</button>
+        <button class="btn small primary" id="openFormTop" type="button">Get Updates</button>
       </div>
     </div>
   </div>
 
-  <!-- PAGES (slide-style) -->
+  <!-- PAGES -->
   <main class="pages">
 
     <!-- HOME -->
@@ -430,21 +470,20 @@
             </div>
 
             <p>
-I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
-My work is for people who are tired of hype, shortcuts, and loud motivation
-and want something steadier, more honest, and built to last.
-</p>
+              I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
+              My work is for people who are tired of hype, shortcuts, and loud motivation
+              and want something steadier, more honest, and built to last.
+            </p>
 
-<p class="sub">
-These books are not about becoming someone new overnight.
-They’re about becoming someone you can trust through repetition,
-clarity, and showing up even when progress feels invisible.
-</p>
+            <p class="sub">
+              These books are not about becoming someone new overnight.
+              They’re about becoming someone you can trust through repetition,
+              clarity, and showing up even when progress feels invisible.
+            </p>
 
             <div class="row">
               <a class="btn primary" href="#books">Explore Books</a>
-              <button class="btn" id="openFormHero">Join Free Updates</button>
-              
+              <button class="btn" id="openFormHero" type="button">Join Free Updates</button>
             </div>
 
             <div class="tags">
@@ -457,26 +496,31 @@ clarity, and showing up even when progress feels invisible.
           </div>
 
           <div class="card reveal">
-            <h2 style="margin:0 0 8px">What I’m writing next (Upcoming)</h2>
-              <div class="card" style="padding:16px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px">
-    <p style="margin:0 0 10px"><strong>The Unseen Work</strong><br><span class="sub" style="margin:0">Identity × Reps × Time: the discipline that builds self-trust.</span></p>
-    <p style="margin:0 0 10px"><strong>Mind After Midnight</strong><br><span class="sub" style="margin:0">Late-night clarity, reflection, and honest thinking.</span></p>
-    <p style="margin:0"><strong>Kill the 0 Days</strong><br><span class="sub" style="margin:0">Consistency without motivation; win small, daily.</span></p>
-  </div>
+            <h2 style="margin:0 0 8px">Latest release</h2>
+            <div class="card" style="padding:16px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px">
+              <p style="margin:0 0 10px">
+                <strong>The Unseen Work</strong> <span class="tag live">NOW PUBLISHED</span><br>
+                <span class="sub" style="margin:0">Identity × Reps × Time: the discipline that builds self-trust.</span>
+              </p>
+              <div class="row" style="margin-top:10px">
+                <a class="btn primary" href="https://amzn.eu/d/dkzlBwT" target="_blank" rel="noopener">Buy on Amazon</a>
+                <a class="btn linklike" href="#books">See all books</a>
+              </div>
+            </div>
+
             <div class="tags">
               <span class="tag">No hype</span>
               <span class="tag">Real systems</span>
               <span class="tag">Quiet progress</span>
             </div>
-            <p class="note">
-              Tip: scroll down each section is a full “page”.
-            </p>
+
+            <p class="note">Tip: scroll down — each section is a full “page”.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- BOOKS PAGE -->
+    <!-- BOOKS -->
     <section class="page" id="books">
       <div class="wrap">
         <div class="card reveal">
@@ -484,8 +528,21 @@ clarity, and showing up even when progress feels invisible.
           <p class="sub">Official links to my published books.</p>
 
           <div class="grid">
+
+            <!-- NEW: The Unseen Work -->
             <div class="book" data-tilt>
-              <img class="cover" src="assets/luck-blueprint.jpg" alt="The Luck Blueprint cover">
+              <img class="cover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover">
+              <div class="meta">
+                <h3>The Unseen Work <span class="tag live" style="margin-left:8px">NEW</span></h3>
+                <p>A quiet guide to discipline, self-trust, and progress built through Identity × Reps × Time.</p>
+                <div class="row">
+                  <a class="btn primary" href="https://amzn.eu/d/dkzlBwT" target="_blank" rel="noopener">Buy on Amazon</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="book" data-tilt>
+              <img class="cover" src="assets/luck-blueprint.jpeg" alt="The Luck Blueprint cover">
               <div class="meta">
                 <h3>The Luck Blueprint</h3>
                 <p>Practical self-help for building momentum, clarity, and better decisions.</p>
@@ -496,7 +553,7 @@ clarity, and showing up even when progress feels invisible.
             </div>
 
             <div class="book" data-tilt>
-              <img class="cover" src="assets/why-not-to-be-rich.jpg" alt="Why Not To Be Rich cover">
+              <img class="cover" src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover">
               <div class="meta">
                 <h3>Why Not To Be Rich</h3>
                 <p>A contrarian take on ambition, success, and what “rich” really means.</p>
@@ -525,21 +582,15 @@ clarity, and showing up even when progress feels invisible.
       </div>
     </section>
 
-    <!-- UPCOMING PAGE -->
+    <!-- UPCOMING -->
     <section class="page" id="upcoming">
       <div class="wrap">
         <div class="card reveal">
           <h2>Upcoming</h2>
-          <p class="sub">Covers coming soon!!! </p>
+          <p class="sub">Covers coming soon!!!</p>
 
           <div class="up-grid">
-            <div class="book" data-tilt>
-              <div class="placeholder">COMING SOON</div>
-              <div class="meta" style="margin-top:14px">
-                <h3>The Unseen Work</h3>
-                <p>Identity × Reps × Time: the discipline that builds self-trust.</p>
-              </div>
-            </div>
+            <!-- REMOVED: The Unseen Work -->
 
             <div class="book" data-tilt>
               <div class="placeholder">COMING SOON</div>
@@ -556,13 +607,14 @@ clarity, and showing up even when progress feels invisible.
                 <p>Consistency without motivation. How to win the day in a small way?</p>
               </div>
             </div>
+
             <div class="book" data-tilt>
-  <div class="placeholder">COMING SOON</div>
-  <div class="meta" style="margin-top:14px">
-    <h3>The Discipline Equation</h3>
-    <p>How consistency becomes character.</p>
-  </div>
-</div>
+              <div class="placeholder">COMING SOON</div>
+              <div class="meta" style="margin-top:14px">
+                <h3>The Discipline Equation</h3>
+                <p>How consistency becomes character.</p>
+              </div>
+            </div>
           </div>
 
           <div class="row" style="margin-top:16px">
@@ -572,7 +624,7 @@ clarity, and showing up even when progress feels invisible.
       </div>
     </section>
 
-    <!-- ABOUT PAGE -->
+    <!-- ABOUT -->
     <section class="page" id="about">
       <div class="wrap">
         <div class="card reveal">
@@ -592,7 +644,7 @@ clarity, and showing up even when progress feels invisible.
               </div>
 
               <p class="sub">
-                I didn’t start writing because it looked cool. I started writing because I needed clarity, 
+                I didn’t start writing because it looked cool. I started writing because I needed clarity,
                 something that still works when motivation disappears.
               </p>
               <p class="sub">
@@ -620,12 +672,12 @@ clarity, and showing up even when progress feels invisible.
               </div>
 
               <p class="sub" style="margin-top:14px">
-                In engineering, you don’t get results by “feeling motivated”,  you get results by showing up,
+                In engineering, you don’t get results by “feeling motivated” — you get results by showing up,
                 measuring, improving, and repeating. That same discipline is the foundation of my work.
               </p>
 
               <div class="row">
-                <button class="btn primary" id="openFormAbout">Get updates</button>
+                <button class="btn primary" id="openFormAbout" type="button">Get updates</button>
                 <a class="btn linklike" href="#reviews">Next: Reviews →</a>
               </div>
 
@@ -636,7 +688,7 @@ clarity, and showing up even when progress feels invisible.
       </div>
     </section>
 
-    <!-- REVIEWS + SIGNUP PAGE -->
+    <!-- REVIEWS -->
     <section class="page" id="reviews">
       <div class="wrap">
         <div class="card reveal">
@@ -677,20 +729,16 @@ clarity, and showing up even when progress feels invisible.
 
             <div class="card" style="padding:18px">
               <h3>Get Early Chapters & Updates</h3>
-              <p class="sub">
-                Free updates only when there’s something worth reading. No spam.
-              </p>
+              <p class="sub">Free updates only when there’s something worth reading. No spam.</p>
 
               <div class="row">
-                <button class="btn primary" id="openFormReviews">Open signup (popup)</button>
+                <button class="btn primary" id="openFormReviews" type="button">Open signup (popup)</button>
                 <a class="btn linklike" href="https://docs.google.com/forms/d/e/1FAIpQLSevhGSWSlvoLke52m2LP0i1lXJBXwZSdcEKu34yfYdNyJPv7A/viewform?usp=dialog" target="_blank" rel="noopener">
                   Open in new tab
                 </a>
               </div>
 
-              <p class="note">
-                Your responses are saved in Google Forms/Sheets automatically (free).
-              </p>
+              <p class="note">Your responses are saved in Google Forms/Sheets automatically (free).</p>
 
               <div class="row" style="margin-top:12px">
                 <a class="btn" href="mailto:kharatmalhar.mk@gmail.com">Contact</a>
@@ -708,12 +756,12 @@ clarity, and showing up even when progress feels invisible.
 
   </main>
 
-  <!-- MODAL (Google Form popup) -->
+  <!-- MODAL -->
   <div class="modal" id="modal">
     <div class="modal-card">
       <div class="modal-head">
         <div class="title">Join Malhar Kharat — Reader Updates</div>
-        <button class="x" id="closeModal" aria-label="Close">✕</button>
+        <button class="x" id="closeModal" aria-label="Close" type="button">✕</button>
       </div>
       <div class="modal-body">
         <iframe
@@ -747,22 +795,33 @@ clarity, and showing up even when progress feels invisible.
     modal.addEventListener("click", (e)=> { if(e.target === modal) modal.classList.remove("show"); });
     document.addEventListener("keydown", (e)=> { if(e.key === "Escape") modal.classList.remove("show"); });
 
-    // Subtle 3D tilt follow (lightweight, no library)
-    const tiltCards = document.querySelectorAll("[data-tilt]");
-    tiltCards.forEach(card=>{
-      card.addEventListener("mousemove", (e)=>{
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top) / r.height;
-        const rx = (0.5 - y) * 8;
-        const ry = (x - 0.5) * 10;
-        card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-      card.addEventListener("mouseleave", ()=>{
-        card.style.transform = "";
-      });
-    });
-  </script>
+    // Dynamic nav height to prevent overlap on phones
+    function setNavHeight(){
+      const navInner = document.querySelector(".nav-inner");
+      if(!navInner) return;
+      const h = navInner.getBoundingClientRect().height + 14 + 10;
+      document.documentElement.style.setProperty("--navH", `${Math.ceil(h)}px`);
+    }
+    window.addEventListener("load", setNavHeight);
+    window.addEventListener("resize", setNavHeight);
+    window.addEventListener("orientationchange", setNavHeight);
 
+    // Subtle 3D tilt follow (desktop only)
+    const tiltCards = document.querySelectorAll("[data-tilt]");
+    const isTouch = matchMedia("(pointer: coarse)").matches;
+    if(!isTouch){
+      tiltCards.forEach(card=>{
+        card.addEventListener("mousemove", (e)=>{
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width;
+          const y = (e.clientY - r.top) / r.height;
+          const rx = (0.5 - y) * 8;
+          const ry = (x - 0.5) * 10;
+          card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+        card.addEventListener("mouseleave", ()=>{ card.style.transform = ""; });
+      });
+    }
+  </script>
 </body>
 </html>
