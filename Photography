@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Photography — Malhar Kharat</title>
+  <meta name="description" content="Architectural and street photography by Malhar Kharat. Moody, blue-hour images from Edinburgh, Glasgow, London, and the Scottish Highlands." />
+
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Malhar Kharat" />
+  <link rel="canonical" href="https://malhar-kharat.github.io/photography.html" />
+
+  <meta property="og:title" content="Photography — Malhar Kharat" />
+  <meta property="og:description" content="Architectural and street photography. Seeing before writing." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://malhar-kharat.github.io/photography.html" />
+  <meta property="og:image" content="https://malhar-kharat.github.io/assets/photos/photo-05-edinburgh-balmoral-clock.jpg" />
+  <meta property="og:site_name" content="Malhar Kharat" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Photography — Malhar Kharat" />
+  <meta name="twitter:description" content="Architectural and street photography. Seeing before writing." />
+  <meta name="twitter:image" content="https://malhar-kharat.github.io/assets/photos/photo-05-edinburgh-balmoral-clock.jpg" />
+
+  <!-- Schema: ImageGallery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Photography by Malhar Kharat",
+    "description": "Architectural and street photography from across the UK.",
+    "url": "https://malhar-kharat.github.io/photography.html",
+    "author": {
+      "@type": "Person",
+      "name": "Malhar Kharat"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#07080c;
+      --card:#0f121a;
+      --text:#e9e9ee;
+      --muted:#a8a9b3;
+      --line:#242a3a;
+      --accent:#c7ff5a;
+      --accent2:#6ee7ff;
+      --max:1200px;
+      --r:20px;
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --navH: 84px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(900px 600px at 18% 10%, rgba(110,231,255,.16), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(199,255,90,.12), transparent 55%),
+        radial-gradient(1100px 700px at 60% 120%, rgba(122,92,255,.10), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Top nav (matches index.html) */
+    .nav{
+      position:fixed; left:0; right:0; top:14px; z-index:50;
+      display:flex; justify-content:center; pointer-events:none;
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-inner{
+      pointer-events:auto;
+      width:min(var(--max), calc(100% - 36px));
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(10,12,18,.55);
+      backdrop-filter: blur(12px);
+      border-radius:999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:650; flex:0 0 auto}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(199,255,90,.55)}
+    .links{display:flex;gap:10px;align-items:center;flex:1 1 auto;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;min-width:0;justify-content:center;}
+    .links::-webkit-scrollbar{display:none;}
+    .links a{color:var(--muted);padding:6px 10px;border-radius:999px;border:1px solid transparent;font-size:14px;transition:.2s;white-space:nowrap;flex:0 0 auto;}
+    .links a:hover{color:var(--text); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.06)}
+    .links a.active{color:var(--text); background:rgba(255,255,255,.06);}
+    .cta{display:flex; gap:10px; align-items:center; flex:0 0 auto}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);color:var(--text);
+      font-weight:650;transition:transform .2s ease, box-shadow .25s ease, border-color .25s ease;
+      cursor:pointer;white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-2px);border-color:rgba(199,255,90,.25);box-shadow:0 14px 40px rgba(0,0,0,.35);}
+    .btn.small{padding:9px 12px; font-size:14px}
+    .btn.primary{background:linear-gradient(135deg, rgba(199,255,90,.95), rgba(110,231,255,.55));color:#06110a;border-color:rgba(199,255,90,.30);}
+
+    /* Page wrap */
+    .wrap{width:min(var(--max), 100%); margin:0 auto; padding:0 18px;}
+
+    /* Hero */
+    .hero{
+      padding: calc(var(--navH) + 60px) 18px 30px;
+      text-align:center;
+    }
+    .hero .inner{width:min(820px,100%); margin:0 auto;}
+    .eyebrow{
+      display:inline-block;
+      font-size:13px; letter-spacing:3px; text-transform:uppercase;
+      color:var(--accent); margin-bottom:14px;
+      border:1px solid rgba(199,255,90,.25);
+      padding:5px 14px; border-radius:999px;
+      background:rgba(199,255,90,.04);
+    }
+    .hero h1{
+      font-size:clamp(40px, 7vw, 68px);
+      line-height:1.02; letter-spacing:-1px; margin:0 0 16px;
+      font-weight:800;
+    }
+    .hero p{color:var(--muted); font-size:18px; margin:0 auto 8px; max-width:580px;}
+
+    /* Section label */
+    .place-label{
+      display:flex; align-items:center; gap:14px;
+      margin:42px 0 18px; padding-top:10px;
+    }
+    .place-label h2{
+      font-size:22px; margin:0; font-weight:700; white-space:nowrap;
+    }
+    .place-label .count{color:var(--muted); font-size:13px; white-space:nowrap;}
+    .place-label .rule{flex:1 1 auto; height:1px; background:linear-gradient(90deg, rgba(255,255,255,.14), transparent);}
+
+    /* Masonry gallery */
+    .gallery{
+      column-count:3;
+      column-gap:16px;
+    }
+    @media(max-width:900px){ .gallery{column-count:2;} }
+    @media(max-width:560px){ .gallery{column-count:1;} }
+
+    .shot{
+      break-inside:avoid;
+      margin:0 0 16px;
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.2);
+      box-shadow:0 8px 30px rgba(0,0,0,.35);
+      transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .shot img{
+      width:100%; height:auto; display:block;
+      transition:transform .5s ease, filter .5s ease;
+      filter:saturate(1.02);
+    }
+    .shot:hover{
+      transform:translateY(-4px);
+      border-color:rgba(199,255,90,.22);
+      box-shadow:0 18px 50px rgba(0,0,0,.5);
+    }
+    .shot:hover img{ transform:scale(1.04); filter:saturate(1.12) contrast(1.04); }
+    .shot .cap{
+      position:absolute; left:0; right:0; bottom:0;
+      padding:26px 14px 12px;
+      font-size:13px; color:#f3f4f8;
+      background:linear-gradient(to top, rgba(4,5,8,.82), transparent);
+      opacity:0; transform:translateY(6px);
+      transition:opacity .3s ease, transform .3s ease;
+    }
+    .shot:hover .cap{opacity:1; transform:none;}
+
+    /* Like button */
+    .like-btn{
+      position:absolute; top:10px; right:10px; z-index:3;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:7px 11px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(8,9,13,.55);
+      backdrop-filter:blur(8px);
+      color:#f3f4f8; font-size:13px; font-weight:650;
+      cursor:pointer;
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .like-btn:hover{ background:rgba(8,9,13,.75); border-color:rgba(255,120,150,.4); }
+    .like-btn:active{ transform:scale(.92); }
+    .like-btn .heart{
+      width:15px; height:15px; display:inline-block;
+      transition:transform .25s ease;
+    }
+    .like-btn .heart svg{ width:100%; height:100%; display:block; }
+    .like-btn.liked{ border-color:rgba(255,90,120,.55); }
+    .like-btn.liked .heart{ transform:scale(1.15); }
+    .like-btn .heart path{ transition:fill .2s ease, stroke .2s ease; }
+    .like-btn.liked .heart path{ fill:#ff5a78; stroke:#ff5a78; }
+    .like-btn .heart path{ fill:none; stroke:#f3f4f8; stroke-width:2; }
+    @keyframes pop{ 0%{transform:scale(1)} 40%{transform:scale(1.35)} 100%{transform:scale(1)} }
+    .like-btn.bump .heart{ animation:pop .35s ease; }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0; z-index:200;
+      display:none; align-items:center; justify-content:center;
+      background:rgba(4,5,8,.92);
+      backdrop-filter:blur(6px);
+      padding:20px;
+    }
+    .lightbox.show{display:flex;}
+    .lightbox img{
+      max-width:92vw; max-height:84vh;
+      border-radius:10px;
+      box-shadow:0 30px 90px rgba(0,0,0,.7);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .lb-cap{
+      position:fixed; bottom:24px; left:0; right:0; text-align:center;
+      color:var(--muted); font-size:14px; padding:0 20px;
+    }
+    .lb-close{
+      position:fixed; top:20px; right:20px;
+      width:46px; height:46px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05); color:var(--text);
+      font-size:20px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .lb-close:hover{border-color:rgba(199,255,90,.3);}
+    .lb-nav{
+      position:fixed; top:50%; transform:translateY(-50%);
+      width:52px; height:52px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05); color:var(--text);
+      font-size:22px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .lb-nav:hover{border-color:rgba(199,255,90,.3);}
+    .lb-prev{left:20px;} .lb-next{right:20px;}
+    @media(max-width:560px){ .lb-nav{display:none;} }
+
+    /* Footer */
+    footer{
+      text-align:center; padding:50px 18px 60px; color:var(--muted);
+    }
+    footer .row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:18px;}
+    .note{color:rgba(255,255,255,.4); font-size:13px;}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand"><span class="dot"></span><span>Malhar Kharat</span></div>
+      <div class="links">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#books">Books</a>
+        <a href="index.html#upcoming">Upcoming</a>
+        <a href="index.html#about">About</a>
+        <a href="photography.html" class="active">Photography</a>
+        <a href="index.html#reviews">Reviews</a>
+      </div>
+      <div class="cta">
+        <a class="btn small primary" href="https://instagram.com/malhar__k" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="inner">
+      <span class="eyebrow">Photography</span>
+      <h1>Seeing before writing.</h1>
+      <p>Before the words come the frames. Quiet architecture, blue-hour streets, and stone catching the last of the light. Shot across Edinburgh, Glasgow, London, and the Scottish Highlands.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- RANKED GALLERY -->
+    <div class="place-label">
+      <h2>The collection</h2>
+      <span class="count">15 frames</span>
+      <span class="rule"></span>
+    </div>
+    <div class="gallery">
+      <div class="shot" data-id="p05" data-likes="48"><img src="assets/photos/photo-05-edinburgh-balmoral-clock.jpg" alt="The Balmoral clock tower glowing red at dusk, Edinburgh" loading="lazy"><div class="cap">The Balmoral, dusk · Edinburgh</div></div>
+      <div class="shot" data-id="p09" data-likes="42"><img src="assets/photos/photo-09-skye-fairy-pools.jpg" alt="Waterfall cascading into clear pools, Fairy Pools, Isle of Skye" loading="lazy"><div class="cap">Fairy Pools · Isle of Skye</div></div>
+      <div class="shot" data-id="p13" data-likes="39"><img src="assets/photos/photo-13-glasgow-mural.jpg" alt="Large street mural of a woman holding a cocktail, Glasgow" loading="lazy"><div class="cap">Mural on the gable end · Glasgow</div></div>
+      <div class="shot" data-id="p11" data-likes="36"><img src="assets/photos/photo-11-camera-coffee-street.jpg" alt="Holding a camera and coffee while shooting a building facade" loading="lazy"><div class="cap">On the shoot · Glasgow</div></div>
+      <div class="shot" data-id="p15" data-likes="33"><img src="assets/photos/photo-15-glasgow-city-chambers.jpg" alt="Ornate dome of Glasgow City Chambers against blue sky" loading="lazy"><div class="cap">City Chambers · Glasgow</div></div>
+      <div class="shot" data-id="p01" data-likes="29"><img src="assets/photos/photo-01-edinburgh-corner-spires.jpg" alt="Ornate corner building with twin spires at dusk, Edinburgh" loading="lazy"><div class="cap">Twin spires on the corner · Edinburgh</div></div>
+      <div class="shot" data-id="p02" data-likes="27"><img src="assets/photos/photo-02-london-mansion-house-lfa.jpg" alt="White Lexus LFA passing Mansion House at golden hour, London" loading="lazy"><div class="cap">LFA at Mansion House · London</div></div>
+      <div class="shot" data-id="p07" data-likes="24"><img src="assets/photos/photo-07-calton-hill-columns.jpg" alt="Greek-style columns overlooking the city from Calton Hill, Edinburgh" loading="lazy"><div class="cap">Columns over the city · Calton Hill</div></div>
+      <div class="shot" data-id="p03" data-likes="22"><img src="assets/photos/photo-03-london-superdry-corner.jpg" alt="Illuminated Superdry corner store at blue hour, London" loading="lazy"><div class="cap">Corner light, blue hour · London</div></div>
+      <div class="shot" data-id="p04" data-likes="19"><img src="assets/photos/photo-04-edinburgh-princes-street.jpg" alt="Stone building with lit windows on Princes Street, Edinburgh" loading="lazy"><div class="cap">Princes Street, lights on · Edinburgh</div></div>
+      <div class="shot" data-id="p10" data-likes="17"><img src="assets/photos/photo-10-country-lane-bare-trees.jpg" alt="Bare winter trees over a quiet country lane at dawn" loading="lazy"><div class="cap">Bare lane, first light</div></div>
+      <div class="shot" data-id="p12" data-likes="15"><img src="assets/photos/photo-12-glasgow-spire-street.jpg" alt="Glasgow street with a white church spire in the distance" loading="lazy"><div class="cap">Spire down the street · Glasgow</div></div>
+      <div class="shot" data-id="p08" data-likes="13"><img src="assets/photos/photo-08-white-church-blue-sky.jpg" alt="White church tower against a deep blue sky" loading="lazy"><div class="cap">White tower, blue sky</div></div>
+      <div class="shot" data-id="p06" data-likes="11"><img src="assets/photos/photo-06-classical-columns-hills.jpg" alt="Classical stone columns of a monument with hills beyond" loading="lazy"><div class="cap">Columns and hills</div></div>
+      <div class="shot" data-id="p14" data-likes="9"><img src="assets/photos/photo-14-glasgow-gallery-framed.jpg" alt="Gallery of Modern Art framed through a window, Glasgow" loading="lazy"><div class="cap">GoMA, framed · Glasgow</div></div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="row">
+      <a class="btn" href="https://instagram.com/malhar__k" target="_blank" rel="noopener">Follow on Instagram</a>
+      <a class="btn" href="index.html#home">Back to home</a>
+    </div>
+    <p class="note">© <span id="y"></span> Malhar Kharat · Photography</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // ---- Like buttons (per-device, saved in this browser) ----
+    const heartSVG = '<span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.2C.4 8.6 2 5 5.3 5c1.9 0 3.3 1 4.7 2.8C11.4 6 12.8 5 14.7 5 18 5 19.6 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg></span>';
+
+    document.querySelectorAll('.shot').forEach(shot => {
+      const id = shot.getAttribute('data-id');
+      const base = parseInt(shot.getAttribute('data-likes') || '0', 10);
+      const liked = localStorage.getItem('like_' + id) === '1';
+      const count = base + (liked ? 1 : 0);
+
+      const btn = document.createElement('button');
+      btn.className = 'like-btn' + (liked ? ' liked' : '');
+      btn.setAttribute('aria-label', 'Like this photo');
+      btn.innerHTML = heartSVG + '<span class="count">' + count + '</span>';
+      shot.appendChild(btn);
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // don't open lightbox
+        const isLiked = localStorage.getItem('like_' + id) === '1';
+        const countEl = btn.querySelector('.count');
+        if (isLiked) {
+          localStorage.removeItem('like_' + id);
+          btn.classList.remove('liked');
+          countEl.textContent = base;
+        } else {
+          localStorage.setItem('like_' + id, '1');
+          btn.classList.add('liked', 'bump');
+          countEl.textContent = base + 1;
+          setTimeout(() => btn.classList.remove('bump'), 360);
+        }
+      });
+    });
+
+    // ---- Lightbox ----
+    const shots = Array.from(document.querySelectorAll(".shot img"));
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbCap = document.getElementById("lbCap");
+    let current = 0;
+
+    function openLb(i){
+      current = i;
+      lbImg.src = shots[i].src;
+      lbImg.alt = shots[i].alt;
+      lbCap.textContent = shots[i].alt;
+      lb.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLb(){
+      lb.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+    function step(d){
+      current = (current + d + shots.length) % shots.length;
+      lbImg.src = shots[current].src;
+      lbImg.alt = shots[current].alt;
+      lbCap.textContent = shots[current].alt;
+    }
+
+    shots.forEach((img, i)=> img.parentElement.addEventListener("click", ()=> openLb(i)));
+    document.getElementById("lbClose").addEventListener("click", closeLb);
+    document.getElementById("lbPrev").addEventListener("click", (e)=>{ e.stopPropagation(); step(-1); });
+    document.getElementById("lbNext").addEventListener("click", (e)=>{ e.stopPropagation(); step(1); });
+    lb.addEventListener("click", (e)=>{ if(e.target === lb) closeLb(); });
+    document.addEventListener("keydown", (e)=>{
+      if(!lb.classList.contains("show")) return;
+      if(e.key === "Escape") closeLb();
+      if(e.key === "ArrowLeft") step(-1);
+      if(e.key === "ArrowRight") step(1);
+    });
+  </script>
+</body>
+</html>
