@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Malhar Kharat — Author</title>
-  <meta name="description" content="Official author website of Malhar Kharat. Books, upcoming releases, and reader updates." />
+  <meta name="description" content="Official author website of Malhar Kharat. Books on discipline, identity, and consistency, plus upcoming releases and reader updates." />
 
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Malhar Kharat" />
@@ -76,28 +76,6 @@
     "publisher": {
       "@type": "Organization",
       "name": "Amazon KDP"
-    }
-  }
-  </script>
-
-  <!-- Schema: Review (example) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Book",
-      "name": "The Luck Blueprint"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Leena"
-    },
-    "reviewBody": "Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them.",
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5"
     }
   }
   </script>
@@ -245,6 +223,14 @@
     .hero h1{margin:0 0 10px; font-size:56px; line-height:1.05; letter-spacing:-.6px}
     @media(max-width:520px){ .hero h1{font-size:44px} }
     .sub{color:var(--muted); margin:0 0 14px}
+    .value-prop{
+      font-size:18px;
+      color:var(--text);
+      margin:0 0 16px;
+      font-weight:600;
+      border-left:2px solid var(--accent);
+      padding-left:12px;
+    }
 
     .authorRow{display:flex; gap:16px; align-items:center; margin-bottom:12px;}
     .avatar{
@@ -349,7 +335,7 @@
     .quote p{margin:0 0 12px; color:var(--muted)}
     .quote strong{color:var(--text)}
 
-    /* PHOTOGRAPHY (NEW) */
+    /* PHOTOGRAPHY */
     .photo-strip{
       display:flex;
       gap:14px;
@@ -438,12 +424,12 @@
         <a href="#books">Books</a>
         <a href="#upcoming">Upcoming</a>
         <a href="#about">About</a>
-        <a href="#photography">Photography</a><!-- NEW -->
+        <a href="#photography">Photography</a>
         <a href="#reviews">Reviews</a>
       </div>
 
       <div class="cta">
-        <button class="btn small primary" id="openFormTop" type="button">Get Updates</button>
+        <button class="btn small primary" id="openFormTop" type="button">Get a Free Chapter</button>
       </div>
     </div>
   </div>
@@ -464,6 +450,10 @@
               </div>
             </div>
 
+            <p class="value-prop">
+              Three books on building discipline, self-trust, and momentum — without relying on motivation.
+            </p>
+
             <p>
               I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
               My work is for people who are tired of hype, shortcuts, and loud motivation
@@ -472,13 +462,13 @@
 
             <p class="sub">
               These books are not about becoming someone new overnight.
-              They’re about becoming someone you can trust through repetition,
+              They're about becoming someone you can trust through repetition,
               clarity, and showing up even when progress feels invisible.
             </p>
 
             <div class="row">
               <a class="btn primary" href="#books">Explore Books</a>
-              <button class="btn" id="openFormHero" type="button">Join Free Updates</button>
+              <button class="btn" id="openFormHero" type="button">Get a Free Chapter</button>
             </div>
 
             <div class="tags">
@@ -491,10 +481,10 @@
           </div>
 
           <div class="card reveal">
-            <h2 style="margin:0 0 8px">Latest release</h2>
+            <h2 style="margin:0 0 8px">Start here</h2>
             <div class="card" style="padding:16px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px">
               <p style="margin:0 0 10px">
-                <strong>The Unseen Work</strong> <span class="tag live">NOW PUBLISHED</span><br>
+                <strong>The Unseen Work</strong> <span class="tag live">NEW</span><br>
                 <span class="sub" style="margin:0">Identity × Reps × Time: the discipline that builds self-trust.</span>
               </p>
               <div class="row" style="margin-top:10px">
@@ -509,7 +499,7 @@
               <span class="tag">Quiet progress</span>
             </div>
 
-            <p class="note">Tip: scroll down — each section is a full “page”.</p>
+            <p class="note">Tip: scroll down — each section is a full "page".</p>
           </div>
         </div>
       </div>
@@ -524,7 +514,6 @@
 
           <div class="grid">
 
-            <!-- NEW: The Unseen Work -->
             <div class="book" data-tilt>
               <img class="cover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover">
               <div class="meta">
@@ -551,7 +540,7 @@
               <img class="cover" src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover">
               <div class="meta">
                 <h3>Why Not To Be Rich</h3>
-                <p>A contrarian take on ambition, success, and what “rich” really means.</p>
+                <p>A contrarian take on ambition, success, and what "rich" really means.</p>
                 <div class="row">
                   <a class="btn primary" href="https://amzn.eu/d/isqC5Rg" target="_blank" rel="noopener">Buy on Amazon</a>
                 </div>
@@ -582,7 +571,7 @@
       <div class="wrap">
         <div class="card reveal">
           <h2>Upcoming</h2>
-          <p class="sub">Covers coming soon!!!</p>
+          <p class="sub">Covers coming soon.</p>
 
           <div class="up-grid">
             <div class="book" data-tilt>
@@ -597,7 +586,7 @@
               <div class="placeholder">COMING SOON</div>
               <div class="meta" style="margin-top:14px">
                 <h3>Kill the 0 Days</h3>
-                <p>Consistency without motivation. How to win the day in a small way?</p>
+                <p>Consistency without motivation. How to win the day in a small way.</p>
               </div>
             </div>
 
@@ -623,7 +612,7 @@
         <div class="card reveal">
           <h2>About the Author</h2>
           <p class="sub">
-            A personal story: why I write, what I studied, and what I’m building.
+            A personal story: why I write, what I studied, and what I'm building.
           </p>
 
           <div class="split">
@@ -637,7 +626,7 @@
               </div>
 
               <p class="sub">
-                I didn’t start writing because it looked cool. I started writing because I needed clarity,
+                I didn't start writing because it looked cool. I started writing because I needed clarity,
                 something that still works when motivation disappears.
               </p>
               <p class="sub">
@@ -659,36 +648,33 @@
               </p>
 
               <div class="tags">
-                <span class="tag"><strong>Master’s</strong> : Automotive Engineering (Electric Vehicles focus)</span>
+                <span class="tag"><strong>Master's</strong> : Automotive Engineering (Electric Vehicles focus)</span>
                 <span class="tag"><strong>Background</strong> : Automotive Technology Engineering</span>
                 <span class="tag"><strong>Style</strong> : Practical, systems-based writing</span>
               </div>
 
               <p class="sub" style="margin-top:14px">
-                In engineering, you don’t get results by “feeling motivated” — you get results by showing up,
+                In engineering, you don't get results by "feeling motivated" — you get results by showing up,
                 measuring, improving, and repeating. That same discipline is the foundation of my work.
               </p>
 
               <div class="row">
-                <button class="btn primary" id="openFormAbout" type="button">Get updates</button>
-                <a class="btn linklike" href="#photography">Next: Photography →</a><!-- UPDATED -->
+                <button class="btn primary" id="openFormAbout" type="button">Get a Free Chapter</button>
+                <a class="btn linklike" href="#photography">Next: Photography →</a>
               </div>
-
-              <p class="note">Want this section even more personal (India → UK journey, career, etc.)? Tell me and I’ll rewrite it in your voice.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PHOTOGRAPHY (NEW SECTION) -->
+    <!-- PHOTOGRAPHY -->
     <section class="page" id="photography">
       <div class="wrap">
         <div class="card reveal">
           <h2>Photography</h2>
           <p class="sub">Seeing before writing.</p>
 
-          <!-- Preview strip: replace the image paths with your own -->
           <a class="photo-strip" href="https://instagram.com/malhar__k" target="_blank" rel="noopener" aria-label="Open photography (Instagram)">
             <figure class="photo"><img src="assets/photos/p-01.jpg" alt="Photography preview 1" loading="lazy"></figure>
             <figure class="photo"><img src="assets/photos/p-02.jpg" alt="Photography preview 2" loading="lazy"></figure>
@@ -701,8 +687,6 @@
             <a class="btn linklike" href="https://instagram.com/malhar__k" target="_blank" rel="noopener">View full photography →</a>
             <a class="btn" href="#reviews">Next: Reviews →</a>
           </div>
-
-          <p class="note">Add 5 curated images in <strong>assets/photos/</strong> named p-01.jpg … p-05.jpg.</p>
         </div>
       </div>
     </section>
@@ -717,26 +701,22 @@
           <div class="split">
             <div class="card" style="padding:18px">
               <h3>What readers say</h3>
-              <p class="note">
-                Note: these are placeholder “early reader notes” until you paste real review screenshots/quotes.
-                Replace anytime.
-              </p>
 
               <div class="t-grid">
                 <div class="quote">
-                  <p>“Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them.”</p>
+                  <p>"Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them."</p>
                   <strong>— Leena</strong>
                 </div>
                 <div class="quote">
-                  <p>“No over-promising. Practical perspective that stays in your head after you close the book.”</p>
+                  <p>"No over-promising. Practical perspective that stays in your head after you close the book."</p>
                   <strong>— Kaustubh Rai</strong>
                 </div>
                 <div class="quote">
-                  <p>“It’s calm writing, the kind that pushes you to act quietly instead of announcing your goals.”</p>
+                  <p>"It's calm writing, the kind that pushes you to act quietly instead of announcing your goals."</p>
                   <strong>— James Walker</strong>
                 </div>
                 <div class="quote">
-                  <p>“Helped me reset without pressure. It’s not loud motivation, it’s a clean mental shift.”</p>
+                  <p>"Helped me reset without pressure. It's not loud motivation, it's a clean mental shift."</p>
                   <strong>— Daniel Hughes</strong>
                 </div>
               </div>
@@ -747,8 +727,8 @@
             </div>
 
             <div class="card" style="padding:18px">
-              <h3>Get Early Chapters & Updates</h3>
-              <p class="sub">Free updates only when there’s something worth reading. No spam.</p>
+              <h3>Get a Free Chapter</h3>
+              <p class="sub">Sign up and get a free chapter from "The Unseen Work" plus updates when there's something worth reading. No spam.</p>
 
               <div class="row">
                 <button class="btn primary" id="openFormReviews" type="button">Open signup (popup)</button>
@@ -779,7 +759,7 @@
   <div class="modal" id="modal">
     <div class="modal-card">
       <div class="modal-head">
-        <div class="title">Join Malhar Kharat — Reader Updates</div>
+        <div class="title">Get a Free Chapter — Malhar Kharat</div>
         <button class="x" id="closeModal" aria-label="Close" type="button">✕</button>
       </div>
       <div class="modal-body">
