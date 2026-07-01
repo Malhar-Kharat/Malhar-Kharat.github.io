@@ -484,6 +484,59 @@
     .reveal.show{opacity:1; transform:none}
 
     .note{color:rgba(255,255,255,.45); font-size:13px; margin-top:10px}
+
+    /* Streak counter */
+    .streak{
+      display:flex; align-items:baseline; gap:10px;
+      margin:14px 0; padding:10px 16px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      width:fit-content;
+    }
+    .streak-num{font-size:24px; font-weight:800; color:var(--accent)}
+    .streak-label{font-size:13px; color:var(--muted)}
+
+    /* Flip cards (published books) */
+    .flip{perspective:1200px}
+    .flip-inner{
+      position:relative; width:100%; aspect-ratio:2/3;
+      transition:transform .6s cubic-bezier(.4,.2,.2,1);
+      transform-style:preserve-3d;
+    }
+    .book:hover .flip-inner, .book.flipped .flip-inner{transform:rotateY(180deg)}
+    .flip-front, .flip-back{
+      position:absolute; inset:0;
+      backface-visibility:hidden;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .fcover{width:100%; height:100%; object-fit:cover; display:block; background:rgba(0,0,0,.18)}
+    .flip-back{
+      transform:rotateY(180deg);
+      background: linear-gradient(160deg, rgba(199,255,90,.14), rgba(110,231,255,.10)), rgba(12,14,22,.9);
+      display:flex; align-items:center; justify-content:center;
+      padding:18px; text-align:center;
+    }
+    .flip-back p{margin:0; color:var(--text); font-weight:650; font-size:15px; line-height:1.4}
+
+    /* Testimonial carousel */
+    .carousel{position:relative; min-height:150px}
+    .carousel-item{display:none}
+    .carousel-item.active{display:block; animation:fadeInUp .5s ease}
+    @keyframes fadeInUp{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+    .dots{display:flex; gap:8px; margin-top:14px}
+    .dot-btn{
+      width:8px; height:8px; border-radius:50%;
+      background:rgba(255,255,255,.20); border:none; padding:0; cursor:pointer;
+    }
+    .dot-btn.active{background:var(--accent)}
+
+    /* Build-log progress bars */
+    .progress{height:6px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:12px}
+    .progress-fill{height:100%; background:linear-gradient(90deg, var(--accent), var(--accent2))}
+    .progress-label{display:block; font-size:12px; color:var(--muted); margin-top:6px}
   </style>
 </head>
 
@@ -523,7 +576,7 @@
               <img class="avatar" src="assets/author.jpg" alt="Malhar Kharat author portrait" />
               <div>
                 <h1 style="margin:0 0 8px">Malhar Kharat</h1>
-                <p class="sub" style="margin:0">Author of modern self-help & reflective nonfiction.</p>
+                <p class="sub" style="margin:0">An engineer who writes about the parts of life that don't have a manual.</p>
               </div>
             </div>
 
@@ -531,10 +584,15 @@
               Three books on building discipline, self-trust, and momentum that don't rely on motivation.
             </p>
 
+            <div class="streak">
+              <span class="streak-num" id="streakNum">--</span>
+              <span class="streak-label">day of the year. Not a countdown, a count of reps.</span>
+            </div>
+
             <p>
-              I write about discipline, identity, and the quiet work that changes your life when nobody is watching.
-              My work is for people who are tired of hype, shortcuts, and loud motivation
-              and want something steadier, more honest, and built to last.
+              By day I test electric vehicle drivetrains, where a system either holds up under load or it doesn't.
+              My books apply the same standard to a life: no willpower, no hype, just reps that hold up under pressure.
+              If you're tired of being told to "manifest" your way out of a Tuesday, start here.
             </p>
 
             <p class="sub">
@@ -592,10 +650,15 @@
           <div class="grid">
 
             <div class="book" data-tilt>
-              <img class="cover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover">
+              <div class="flip">
+                <div class="flip-inner">
+                  <div class="flip-front"><img class="fcover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover"></div>
+                  <div class="flip-back"><p>"Discipline isn't a feeling. It's Identity × Reps × Time."</p></div>
+                </div>
+              </div>
               <div class="meta">
                 <h3>The Unseen Work <span class="tag live" style="margin-left:8px">NEW</span></h3>
-                <p>A quiet guide to discipline, self-trust, and progress built through Identity × Reps × Time.</p>
+                <p>The discipline that builds self-trust, one unglamorous rep at a time.</p>
                 <div class="row">
                   <a class="btn primary" href="https://amzn.eu/d/dkzlBwT" target="_blank" rel="noopener">Buy on Amazon</a>
                 </div>
@@ -603,10 +666,15 @@
             </div>
 
             <div class="book" data-tilt>
-              <img class="cover" src="assets/luck-blueprint.jpeg" alt="The Luck Blueprint cover">
+              <div class="flip">
+                <div class="flip-inner">
+                  <div class="flip-front"><img class="fcover" src="assets/luck-blueprint.jpeg" alt="The Luck Blueprint cover"></div>
+                  <div class="flip-back"><p>"What if getting lucky is just a system you haven't built yet."</p></div>
+                </div>
+              </div>
               <div class="meta">
                 <h3>The Luck Blueprint</h3>
-                <p>Practical self-help for building momentum, clarity, and better decisions.</p>
+                <p>Luck isn't random. It's what preparation looks like from the outside.</p>
                 <div class="row">
                   <a class="btn primary" href="https://amzn.eu/d/97oAgIP" target="_blank" rel="noopener">Buy on Amazon</a>
                 </div>
@@ -614,10 +682,15 @@
             </div>
 
             <div class="book" data-tilt>
-              <img class="cover" src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover">
+              <div class="flip">
+                <div class="flip-inner">
+                  <div class="flip-front"><img class="fcover" src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover"></div>
+                  <div class="flip-back"><p>"The question nobody asks before chasing more."</p></div>
+                </div>
+              </div>
               <div class="meta">
                 <h3>Why Not To Be Rich</h3>
-                <p>A contrarian take on ambition, success, and what "rich" really means.</p>
+                <p>A contrarian's case against chasing more.</p>
                 <div class="row">
                   <a class="btn primary" href="https://amzn.eu/d/isqC5Rg" target="_blank" rel="noopener">Buy on Amazon</a>
                 </div>
@@ -625,10 +698,15 @@
             </div>
 
             <div class="book" data-tilt>
-              <img class="cover" src="assets/echoes-of-youth.jpeg" alt="Echoes Of Youth cover">
+              <div class="flip">
+                <div class="flip-inner">
+                  <div class="flip-front"><img class="fcover" src="assets/echoes-of-youth.jpeg" alt="Echoes Of Youth cover"></div>
+                  <div class="flip-back"><p>"Growing up rarely feels like the version you imagined."</p></div>
+                </div>
+              </div>
               <div class="meta">
                 <h3>Echoes Of Youth</h3>
-                <p>Reflections on growth, emotions, and the quiet lessons of becoming.</p>
+                <p>What growing up actually sounds like, before the highlight reel.</p>
                 <div class="row">
                   <a class="btn primary" href="https://amzn.eu/d/h0XX5MM" target="_blank" rel="noopener">Buy on Amazon</a>
                 </div>
@@ -656,6 +734,8 @@
               <div class="meta" style="margin-top:14px">
                 <h3>The Inner War <span class="tag" style="margin-left:8px">Part I: The Noise</span></h3>
                 <p><em>"The noise is not outside."</em> The first part of a three-part series on the battles fought silently within: doubt, fear, and the war for self-control.</p>
+                <div class="progress"><div class="progress-fill" style="width:40%"></div></div>
+                <span class="progress-label">Drafting, 40%</span>
               </div>
             </div>
 
@@ -664,6 +744,8 @@
               <div class="meta" style="margin-top:14px">
                 <h3>The Inner War <span class="tag" style="margin-left:8px">Part II: The War Within</span></h3>
                 <p><em>"Both sides live inside you."</em> The middle of the series: confronting identity, ego, and the patterns that quietly run your life.</p>
+                <div class="progress"><div class="progress-fill" style="width:20%"></div></div>
+                <span class="progress-label">Outlining, 20%</span>
               </div>
             </div>
 
@@ -672,6 +754,8 @@
               <div class="meta" style="margin-top:14px">
                 <h3>The Inner War <span class="tag" style="margin-left:8px">Part III: The Way</span></h3>
                 <p><em>"The way was never missing."</em> The final part: making peace with yourself and turning the war into lasting discipline.</p>
+                <div class="progress"><div class="progress-fill" style="width:5%"></div></div>
+                <span class="progress-label">Notes only, 5%</span>
               </div>
             </div>
           </div>
@@ -729,25 +813,21 @@
               </div>
 
               <p class="sub">
-                I didn't start writing because it looked cool. I started writing because I needed clarity,
-                something that still works when motivation disappears.
-              </p>
-              <p class="sub">
-                For a long time, I was the kind of person who wanted big results but kept fighting inconsistency:
-                overthinking, starting late, stopping early, and restarting again.
-                Writing became my way of turning chaos into systems and systems into progress.
+                I spent my twenties trying to make big things happen and mostly failing at small, boring things:
+                showing up, finishing what I started, not quitting in week three.
               </p>
               <p class="sub" style="margin-bottom:0">
-                My books are built for people who are tired of hype and want something real:
-                simple actions, repeated honestly, until self-trust becomes your normal.
+                Then I got a master's in electric vehicle engineering, where none of that works. A drivetrain doesn't
+                care how motivated you felt when you built it. It either survives the test cycle or it doesn't.
+                That standard is what my books are built on: not motivation, repetition that holds up when nobody's checking.
               </p>
             </div>
 
             <div class="card" style="padding:18px">
               <h3>Studies & credibility</h3>
               <p class="sub">
-                I have an engineering background, which heavily shapes how I write:
-                structured thinking, problem-solving, and building systems that work in real life.
+                My day job is engineering electric vehicle systems. That means I don't write about discipline as a
+                feeling, I write about it as an input you can test, measure, and repeat, the same way you'd validate a drivetrain.
               </p>
 
               <div class="tags">
@@ -807,24 +887,25 @@
             <div class="card" style="padding:18px">
               <h3>What readers say</h3>
 
-              <div class="t-grid">
-                <div class="quote">
+              <div class="carousel" id="testiCarousel">
+                <div class="quote carousel-item active">
                   <p>"Clear, honest, and grounding. It felt like someone understood my thoughts and simplified them."</p>
                   <strong>Leena</strong>
                 </div>
-                <div class="quote">
+                <div class="quote carousel-item">
                   <p>"No over-promising. Practical perspective that stays in your head after you close the book."</p>
                   <strong>Kaustubh Rai</strong>
                 </div>
-                <div class="quote">
+                <div class="quote carousel-item">
                   <p>"It's calm writing, the kind that pushes you to act quietly instead of announcing your goals."</p>
                   <strong>James Walker</strong>
                 </div>
-                <div class="quote">
+                <div class="quote carousel-item">
                   <p>"Helped me reset without pressure. It's not loud motivation, it's a clean mental shift."</p>
                   <strong>Daniel Hughes</strong>
                 </div>
               </div>
+              <div class="dots" id="testiDots"></div>
 
               <div class="row" style="margin-top:14px">
                 <a class="btn" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Review%20for%20Malhar%20Kharat">Add your review</a>
@@ -927,6 +1008,47 @@
         card.addEventListener("mouseleave", ()=>{ card.style.transform = ""; });
       });
     }
+
+    // Streak counter: day of the year, honest counter, no fabricated claims
+    (function(){
+      const el = document.getElementById("streakNum");
+      if(!el) return;
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = now - start;
+      el.textContent = Math.floor(diff / 86400000);
+    })();
+
+    // Tap-to-flip on touch devices (desktop uses :hover)
+    document.querySelectorAll(".book").forEach(card=>{
+      card.addEventListener("click", (e)=>{
+        if(e.target.closest("a")) return;
+        if(card.querySelector(".flip")) card.classList.toggle("flipped");
+      });
+    });
+
+    // Testimonial carousel: auto-rotate every 5s, with clickable dots
+    (function(){
+      const items = document.querySelectorAll("#testiCarousel .carousel-item");
+      const dotsWrap = document.getElementById("testiDots");
+      if(!items.length || !dotsWrap) return;
+      let idx = 0;
+      items.forEach((_, i)=>{
+        const b = document.createElement("button");
+        b.className = "dot-btn" + (i === 0 ? " active" : "");
+        b.setAttribute("aria-label", "Show testimonial " + (i + 1));
+        b.addEventListener("click", ()=> show(i));
+        dotsWrap.appendChild(b);
+      });
+      function show(i){
+        items[idx].classList.remove("active");
+        dotsWrap.children[idx].classList.remove("active");
+        idx = i;
+        items[idx].classList.add("active");
+        dotsWrap.children[idx].classList.add("active");
+      }
+      setInterval(()=> show((idx + 1) % items.length), 5000);
+    })();
   </script>
 </body>
 </html>
