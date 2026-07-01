@@ -161,17 +161,17 @@
 
   <style>
     :root{
-      --bg:#07080c;
+      --bg:#0a0e14;
       --card:#0f121a;
       --text:#e9e9ee;
       --muted:#a8a9b3;
       --line:#242a3a;
-      --accent:#c7ff5a;
-      --accent2:#6ee7ff;
+      --accent:#f2600c;
+      --accent2:#cfd1d6;
       --max:1100px;
       --r:20px;
       --shadow: 0 18px 70px rgba(0,0,0,.55);
-      --glow: 0 0 0 1px rgba(199,255,90,.14), 0 18px 70px rgba(0,0,0,.55);
+      --glow: 0 0 0 1px rgba(242,96,12,.14), 0 18px 70px rgba(0,0,0,.55);
       --navH: 84px;
     }
 
@@ -182,9 +182,9 @@
       color:var(--text);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
-        radial-gradient(900px 600px at 18% 10%, rgba(110,231,255,.16), transparent 55%),
-        radial-gradient(900px 600px at 80% 20%, rgba(199,255,90,.12), transparent 55%),
-        radial-gradient(1100px 700px at 60% 120%, rgba(122,92,255,.10), transparent 60%),
+        radial-gradient(900px 600px at 18% 10%, rgba(207,209,214,.16), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(242,96,12,.12), transparent 55%),
+        radial-gradient(1100px 700px at 60% 120%, rgba(140,141,148,.10), transparent 60%),
         var(--bg);
       overflow-x:hidden;
     }
@@ -210,7 +210,7 @@
       overflow:hidden;
     }
     .brand{display:flex;align-items:center;gap:10px;font-weight:650; flex:0 0 auto}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(199,255,90,.55)}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(242,96,12,.55)}
 
     .links{
       display:flex;
@@ -252,13 +252,13 @@
     }
     .btn:hover{
       transform: translateY(-2px);
-      border-color: rgba(199,255,90,.25);
+      border-color: rgba(242,96,12,.25);
       box-shadow: 0 14px 40px rgba(0,0,0,.35);
     }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(199,255,90,.95), rgba(110,231,255,.55));
+      background: linear-gradient(135deg, rgba(242,96,12,.95), rgba(207,209,214,.55));
       color:#06110a;
-      border-color: rgba(199,255,90,.30);
+      border-color: rgba(242,96,12,.30);
     }
     .btn.small{padding:9px 12px; font-size:14px}
     .btn.linklike{background:transparent;border-color:rgba(255,255,255,.10);color:var(--muted)}
@@ -328,8 +328,8 @@
     }
     .tag.live{
       color:#06110a;
-      background: linear-gradient(135deg, rgba(199,255,90,.95), rgba(110,231,255,.55));
-      border-color: rgba(199,255,90,.35);
+      background: linear-gradient(135deg, rgba(242,96,12,.95), rgba(207,209,214,.55));
+      border-color: rgba(242,96,12,.35);
       font-weight:800;
     }
 
@@ -355,12 +355,12 @@
     .book:before{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(600px 200px at 20% 0%, rgba(199,255,90,.10), transparent 55%),
-                  radial-gradient(700px 240px at 90% 20%, rgba(110,231,255,.10), transparent 55%);
+      background: radial-gradient(600px 200px at 20% 0%, rgba(242,96,12,.10), transparent 55%),
+                  radial-gradient(700px 240px at 90% 20%, rgba(207,209,214,.10), transparent 55%);
       pointer-events:none;
       opacity:.85;
     }
-    .book:hover{box-shadow:var(--glow); border-color:rgba(199,255,90,.25); transform: translateY(-6px)}
+    .book:hover{box-shadow:var(--glow); border-color:rgba(242,96,12,.25); transform: translateY(-6px)}
     .cover{
       width:100%;
       aspect-ratio:2/3;
@@ -476,7 +476,7 @@
       cursor:pointer;
       display:flex; align-items:center; justify-content:center;
     }
-    .x:hover{border-color:rgba(199,255,90,.25)}
+    .x:hover{border-color:rgba(242,96,12,.25)}
     iframe{width:100%; height:78vh; border:0; display:block; background:#fff;}
 
     /* Reveal on scroll */
@@ -515,7 +515,7 @@
     .fcover{width:100%; height:100%; object-fit:cover; display:block; background:rgba(0,0,0,.18)}
     .flip-back{
       transform:rotateY(180deg);
-      background: linear-gradient(160deg, rgba(199,255,90,.14), rgba(110,231,255,.10)), rgba(12,14,22,.9);
+      background: linear-gradient(160deg, rgba(242,96,12,.14), rgba(207,209,214,.10)), rgba(12,14,22,.9);
       display:flex; align-items:center; justify-content:center;
       padding:18px; text-align:center;
     }
@@ -537,6 +537,21 @@
     .progress{height:6px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:12px}
     .progress-fill{height:100%; background:linear-gradient(90deg, var(--accent), var(--accent2))}
     .progress-label{display:block; font-size:12px; color:var(--muted); margin-top:6px}
+
+    /* Mouse-follow spotlight glow */
+    .spotlight{
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background: radial-gradient(600px circle at var(--x, 50%) var(--y, 30%), rgba(242,96,12,.12), transparent 60%);
+    }
+
+    /* Parallax orbs */
+    .parallax-shape{
+      position:fixed; z-index:-1; border-radius:50%;
+      filter: blur(70px); opacity:.35; pointer-events:none;
+      will-change: transform;
+    }
+    .shape1{width:340px; height:340px; background:var(--accent); top:-80px; left:-80px}
+    .shape2{width:420px; height:420px; background:var(--accent2); bottom:-120px; right:-100px}
 
     /* Preloader */
     .preloader{
@@ -561,7 +576,7 @@
       position:fixed; top:0; left:0; height:3px; z-index:60;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       width:0%;
-      box-shadow: 0 0 12px rgba(199,255,90,.5);
+      box-shadow: 0 0 12px rgba(242,96,12,.5);
     }
 
     /* Staggered reveal for grid cards */
@@ -582,6 +597,9 @@
       <span class="preloader-pct" id="preloaderPct">0%</span>
     </div>
   </div>
+  <div class="spotlight" id="spotlight"></div>
+  <div class="parallax-shape shape1" id="shape1" aria-hidden="true"></div>
+  <div class="parallax-shape shape2" id="shape2" aria-hidden="true"></div>
   <div class="scrollbar" id="scrollbar"></div>
   <!-- NAV -->
   <div class="nav">
@@ -657,7 +675,7 @@
             </div>
           </div>
 
-          <div class="card reveal">
+          <div class="card reveal" id="startHereCard">
             <h2 style="margin:0 0 8px">Start here</h2>
             <div class="card" style="padding:16px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px">
               <p style="margin:0 0 10px">
@@ -1006,6 +1024,10 @@
     </div>
   </div>
 
+  <!-- GSAP for heavier scroll-linked motion (parallax orbs, hero entrance) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
   <script>
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
@@ -1057,6 +1079,42 @@
         card.addEventListener("mouseleave", ()=>{ card.style.transform = ""; });
       });
     }
+
+    // Mouse-follow spotlight (desktop only)
+    (function(){
+      const isTouchDevice = matchMedia("(pointer: coarse)").matches;
+      if(isTouchDevice) return;
+      document.addEventListener("mousemove", (e)=>{
+        document.documentElement.style.setProperty("--x", e.clientX + "px");
+        document.documentElement.style.setProperty("--y", e.clientY + "px");
+      }, {passive:true});
+    })();
+
+    // Heavier GSAP-driven motion: hero entrance + scroll-scrubbed parallax orbs
+    (function(){
+      if(!window.gsap) return;
+      if(window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+      // Hero entrance timeline (plays once on load)
+      gsap.timeline({defaults:{ease:"power3.out"}})
+        .from(".hero .authorRow", {opacity:0, y:26, duration:.8})
+        .from(".hero .streak", {opacity:0, scale:.85, duration:.6}, "-=0.35")
+        .from(".hero > .card > p", {opacity:0, y:16, duration:.6, stagger:0.08}, "-=0.3")
+        .from(".hero .tags .tag", {opacity:0, y:10, duration:.5, stagger:0.06}, "-=0.35")
+        .from("#startHereCard", {opacity:0, x:36, duration:.7}, "-=0.5");
+
+      // Scroll-scrubbed parallax orbs, tied to the .pages scroll container
+      if(window.ScrollTrigger){
+        gsap.to("#shape1", {
+          y: 320, ease:"none",
+          scrollTrigger:{ scroller:".pages", trigger:".pages", start:"top top", end:"bottom bottom", scrub:true }
+        });
+        gsap.to("#shape2", {
+          y: -280, ease:"none",
+          scrollTrigger:{ scroller:".pages", trigger:".pages", start:"top top", end:"bottom bottom", scrub:true }
+        });
+      }
+    })();
 
     // Preloader: quick animated percentage, purely time-based (not tied to asset loading)
     (function(){
