@@ -161,17 +161,18 @@
 
   <style>
     :root{
-      --bg:#0a0e14;
-      --card:#0f121a;
-      --text:#e9e9ee;
-      --muted:#a8a9b3;
-      --line:#242a3a;
-      --accent:#f2600c;
-      --accent2:#cfd1d6;
+      --bg:#fbf6ec;
+      --card:#fffaf1;
+      --text:#2a211a;
+      --muted:#6b5a4a;
+      --line:#e3d5c2;
+      --accent:#d4a657;
+      --accent2:#e8b4a8;
+      --accent-ink:#8a5f26;
       --max:1100px;
       --r:20px;
-      --shadow: 0 18px 70px rgba(0,0,0,.55);
-      --glow: 0 0 0 1px rgba(242,96,12,.14), 0 18px 70px rgba(0,0,0,.55);
+      --shadow: 0 14px 46px rgba(58,42,26,.14);
+      --glow: 0 0 0 1px rgba(212,166,87,.35), 0 14px 46px rgba(58,42,26,.14);
       --navH: 84px;
     }
 
@@ -182,9 +183,9 @@
       color:var(--text);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
-        radial-gradient(900px 600px at 18% 10%, rgba(207,209,214,.16), transparent 55%),
-        radial-gradient(900px 600px at 80% 20%, rgba(242,96,12,.12), transparent 55%),
-        radial-gradient(1100px 700px at 60% 120%, rgba(140,141,148,.10), transparent 60%),
+        radial-gradient(900px 600px at 18% 10%, rgba(232,180,168,.32), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(212,166,87,.30), transparent 55%),
+        radial-gradient(1100px 700px at 60% 120%, rgba(232,180,168,.22), transparent 60%),
         var(--bg);
       overflow-x:hidden;
     }
@@ -202,15 +203,15 @@
       width:min(var(--max), calc(100% - 36px));
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       padding:12px 16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(10,12,18,.55);
+      border:1px solid rgba(58,42,26,.10);
+      background:rgba(255,250,241,.72);
       backdrop-filter: blur(12px);
       border-radius:999px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      box-shadow: 0 10px 40px rgba(58,42,26,.14);
       overflow:hidden;
     }
     .brand{display:flex;align-items:center;gap:10px;font-weight:650; flex:0 0 auto}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(242,96,12,.55)}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(212,166,87,.55)}
 
     .links{
       display:flex;
@@ -234,7 +235,7 @@
       white-space:nowrap;
       flex:0 0 auto;
     }
-    .links a:hover{color:var(--text); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.06)}
+    .links a:hover{color:var(--text); background:rgba(58,42,26,.06); border-color:rgba(58,42,26,.08)}
     .cta{display:flex; gap:10px; align-items:center; flex:0 0 auto}
 
     /* Buttons */
@@ -242,8 +243,8 @@
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:11px 14px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
+      border:1px solid rgba(58,42,26,.14);
+      background:rgba(255,255,255,.55);
       color:var(--text);
       font-weight:650;
       transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease;
@@ -252,16 +253,16 @@
     }
     .btn:hover{
       transform: translateY(-2px);
-      border-color: rgba(242,96,12,.25);
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      border-color: rgba(212,166,87,.25);
+      box-shadow: 0 14px 40px rgba(58,42,26,.14);
     }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(242,96,12,.95), rgba(207,209,214,.55));
-      color:#06110a;
-      border-color: rgba(242,96,12,.30);
+      background: linear-gradient(135deg, rgba(212,166,87,.95), rgba(232,180,168,.55));
+      color:#2a211a;
+      border-color: rgba(212,166,87,.30);
     }
     .btn.small{padding:9px 12px; font-size:14px}
-    .btn.linklike{background:transparent;border-color:rgba(255,255,255,.10);color:var(--muted)}
+    .btn.linklike{background:transparent;border-color:rgba(58,42,26,.14);color:var(--muted)}
     .btn.linklike:hover{color:var(--text)}
 
     /* Slide pages */
@@ -277,13 +278,14 @@
       min-height:100vh;
       display:flex;
       align-items:center;
+      justify-content:center;
       padding: calc(var(--navH) + 22px) 18px 56px;
     }
     .wrap{width:min(var(--max), 100%); margin:0 auto;}
 
     .card{
-      border:1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(16,18,28,.78), rgba(10,12,20,.62));
+      border:1px solid rgba(58,42,26,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,250,241,.55));
       border-radius: var(--r);
       box-shadow: var(--shadow);
       padding:26px;
@@ -312,8 +314,8 @@
     .authorRow{display:flex; gap:16px; align-items:center; margin-bottom:12px;}
     .avatar{
       width:108px;height:108px;border-radius:22px; object-fit:cover;
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      border:1px solid rgba(58,42,26,.14);
+      box-shadow: 0 12px 40px rgba(58,42,26,.14);
       animation: floaty 6s ease-in-out infinite;
     }
     @keyframes floaty{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
@@ -322,14 +324,14 @@
     .tag{
       display:inline-flex; align-items:center;
       font-size:12px;color:var(--muted);
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(58,42,26,.14);
       padding:5px 10px;border-radius:999px;
-      background:rgba(255,255,255,.03);
+      background:rgba(255,255,255,.55);
     }
     .tag.live{
-      color:#06110a;
-      background: linear-gradient(135deg, rgba(242,96,12,.95), rgba(207,209,214,.55));
-      border-color: rgba(242,96,12,.35);
+      color:#2a211a;
+      background: linear-gradient(135deg, rgba(212,166,87,.95), rgba(232,180,168,.55));
+      border-color: rgba(212,166,87,.35);
       font-weight:800;
     }
 
@@ -342,8 +344,8 @@
     @media(max-width:980px){ .grid{grid-template-columns:1fr} }
 
     .book{
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
+      border:1px solid rgba(58,42,26,.10);
+      background: rgba(255,255,255,.55);
       border-radius:18px;
       padding:16px;
       transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
@@ -355,19 +357,19 @@
     .book:before{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(600px 200px at 20% 0%, rgba(242,96,12,.10), transparent 55%),
-                  radial-gradient(700px 240px at 90% 20%, rgba(207,209,214,.10), transparent 55%);
+      background: radial-gradient(600px 200px at 20% 0%, rgba(212,166,87,.10), transparent 55%),
+                  radial-gradient(700px 240px at 90% 20%, rgba(232,180,168,.10), transparent 55%);
       pointer-events:none;
       opacity:.85;
     }
-    .book:hover{box-shadow:var(--glow); border-color:rgba(242,96,12,.25); transform: translateY(-6px)}
+    .book:hover{box-shadow:var(--glow); border-color:rgba(212,166,87,.25); transform: translateY(-6px)}
     .cover{
       width:100%;
       aspect-ratio:2/3;
       border-radius:14px;
       object-fit:cover;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
+      border:1px solid rgba(58,42,26,.14);
+      background: rgba(58,42,26,.06);
       transform: translateZ(22px);
       transition: transform .35s ease, filter .35s ease;
       position:relative;
@@ -388,10 +390,10 @@
       width:100%;
       aspect-ratio:2/3;
       border-radius:14px;
-      border:1px dashed rgba(255,255,255,.14);
-      background: rgba(255,255,255,.02);
+      border:1px dashed rgba(58,42,26,.20);
+      background: rgba(58,42,26,.03);
       display:flex; align-items:center; justify-content:center;
-      color:rgba(255,255,255,.35);
+      color:rgba(58,42,26,.4);
       font-weight:650;
       letter-spacing:.2px;
     }
@@ -404,8 +406,8 @@
     .t-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:14px;}
     @media(max-width:980px){ .t-grid{grid-template-columns:1fr} }
     .quote{
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
+      border:1px solid rgba(58,42,26,.10);
+      background: rgba(255,255,255,.55);
       border-radius:18px;
       padding:18px;
     }
@@ -418,15 +420,15 @@
       gap:14px;
       padding:10px;
       border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
+      border:1px solid rgba(58,42,26,.10);
+      background: rgba(255,255,255,.55);
       overflow-x:auto;
       -webkit-overflow-scrolling: touch;
       scroll-snap-type:x mandatory;
     }
     .photo-strip::-webkit-scrollbar{height:8px}
     .photo-strip::-webkit-scrollbar-thumb{
-      background: rgba(255,255,255,.10);
+      background: rgba(58,42,26,.14);
       border-radius:999px;
     }
     .photo{
@@ -436,8 +438,8 @@
       border-radius:14px;
       overflow:hidden;
       scroll-snap-align:start;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
+      border:1px solid rgba(58,42,26,.14);
+      background: rgba(58,42,26,.06);
     }
     .photo img{
       width:100%;
@@ -460,41 +462,41 @@
     .modal-card{
       width:min(920px, 100%);
       border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,12,20,.86);
+      border:1px solid rgba(58,42,26,.12);
+      background: rgba(255,250,241,.95);
       backdrop-filter: blur(14px);
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+      box-shadow: 0 20px 60px rgba(58,42,26,.18);
       overflow:hidden;
     }
-    .modal-head{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08);}
+    .modal-head{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid rgba(58,42,26,.10);}
     .modal-head .title{font-weight:700}
     .x{
       width:38px;height:38px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
+      border:1px solid rgba(58,42,26,.14);
+      background: rgba(58,42,26,.05);
       color:var(--text);
       cursor:pointer;
       display:flex; align-items:center; justify-content:center;
     }
-    .x:hover{border-color:rgba(242,96,12,.25)}
+    .x:hover{border-color:rgba(212,166,87,.25)}
     iframe{width:100%; height:78vh; border:0; display:block; background:#fff;}
 
     /* Reveal on scroll */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease}
     .reveal.show{opacity:1; transform:none}
 
-    .note{color:rgba(255,255,255,.45); font-size:13px; margin-top:10px}
+    .note{color:rgba(58,42,26,.55); font-size:13px; margin-top:10px}
 
     /* Streak counter */
     .streak{
       display:flex; align-items:baseline; gap:10px;
       margin:14px 0; padding:10px 16px;
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(58,42,26,.14);
       border-radius:14px;
-      background:rgba(255,255,255,.03);
+      background:rgba(255,255,255,.55);
       width:fit-content;
     }
-    .streak-num{font-size:24px; font-weight:800; color:var(--accent)}
+    .streak-num{font-size:24px; font-weight:800; color:var(--accent-ink)}
     .streak-label{font-size:13px; color:var(--muted)}
 
     /* Flip cards (published books) */
@@ -509,17 +511,31 @@
       position:absolute; inset:0;
       backface-visibility:hidden;
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(58,42,26,.14);
       overflow:hidden;
     }
-    .fcover{width:100%; height:100%; object-fit:cover; display:block; background:rgba(0,0,0,.18)}
+    .fcover{width:100%; height:100%; object-fit:cover; display:block; background:rgba(58,42,26,.06)}
     .flip-back{
       transform:rotateY(180deg);
-      background: linear-gradient(160deg, rgba(242,96,12,.14), rgba(207,209,214,.10)), rgba(12,14,22,.9);
+      background: linear-gradient(160deg, rgba(212,166,87,.18), rgba(232,180,168,.16)), rgba(255,250,241,.95);
       display:flex; align-items:center; justify-content:center;
       padding:18px; text-align:center;
     }
     .flip-back p{margin:0; color:var(--text); font-weight:650; font-size:15px; line-height:1.4}
+    .rep-stamp{
+      position:absolute; bottom:12px; left:50%;
+      transform:translateX(-50%) scale(.8);
+      background: rgba(212,166,87,.92);
+      color:#2a211a;
+      font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+      padding:4px 10px; border-radius:999px;
+      opacity:0;
+      transition: opacity .35s ease .15s, transform .35s ease .15s;
+      pointer-events:none;
+    }
+    .book:hover .rep-stamp, .book.flipped .rep-stamp{
+      opacity:1; transform:translateX(-50%) scale(1);
+    }
 
     /* Testimonial carousel */
     .carousel{position:relative; min-height:150px}
@@ -529,25 +545,51 @@
     .dots{display:flex; gap:8px; margin-top:14px}
     .dot-btn{
       width:8px; height:8px; border-radius:50%;
-      background:rgba(255,255,255,.20); border:none; padding:0; cursor:pointer;
+      background:rgba(58,42,26,.20); border:none; padding:0; cursor:pointer;
     }
     .dot-btn.active{background:var(--accent)}
 
     /* Build-log progress bars */
-    .progress{height:6px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:12px}
+    .progress{height:6px; border-radius:999px; background:rgba(58,42,26,.10); overflow:hidden; margin-top:12px}
     .progress-fill{height:100%; background:linear-gradient(90deg, var(--accent), var(--accent2))}
     .progress-label{display:block; font-size:12px; color:var(--muted); margin-top:6px}
 
-    /* Mouse-follow spotlight glow */
-    .spotlight{
-      position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background: radial-gradient(600px circle at var(--x, 50%) var(--y, 30%), rgba(242,96,12,.12), transparent 60%);
+    /* Ambient floating gold particles, drifting slowly upward like dust in sunlight */
+    .particles{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden}
+    .particle{
+      position:absolute; bottom:-40px; border-radius:50%;
+      background: radial-gradient(circle, rgba(212,166,87,.55), rgba(212,166,87,0) 72%);
+      animation: driftUp linear infinite;
     }
+    @keyframes driftUp{
+      0%{transform:translate(0,0); opacity:0}
+      10%{opacity:.7}
+      90%{opacity:.7}
+      100%{transform:translate(var(--drift-x, 30px), -115vh); opacity:0}
+    }
+
+    /* Gentle floating bob on the four published book covers */
+    @keyframes coverFloat{0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
+    .fcover{animation: coverFloat 5s ease-in-out infinite}
+    .grid .book:nth-child(1) .fcover{animation-delay:0s}
+    .grid .book:nth-child(2) .fcover{animation-delay:.4s}
+    .grid .book:nth-child(3) .fcover{animation-delay:.8s}
+    .grid .book:nth-child(4) .fcover{animation-delay:1.2s}
+
+    /* Animated underline on nav links */
+    .links a{position:relative}
+    .links a::after{
+      content:""; position:absolute; left:10px; right:10px; bottom:3px; height:2px;
+      background:var(--accent); border-radius:2px;
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .3s ease;
+    }
+    .links a:hover::after{transform:scaleX(1)}
 
     /* Parallax orbs */
     .parallax-shape{
       position:fixed; z-index:-1; border-radius:50%;
-      filter: blur(70px); opacity:.35; pointer-events:none;
+      filter: blur(64px); opacity:.5; pointer-events:none;
       will-change: transform;
     }
     .shape1{width:340px; height:340px; background:var(--accent); top:-80px; left:-80px}
@@ -563,12 +605,12 @@
     .preloader.hide{opacity:0; visibility:hidden; pointer-events:none}
     .preloader-inner{display:flex; flex-direction:column; align-items:center; gap:14px}
     .preloader-word{font-size:13px; letter-spacing:.35em; color:var(--muted); text-transform:uppercase}
-    .preloader-pct{font-size:48px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums}
+    .preloader-pct{font-size:48px; font-weight:800; color:var(--accent-ink); font-variant-numeric:tabular-nums}
 
     /* Stat counters */
     .stats-row{display:flex; gap:32px; flex-wrap:wrap; margin:16px 0 6px}
     .stat{display:flex; flex-direction:column}
-    .stat-num{font-size:36px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums}
+    .stat-num{font-size:36px; font-weight:800; color:var(--accent-ink); font-variant-numeric:tabular-nums}
     .stat-label{font-size:13px; color:var(--muted)}
 
     /* Scroll progress bar */
@@ -576,7 +618,7 @@
       position:fixed; top:0; left:0; height:3px; z-index:60;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       width:0%;
-      box-shadow: 0 0 12px rgba(242,96,12,.5);
+      box-shadow: 0 0 12px rgba(212,166,87,.5);
     }
 
     /* Staggered reveal for grid cards */
@@ -597,7 +639,7 @@
       <span class="preloader-pct" id="preloaderPct">0%</span>
     </div>
   </div>
-  <div class="spotlight" id="spotlight"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
   <div class="parallax-shape shape1" id="shape1" aria-hidden="true"></div>
   <div class="parallax-shape shape2" id="shape2" aria-hidden="true"></div>
   <div class="scrollbar" id="scrollbar"></div>
@@ -636,7 +678,7 @@
               <img class="avatar" src="assets/author.jpg" alt="Malhar Kharat author portrait" />
               <div>
                 <h1 style="margin:0 0 8px">Malhar Kharat</h1>
-                <p class="sub" style="margin:0">An engineer who writes about the parts of life that don't have a manual.</p>
+                <p class="sub" style="margin:0">Honest, practical wisdom for building a life you can trust.</p>
               </div>
             </div>
 
@@ -650,9 +692,9 @@
             </div>
 
             <p>
-              By day I test electric vehicle drivetrains, where a system either holds up under load or it doesn't.
-              My books apply the same standard to a life: no willpower, no hype, just reps that hold up under pressure.
-              If you're tired of being told to "manifest" your way out of a Tuesday, start here.
+              These books aren't about theory. They're about the small, unglamorous choices that actually
+              change a life: showing up when it's boring, keeping a promise to yourself, choosing consistency
+              over intensity. No hype, no shortcuts, just what actually works when you put in the reps.
             </p>
 
             <p class="sub">
@@ -677,7 +719,7 @@
 
           <div class="card reveal" id="startHereCard">
             <h2 style="margin:0 0 8px">Start here</h2>
-            <div class="card" style="padding:16px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px">
+            <div class="card" style="padding:16px; background:rgba(255,255,255,.55); border:1px solid rgba(58,42,26,.10); border-radius:18px">
               <p style="margin:0 0 10px">
                 <strong>The Unseen Work</strong> <span class="tag live">NEW</span><br>
                 <span class="sub" style="margin:0">Identity × Reps × Time: the discipline that builds self-trust.</span>
@@ -883,28 +925,27 @@
                 showing up, finishing what I started, not quitting in week three.
               </p>
               <p class="sub" style="margin-bottom:0">
-                Then I got a master's in electric vehicle engineering, where none of that works. A drivetrain doesn't
-                care how motivated you felt when you built it. It either survives the test cycle or it doesn't.
-                That standard is what my books are built on: not motivation, repetition that holds up when nobody's checking.
+                What changed wasn't motivation, it was learning to trust myself through repetition: keeping small
+                promises long enough that they became who I am. That's what my books are built on, not hacks or
+                hype, just what actually holds up once life goes back to being ordinary.
               </p>
             </div>
 
             <div class="card" style="padding:18px">
-              <h3>Studies & credibility</h3>
+              <h3>Background</h3>
               <p class="sub">
-                My day job is engineering electric vehicle systems. That means I don't write about discipline as a
-                feeling, I write about it as an input you can test, measure, and repeat, the same way you'd validate a drivetrain.
+                My background is in engineering, which taught me to think in systems instead of moods. It's a
+                small part of how I write, the books themselves are about living, not machines.
               </p>
 
               <div class="tags">
-                <span class="tag"><strong>Master's</strong> : Automotive Engineering (Electric Vehicles focus)</span>
-                <span class="tag"><strong>Background</strong> : Automotive Technology Engineering</span>
                 <span class="tag"><strong>Style</strong> : Practical, systems-based writing</span>
+                <span class="tag"><strong>Focus</strong> : Discipline, identity, self-trust</span>
               </div>
 
               <p class="sub" style="margin-top:14px">
-                In engineering, you don't get results by "feeling motivated." You get results by showing up,
-                measuring, improving, and repeating. That same discipline is the foundation of my work.
+                You don't need any special background to use what's in these books. The idea is simple: results
+                come from showing up and repeating, not from feeling ready.
               </p>
 
               <div class="row">
@@ -973,10 +1014,20 @@
               </div>
               <div class="dots" id="testiDots"></div>
 
-              <div class="row" style="margin-top:14px">
-                <a class="btn primary" href="PASTE_YOUR_GOOGLE_FORM_URL_HERE" target="_blank" rel="noopener">Add your review</a>
-                <a class="btn linklike" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Review%20for%20Malhar%20Kharat">Or email it instead</a>
-              </div>
+              <form id="reviewForm" action="PASTE_YOUR_FORMSPREE_ENDPOINT_HERE" method="POST" style="margin-top:16px; display:flex; flex-direction:column; gap:8px; max-width:420px;">
+                <input type="text" name="name" placeholder="Your name" required
+                  style="padding:10px 12px; border-radius:10px; border:1px solid rgba(58,42,26,.14); background:rgba(255,255,255,.6); color:var(--text); font:inherit;" />
+                <textarea name="review" placeholder="Your review" required rows="3"
+                  style="padding:10px 12px; border-radius:10px; border:1px solid rgba(58,42,26,.14); background:rgba(255,255,255,.6); color:var(--text); font:inherit; resize:vertical;"></textarea>
+                <div class="row">
+                  <button class="btn primary" type="submit">Submit review</button>
+                </div>
+                <p class="note" style="margin:0">
+                  Submissions come to me privately, I choose which ones to post. Nothing appears
+                  on the site automatically.
+                </p>
+              </form>
+              <p id="reviewFormThanks" class="note" style="display:none; margin-top:8px;">Thank you, your review has been sent.</p>
             </div>
 
             <div class="card" style="padding:18px">
@@ -1080,14 +1131,49 @@
       });
     }
 
-    // Mouse-follow spotlight (desktop only)
+    // Ambient floating particles: small gold motes drifting slowly upward
+    (function(){
+      const wrap = document.getElementById("particles");
+      if(!wrap) return;
+      const count = 16;
+      for(let i = 0; i < count; i++){
+        const p = document.createElement("span");
+        p.className = "particle";
+        const size = 4 + Math.random() * 7;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.setProperty("--drift-x", (Math.random() * 60 - 30) + "px");
+        p.style.animationDuration = (14 + Math.random() * 12) + "s";
+        p.style.animationDelay = (Math.random() * 20) + "s";
+        wrap.appendChild(p);
+      }
+    })();
+
+    // Magnetic buttons: primary CTAs pull slightly toward the cursor on hover
     (function(){
       const isTouchDevice = matchMedia("(pointer: coarse)").matches;
       if(isTouchDevice) return;
-      document.addEventListener("mousemove", (e)=>{
-        document.documentElement.style.setProperty("--x", e.clientX + "px");
-        document.documentElement.style.setProperty("--y", e.clientY + "px");
-      }, {passive:true});
+      document.querySelectorAll(".btn.primary").forEach(btn=>{
+        btn.addEventListener("mousemove", (e)=>{
+          const r = btn.getBoundingClientRect();
+          const x = (e.clientX - r.left - r.width / 2) * 0.25;
+          const y = (e.clientY - r.top - r.height / 2) * 0.25;
+          btn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        btn.addEventListener("mouseleave", ()=>{ btn.style.transform = ""; });
+      });
+    })();
+
+    // "Rep logged" stamp: a small tick animates onto a book cover on hover,
+    // a literal nod to Identity x Reps x Time.
+    (function(){
+      document.querySelectorAll(".flip-back").forEach(back=>{
+        const stamp = document.createElement("span");
+        stamp.className = "rep-stamp";
+        stamp.textContent = "Rep logged";
+        back.appendChild(stamp);
+      });
     })();
 
     // Heavier GSAP-driven motion: hero entrance + scroll-scrubbed parallax orbs
@@ -1096,12 +1182,23 @@
       if(window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
       // Hero entrance timeline (plays once on load)
+      const heroSelectors = ".hero .authorRow, .hero .streak, .hero > .card > p, .hero .tags .tag, #startHereCard";
       gsap.timeline({defaults:{ease:"power3.out"}})
         .from(".hero .authorRow", {opacity:0, y:26, duration:.8})
         .from(".hero .streak", {opacity:0, scale:.85, duration:.6}, "-=0.35")
         .from(".hero > .card > p", {opacity:0, y:16, duration:.6, stagger:0.08}, "-=0.3")
         .from(".hero .tags .tag", {opacity:0, y:10, duration:.5, stagger:0.06}, "-=0.35")
         .from("#startHereCard", {opacity:0, x:36, duration:.7}, "-=0.5");
+
+      // Safety net: if anything above ever fails to complete (slow network, CDN
+      // hiccup), force every hero element back to normal so content can never
+      // get stuck invisible.
+      setTimeout(()=>{
+        document.querySelectorAll(heroSelectors).forEach(el=>{
+          el.style.opacity = "";
+          el.style.transform = "";
+        });
+      }, 3000);
 
       // Scroll-scrubbed parallax orbs, tied to the .pages scroll container
       if(window.ScrollTrigger){
@@ -1197,13 +1294,17 @@
       });
     });
 
-    // ---- Live reviews (Google Form + Sheet, light moderation via an "Approved" column) ----
-    // 1. Create a Google Form ("Your name" + "Your review"), link its responses to a Sheet.
-    // 2. In the Sheet, add a 4th column header "Approved". Type "Yes" in that column for any
-    //    row you want to show publicly. Leave it blank to keep a review hidden.
-    // 3. In the Sheet: File > Share > Publish to web > pick the responses tab > format CSV > Publish.
-    // 4. Paste that published CSV link below, replacing the placeholder.
-    const REVIEWS_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_URL_HERE";
+    // ---- Reviews: submissions come to you privately (Formspree), you choose what to post ----
+    // Setup once: create a free account at formspree.io, create one form, and paste its
+    // endpoint URL into the form's "action" attribute above (search for
+    // PASTE_YOUR_FORMSPREE_ENDPOINT_HERE). Every submission then lands in your email
+    // and your Formspree dashboard, nothing goes on the site automatically.
+    //
+    // To post a review you like: copy it into the list below as one line, then commit.
+    // That one line is the entire "post it or not" decision, nothing else to configure.
+    const extraReviews = [
+      // { name: "Jordan R.", text: "This book changed how I think about mornings." },
+    ];
 
     function escapeHtml(str){
       return String(str)
@@ -1214,37 +1315,7 @@
         .replace(/'/g, "&#039;");
     }
 
-    function parseCsvLine(line){
-      const out = [];
-      let cur = "";
-      let inQuotes = false;
-      for(let i = 0; i < line.length; i++){
-        const c = line[i];
-        if(inQuotes){
-          if(c === '"'){
-            if(line[i + 1] === '"'){ cur += '"'; i++; }
-            else { inQuotes = false; }
-          } else {
-            cur += c;
-          }
-        } else if(c === '"'){
-          inQuotes = true;
-        } else if(c === ","){
-          out.push(cur); cur = "";
-        } else {
-          cur += c;
-        }
-      }
-      out.push(cur);
-      return out;
-    }
-
-    function parseCsv(text){
-      return text.split(/\r?\n/).filter(l => l.trim().length).map(parseCsvLine);
-    }
-
     // Testimonial carousel: auto-rotate every 5s, with clickable dots.
-    // Run AFTER any live reviews are appended so the dots match the final count.
     function initTestimonialCarousel(){
       const items = document.querySelectorAll("#testiCarousel .carousel-item");
       const dotsWrap = document.getElementById("testiDots");
@@ -1269,30 +1340,39 @@
       setInterval(()=> show((idx + 1) % items.length), 5000);
     }
 
-    (function loadLiveReviews(){
+    (function addPostedReviews(){
       const carousel = document.getElementById("testiCarousel");
-      if(!carousel || REVIEWS_CSV_URL.indexOf("PASTE_") === 0){
-        initTestimonialCarousel();
-        return;
+      if(carousel){
+        extraReviews.forEach(r=>{
+          if(!r || !r.name || !r.text) return;
+          const div = document.createElement("div");
+          div.className = "quote carousel-item";
+          div.innerHTML = `<p>"${escapeHtml(r.text)}"</p><strong>${escapeHtml(r.name)}</strong>`;
+          carousel.appendChild(div);
+        });
       }
-      fetch(REVIEWS_CSV_URL)
-        .then(r => r.text())
-        .then(text => {
-          const rows = parseCsv(text);
-          rows.shift(); // header row: Timestamp, Your name, Your review, Approved
-          rows.forEach(cols => {
-            const name = (cols[1] || "").trim();
-            const review = (cols[2] || "").trim();
-            const approved = (cols[3] || "").trim().toLowerCase();
-            if(approved !== "yes" || !name || !review) return;
-            const div = document.createElement("div");
-            div.className = "quote carousel-item";
-            div.innerHTML = `<p>"${escapeHtml(review)}"</p><strong>${escapeHtml(name)}</strong>`;
-            carousel.appendChild(div);
-          });
-        })
-        .catch(()=>{ /* CSV not reachable yet, static reviews still show */ })
-        .finally(initTestimonialCarousel);
+      initTestimonialCarousel();
+    })();
+
+    // Review submission form: plain POST to Formspree, no page reload, just a thank-you message
+    (function(){
+      const form = document.getElementById("reviewForm");
+      const thanks = document.getElementById("reviewFormThanks");
+      if(!form) return;
+      form.addEventListener("submit", function(e){
+        if(form.action.indexOf("PASTE_") !== -1) return; // not configured yet, let it show the normal browser behavior
+        e.preventDefault();
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: {"Accept": "application/json"}
+        }).then(()=>{
+          form.style.display = "none";
+          if(thanks) thanks.style.display = "block";
+        }).catch(()=>{
+          alert("Something went wrong sending that. Try the email link instead.");
+        });
+      });
     })();
   </script>
 </body>
