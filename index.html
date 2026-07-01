@@ -537,10 +537,52 @@
     .progress{height:6px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:12px}
     .progress-fill{height:100%; background:linear-gradient(90deg, var(--accent), var(--accent2))}
     .progress-label{display:block; font-size:12px; color:var(--muted); margin-top:6px}
+
+    /* Preloader */
+    .preloader{
+      position:fixed; inset:0; z-index:200;
+      background:var(--bg);
+      display:flex; align-items:center; justify-content:center;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    .preloader.hide{opacity:0; visibility:hidden; pointer-events:none}
+    .preloader-inner{display:flex; flex-direction:column; align-items:center; gap:14px}
+    .preloader-word{font-size:13px; letter-spacing:.35em; color:var(--muted); text-transform:uppercase}
+    .preloader-pct{font-size:48px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums}
+
+    /* Stat counters */
+    .stats-row{display:flex; gap:32px; flex-wrap:wrap; margin:16px 0 6px}
+    .stat{display:flex; flex-direction:column}
+    .stat-num{font-size:36px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums}
+    .stat-label{font-size:13px; color:var(--muted)}
+
+    /* Scroll progress bar */
+    .scrollbar{
+      position:fixed; top:0; left:0; height:3px; z-index:60;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width:0%;
+      box-shadow: 0 0 12px rgba(199,255,90,.5);
+    }
+
+    /* Staggered reveal for grid cards */
+    .grid .book, .up-grid .book{
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .grid .book:nth-child(1), .up-grid .book:nth-child(1){transition-delay:.05s}
+    .grid .book:nth-child(2), .up-grid .book:nth-child(2){transition-delay:.15s}
+    .grid .book:nth-child(3), .up-grid .book:nth-child(3){transition-delay:.25s}
+    .grid .book:nth-child(4), .up-grid .book:nth-child(4){transition-delay:.35s}
   </style>
 </head>
 
 <body>
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <span class="preloader-word">Malhar Kharat</span>
+      <span class="preloader-pct" id="preloaderPct">0%</span>
+    </div>
+  </div>
+  <div class="scrollbar" id="scrollbar"></div>
   <!-- NAV -->
   <div class="nav">
     <div class="nav-inner">
@@ -647,9 +689,15 @@
           <h2>Books</h2>
           <p class="sub">Official links to my published books.</p>
 
+          <div class="stats-row">
+            <div class="stat"><span class="stat-num" data-target="4">0</span><span class="stat-label">Published books</span></div>
+            <div class="stat"><span class="stat-num" data-target="6">0</span><span class="stat-label">In the works</span></div>
+            <div class="stat"><span class="stat-num" data-target="0">0</span><span class="stat-label">Hype used</span></div>
+          </div>
+
           <div class="grid">
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <div class="flip">
                 <div class="flip-inner">
                   <div class="flip-front"><img class="fcover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover"></div>
@@ -665,7 +713,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <div class="flip">
                 <div class="flip-inner">
                   <div class="flip-front"><img class="fcover" src="assets/luck-blueprint.jpeg" alt="The Luck Blueprint cover"></div>
@@ -681,7 +729,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <div class="flip">
                 <div class="flip-inner">
                   <div class="flip-front"><img class="fcover" src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover"></div>
@@ -697,7 +745,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <div class="flip">
                 <div class="flip-inner">
                   <div class="flip-front"><img class="fcover" src="assets/echoes-of-youth.jpeg" alt="Echoes Of Youth cover"></div>
@@ -729,7 +777,7 @@
           <p class="sub">Covers coming soon.</p>
 
           <div class="up-grid">
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <img class="cover" src="assets/inner-war-part1.jpg" alt="The Inner War Part I: The Noise — book cover">
               <div class="meta" style="margin-top:14px">
                 <h3>The Inner War <span class="tag" style="margin-left:8px">Part I: The Noise</span></h3>
@@ -739,7 +787,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <img class="cover" src="assets/inner-war-part2.jpg" alt="The Inner War Part II: The War Within — book cover">
               <div class="meta" style="margin-top:14px">
                 <h3>The Inner War <span class="tag" style="margin-left:8px">Part II: The War Within</span></h3>
@@ -749,7 +797,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <img class="cover" src="assets/inner-war-part3.jpg" alt="The Inner War Part III: The Way — book cover">
               <div class="meta" style="margin-top:14px">
                 <h3>The Inner War <span class="tag" style="margin-left:8px">Part III: The Way</span></h3>
@@ -761,7 +809,7 @@
           </div>
 
           <div class="up-grid" style="margin-top:18px">
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <img class="cover" src="assets/mind-after-midnight.jpg" alt="The Mind After Midnight book cover">
               <div class="meta" style="margin-top:14px">
                 <h3>Mind After Midnight</h3>
@@ -769,7 +817,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <img class="cover" src="assets/kill-the-0-days.jpg" alt="Kill the 0 Days book cover">
               <div class="meta" style="margin-top:14px">
                 <h3>Kill the 0 Days</h3>
@@ -777,7 +825,7 @@
               </div>
             </div>
 
-            <div class="book" data-tilt>
+            <div class="book reveal" data-tilt>
               <div class="placeholder">COMING SOON</div>
               <div class="meta" style="margin-top:14px">
                 <h3>The Discipline Equation</h3>
@@ -908,7 +956,8 @@
               <div class="dots" id="testiDots"></div>
 
               <div class="row" style="margin-top:14px">
-                <a class="btn" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Review%20for%20Malhar%20Kharat">Add your review</a>
+                <a class="btn primary" href="PASTE_YOUR_GOOGLE_FORM_URL_HERE" target="_blank" rel="noopener">Add your review</a>
+                <a class="btn linklike" href="mailto:kharatmalhar.mk@gmail.com?subject=Book%20Review%20for%20Malhar%20Kharat">Or email it instead</a>
               </div>
             </div>
 
@@ -1009,6 +1058,69 @@
       });
     }
 
+    // Preloader: quick animated percentage, purely time-based (not tied to asset loading)
+    (function(){
+      const pre = document.getElementById("preloader");
+      const pct = document.getElementById("preloaderPct");
+      if(!pre || !pct) return;
+      const duration = 900;
+      const start = Date.now();
+      function tick(){
+        const elapsed = Date.now() - start;
+        const n = Math.min(100, Math.round((elapsed / duration) * 100));
+        pct.textContent = n + "%";
+        if(n < 100){
+          requestAnimationFrame(tick);
+        } else {
+          setTimeout(()=> pre.classList.add("hide"), 150);
+        }
+      }
+      requestAnimationFrame(tick);
+    })();
+
+    // Animated stat counters: count up once each number scrolls into view
+    (function(){
+      const nums = document.querySelectorAll(".stat-num[data-target]");
+      if(!nums.length) return;
+      const seen = new WeakSet();
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting && !seen.has(entry.target)){
+            seen.add(entry.target);
+            animateCount(entry.target);
+          }
+        });
+      }, {threshold:0.4});
+      nums.forEach(n => obs.observe(n));
+      function animateCount(el){
+        const target = parseInt(el.getAttribute("data-target"), 10) || 0;
+        const duration = 800;
+        const start = Date.now();
+        function tick(){
+          const p = Math.min(1, (Date.now() - start) / duration);
+          el.textContent = Math.round(p * target);
+          if(p < 1) requestAnimationFrame(tick);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(tick);
+      }
+    })();
+
+    // Scroll progress bar (tracks position within the scrolling .pages container)
+    (function(){
+      const pagesEl = document.querySelector(".pages");
+      const bar = document.getElementById("scrollbar");
+      if(!pagesEl || !bar) return;
+      function update(){
+        const max = pagesEl.scrollHeight - pagesEl.clientHeight;
+        const pct = max > 0 ? (pagesEl.scrollTop / max) * 100 : 0;
+        bar.style.width = pct + "%";
+      }
+      pagesEl.addEventListener("scroll", update, {passive:true});
+      window.addEventListener("resize", update);
+      update();
+    })();
+
     // Streak counter: day of the year, honest counter, no fabricated claims
     (function(){
       const el = document.getElementById("streakNum");
@@ -1027,13 +1139,62 @@
       });
     });
 
-    // Testimonial carousel: auto-rotate every 5s, with clickable dots
-    (function(){
+    // ---- Live reviews (Google Form + Sheet, light moderation via an "Approved" column) ----
+    // 1. Create a Google Form ("Your name" + "Your review"), link its responses to a Sheet.
+    // 2. In the Sheet, add a 4th column header "Approved". Type "Yes" in that column for any
+    //    row you want to show publicly. Leave it blank to keep a review hidden.
+    // 3. In the Sheet: File > Share > Publish to web > pick the responses tab > format CSV > Publish.
+    // 4. Paste that published CSV link below, replacing the placeholder.
+    const REVIEWS_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_URL_HERE";
+
+    function escapeHtml(str){
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function parseCsvLine(line){
+      const out = [];
+      let cur = "";
+      let inQuotes = false;
+      for(let i = 0; i < line.length; i++){
+        const c = line[i];
+        if(inQuotes){
+          if(c === '"'){
+            if(line[i + 1] === '"'){ cur += '"'; i++; }
+            else { inQuotes = false; }
+          } else {
+            cur += c;
+          }
+        } else if(c === '"'){
+          inQuotes = true;
+        } else if(c === ","){
+          out.push(cur); cur = "";
+        } else {
+          cur += c;
+        }
+      }
+      out.push(cur);
+      return out;
+    }
+
+    function parseCsv(text){
+      return text.split(/\r?\n/).filter(l => l.trim().length).map(parseCsvLine);
+    }
+
+    // Testimonial carousel: auto-rotate every 5s, with clickable dots.
+    // Run AFTER any live reviews are appended so the dots match the final count.
+    function initTestimonialCarousel(){
       const items = document.querySelectorAll("#testiCarousel .carousel-item");
       const dotsWrap = document.getElementById("testiDots");
       if(!items.length || !dotsWrap) return;
+      dotsWrap.innerHTML = "";
       let idx = 0;
-      items.forEach((_, i)=>{
+      items.forEach((it, i)=>{
+        it.classList.toggle("active", i === 0);
         const b = document.createElement("button");
         b.className = "dot-btn" + (i === 0 ? " active" : "");
         b.setAttribute("aria-label", "Show testimonial " + (i + 1));
@@ -1048,6 +1209,32 @@
         dotsWrap.children[idx].classList.add("active");
       }
       setInterval(()=> show((idx + 1) % items.length), 5000);
+    }
+
+    (function loadLiveReviews(){
+      const carousel = document.getElementById("testiCarousel");
+      if(!carousel || REVIEWS_CSV_URL.indexOf("PASTE_") === 0){
+        initTestimonialCarousel();
+        return;
+      }
+      fetch(REVIEWS_CSV_URL)
+        .then(r => r.text())
+        .then(text => {
+          const rows = parseCsv(text);
+          rows.shift(); // header row: Timestamp, Your name, Your review, Approved
+          rows.forEach(cols => {
+            const name = (cols[1] || "").trim();
+            const review = (cols[2] || "").trim();
+            const approved = (cols[3] || "").trim().toLowerCase();
+            if(approved !== "yes" || !name || !review) return;
+            const div = document.createElement("div");
+            div.className = "quote carousel-item";
+            div.innerHTML = `<p>"${escapeHtml(review)}"</p><strong>${escapeHtml(name)}</strong>`;
+            carousel.appendChild(div);
+          });
+        })
+        .catch(()=>{ /* CSV not reachable yet, static reviews still show */ })
+        .finally(initTestimonialCarousel);
     })();
   </script>
 </body>
