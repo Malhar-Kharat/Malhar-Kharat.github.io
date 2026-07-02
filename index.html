@@ -1492,10 +1492,56 @@
         idx = (idx + delta + items.length) % items.length;
         render();
       }
-      if(prevBtn) prevBtn.addEventListener("click", ()=> go(-1));
-      if(nextBtn) nextBtn.addEventListener("click", ()=> go(1));
-      items.forEach((it, i)=> it.addEventListener("click", ()=>{ idx = i; render(); }));
+      if(prevBtn) prevBtn.addEventListener("click", ()=>{ uiSound.click(); go(-1); });
+      if(nextBtn) nextBtn.addEventListener("click", ()=>{ uiSound.click(); go(1); });
+      items.forEach((it, i)=> it.addEventListener("click", ()=>{ uiSound.click(); idx = i; render(); }));
       render();
+    })();
+
+    // Tiny synthesized UI sounds (no audio files, generated on the fly), a
+    // short click for the arrows and a different soft "whoosh" for a book flip.
+    const uiSound = (function(){
+      let ctx;
+      function getCtx(){
+        if(!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if(ctx.state === "suspended") ctx.resume();
+        return ctx;
+      }
+      // Unlock audio on the visitor's first real interaction (browsers block
+      // sound before that).
+      ["pointerdown", "keydown"].forEach(evt=>{
+        document.addEventListener(evt, ()=>{ try{ getCtx(); }catch(e){} }, {once:true, passive:true});
+      });
+      function click(){
+        try{
+          const c = getCtx();
+          const osc = c.createOscillator();
+          const gain = c.createGain();
+          osc.type = "square";
+          osc.frequency.setValueAtTime(880, c.currentTime);
+          gain.gain.setValueAtTime(.06, c.currentTime);
+          gain.gain.exponentialRampToValueAtTime(.001, c.currentTime + .07);
+          osc.connect(gain).connect(c.destination);
+          osc.start();
+          osc.stop(c.currentTime + .07);
+        }catch(e){}
+      }
+      function flip(){
+        try{
+          const c = getCtx();
+          const osc = c.createOscillator();
+          const gain = c.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(520, c.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(160, c.currentTime + .22);
+          gain.gain.setValueAtTime(.08, c.currentTime);
+          gain.gain.exponentialRampToValueAtTime(.001, c.currentTime + .24);
+          osc.connect(gain).connect(c.destination);
+          osc.start();
+          osc.stop(c.currentTime + .24);
+        }catch(e){}
+      }
+      return {click, flip};
     })();
 
     // Streak counter: day of the year, honest counter, no fabricated claims
@@ -1508,12 +1554,17 @@
       el.textContent = Math.floor(diff / 86400000);
     })();
 
-    // Tap-to-flip on touch devices (desktop uses :hover)
+    // Tap-to-flip on touch devices (desktop uses :hover), with its own sound
     document.querySelectorAll(".book").forEach(card=>{
+      if(!card.querySelector(".flip")) return;
       card.addEventListener("click", (e)=>{
         if(e.target.closest("a")) return;
-        if(card.querySelector(".flip")) card.classList.toggle("flipped");
+        card.classList.toggle("flipped");
+        uiSound.flip();
       });
+      // Desktop: the flip itself is pure CSS (:hover), so trigger the sound
+      // separately on mouse enter.
+      card.addEventListener("mouseenter", ()=> uiSound.flip());
     });
 
     // ---- Reviews: submissions come to you privately (Formspree), you choose what to post ----
