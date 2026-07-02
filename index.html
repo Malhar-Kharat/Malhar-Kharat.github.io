@@ -444,27 +444,33 @@
       min-height:60vh;
     }
     @media(max-width:900px){ .pin-story{grid-template-columns:1fr} }
-    .pin-visual{position:relative}
+    .pin-visual{position:relative; width:100%; max-width:260px; aspect-ratio:2/3; margin:0 auto}
     .pin-glow{
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
       width:280px; height:280px; border-radius:50%;
       background: radial-gradient(circle, rgba(212,166,87,.45), transparent 70%);
-      filter: blur(6px); pointer-events:none;
-      transition: opacity .3s ease;
+      filter: blur(6px); pointer-events:none; z-index:0;
     }
+    /* Each book's cover is its own slide, continuously crossfaded by scroll
+       progress, no swapping src, no timeouts, so the transition stays smooth
+       even on a fast flick of the scroll wheel. */
+    .pin-cover-slide{position:absolute; inset:0; z-index:1; opacity:0}
     .pin-cover{
-      position:relative; z-index:1;
-      width:100%; max-width:260px; margin:0 auto; display:block;
-      border-radius:16px; aspect-ratio:2/3; object-fit:cover;
+      width:100%; height:100%; display:block; object-fit:cover;
+      border-radius:16px;
       box-shadow: 0 24px 60px rgba(58,42,26,.22), 0 0 0 1px rgba(212,166,87,.3);
-      transition: transform .1s linear, opacity .25s ease;
     }
+    .pin-stack{position:relative; width:100%; height:100%}
+    .pin-stack-img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      border-radius:16px;
+      box-shadow: 0 24px 60px rgba(58,42,26,.22), 0 0 0 1px rgba(212,166,87,.3);
+    }
+    .pin-stack-img.s3{transform:rotate(-8deg) translate(-14px,6px); z-index:1}
+    .pin-stack-img.s2{transform:rotate(5deg) translate(10px,-4px); z-index:2}
+    .pin-stack-img.s1{transform:none; z-index:3}
     .pin-text{position:relative; min-height:200px}
-    .pin-claim{
-      position:absolute; inset:0; opacity:0; transform:translateY(14px);
-      transition: opacity .5s ease, transform .5s ease; pointer-events:none;
-    }
-    .pin-claim.active{opacity:1; transform:none; pointer-events:auto}
+    .pin-claim{position:absolute; inset:0; opacity:0; pointer-events:none}
     .pin-old{
       display:inline-block; text-decoration:line-through; color:rgba(58,42,26,.45);
       font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;
@@ -915,37 +921,64 @@
       </div>
     </section>
 
-    <!-- WHAT MAKES THESE DIFFERENT: pinned scroll story -->
-    <section class="page" id="different" style="scroll-snap-align:none; min-height:260vh; align-items:flex-start;">
+    <!-- WHAT MAKES THESE DIFFERENT: pinned scroll story, every book gets a turn -->
+    <section class="page" id="different" style="scroll-snap-align:none; min-height:420vh; align-items:flex-start;">
       <div class="wrap">
         <div class="card reveal" id="pinCard" style="min-height:82vh; display:flex; flex-direction:column; justify-content:center;">
           <h2 style="margin:0 0 4px">What makes these different</h2>
-          <p class="sub" style="margin:0 0 20px">Keep scrolling.</p>
+          <p class="sub" style="margin:0 0 20px">Keep scrolling, every book gets its turn.</p>
           <div class="pin-story">
-            <div class="pin-visual">
+            <div class="pin-visual" id="pinVisual">
               <div class="pin-glow" id="pinGlow" aria-hidden="true"></div>
-              <img class="pin-cover" id="pinCover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover">
+              <div class="pin-cover-slide" data-i="0"><img class="pin-cover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover"></div>
+              <div class="pin-cover-slide" data-i="1"><img class="pin-cover" src="assets/luck-blueprint.jpeg" alt="The Luck Blueprint cover"></div>
+              <div class="pin-cover-slide" data-i="2"><img class="pin-cover" src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover"></div>
+              <div class="pin-cover-slide" data-i="3"><img class="pin-cover" src="assets/echoes-of-youth.jpeg" alt="Echoes Of Youth cover"></div>
+              <div class="pin-cover-slide" data-i="4"><img class="pin-cover" src="assets/mind-after-midnight.jpg" alt="Mind After Midnight cover"></div>
+              <div class="pin-cover-slide" data-i="5"><img class="pin-cover" src="assets/kill-the-0-days.jpg" alt="Kill the 0 Days cover"></div>
+              <div class="pin-cover-slide" data-i="6">
+                <div class="pin-stack">
+                  <img class="pin-stack-img s3" src="assets/inner-war-part3.jpg" alt="The Inner War Part III cover">
+                  <img class="pin-stack-img s2" src="assets/inner-war-part2.jpg" alt="The Inner War Part II cover">
+                  <img class="pin-stack-img s1" src="assets/inner-war-part1.jpg" alt="The Inner War Part I cover">
+                </div>
+              </div>
             </div>
             <div class="pin-text">
-              <div class="pin-claim active" data-i="0" data-cover="assets/the-unseen-work.jpeg" data-alt="The Unseen Work cover">
+              <div class="pin-claim" data-i="0">
                 <span class="pin-old">A feeling</span>
                 <h3>A system</h3>
                 <p class="sub">Most self-help sells motivation. This is built like a system: Identity × Reps × Time.</p>
               </div>
-              <div class="pin-claim" data-i="1" data-cover="assets/luck-blueprint.jpeg" data-alt="The Luck Blueprint cover">
+              <div class="pin-claim" data-i="1">
                 <span class="pin-old">Getting lucky is random</span>
                 <h3>Luck is preparation, repeated</h3>
                 <p class="sub">What looks like a lucky break is usually someone who kept showing up long enough that the odds caught up with them.</p>
               </div>
-              <div class="pin-claim" data-i="2" data-cover="assets/why-not-to-be-rich.jpeg" data-alt="Why Not To Be Rich cover">
+              <div class="pin-claim" data-i="2">
                 <span class="pin-old">More is the goal</span>
                 <h3>Enough is a decision</h3>
                 <p class="sub">Nobody asks what you're chasing more for. That question is worth sitting with before you spend another decade chasing it.</p>
               </div>
-              <div class="pin-claim" data-i="3" data-cover="assets/echoes-of-youth.jpeg" data-alt="Echoes Of Youth cover">
+              <div class="pin-claim" data-i="3">
                 <span class="pin-old">Feeling different</span>
                 <h3>Being different</h3>
                 <p class="sub">Most books want you to feel inspired for an afternoon. This one wants you to actually change, quietly, on repeat.</p>
+              </div>
+              <div class="pin-claim" data-i="4">
+                <span class="pin-old">Late nights are wasted time</span>
+                <h3>Late nights are where the truth shows up</h3>
+                <p class="sub">Most advice tells you to sleep on it. This one is for the hours you can't, when the noise finally quiets down enough to hear what you actually think.</p>
+              </div>
+              <div class="pin-claim" data-i="5">
+                <span class="pin-old">Some days just don't count</span>
+                <h3>Every day counts, even the small ones</h3>
+                <p class="sub">A zero day isn't a day you did nothing. It's a day you decided nothing you did mattered. This book is about never deciding that again.</p>
+              </div>
+              <div class="pin-claim" data-i="6">
+                <span class="pin-old">The fight is out there</span>
+                <h3>The fight was always in here</h3>
+                <p class="sub">Three parts, one war: the noise you carry, the two sides pulling at you, and the quiet after you stop fighting yourself.</p>
               </div>
             </div>
           </div>
@@ -1325,16 +1358,18 @@
         });
       }
 
-      // "What makes these different": the card pins in place while you scroll,
-      // and each claim swaps in as the scroll position moves through the section.
+      // "What makes these different": the card pins in place while you scroll.
+      // Every book's cover and claim is its own layer, continuously crossfaded
+      // by scroll position (no swapping <img src>, no timeouts), so it stays
+      // smooth even on a fast scroll.
       if(window.ScrollTrigger){
         const diffSection = document.getElementById("different");
         const pinCard = document.getElementById("pinCard");
         const claims = document.querySelectorAll("#different .pin-claim");
-        const cover = document.getElementById("pinCover");
+        const coverSlides = document.querySelectorAll("#different .pin-cover-slide");
         const glow = document.getElementById("pinGlow");
         if(diffSection && pinCard && claims.length){
-          let lastIdx = -1;
+          const count = claims.length;
           ScrollTrigger.create({
             trigger: diffSection,
             scroller: ".pages",
@@ -1343,33 +1378,20 @@
             pin: pinCard,
             scrub: true,
             onUpdate: function(self){
-              const idx = Math.min(claims.length - 1, Math.floor(self.progress * claims.length));
-              claims.forEach((c, i)=> c.classList.toggle("active", i === idx));
-
-              // Swap the cover to the book behind the current claim, and pulse
-              // the glow brighter right as it changes, like the book stepping
-              // under a light.
-              if(idx !== lastIdx){
-                lastIdx = idx;
-                const active = claims[idx];
-                const src = active.getAttribute("data-cover");
-                const alt = active.getAttribute("data-alt");
-                if(cover && src){
-                  cover.style.opacity = 0;
-                  setTimeout(()=>{
-                    cover.src = src;
-                    if(alt) cover.alt = alt;
-                    cover.style.opacity = 1;
-                  }, 120);
-                }
-                if(glow){
-                  glow.style.opacity = 1;
-                  setTimeout(()=>{ glow.style.opacity = .6; }, 350);
-                }
+              const raw = self.progress * (count - 1);
+              claims.forEach((c, i)=>{
+                const o = Math.max(0, 1 - Math.abs(raw - i));
+                c.style.opacity = o;
+                c.style.transform = `translateY(${(1 - o) * 10}px)`;
+                c.style.pointerEvents = o > 0.5 ? "auto" : "none";
+              });
+              coverSlides.forEach((s, i)=>{
+                s.style.opacity = Math.max(0, 1 - Math.abs(raw - i));
+              });
+              if(glow){
+                const distToNearest = Math.abs(raw - Math.round(raw));
+                glow.style.opacity = Math.max(.35, 1 - distToNearest * 1.6);
               }
-
-              const within = (self.progress * claims.length) % 1;
-              if(cover) cover.style.transform = `rotate(${(within - 0.5) * 6}deg) scale(${1 + within * 0.04})`;
             }
           });
         }
