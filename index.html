@@ -1526,22 +1526,22 @@
         return src;
       }
 
-      // A short, dry, high-pitched tick, like a physical mouse button.
+      // A soft wooden "tock", for moving the spotlight carousel left or right.
       function click(){
         try{
           const c = getCtx();
-          const duration = .05;
+          const duration = .07;
           const noise = noiseBurst(duration);
           const bandpass = c.createBiquadFilter();
           bandpass.type = "bandpass";
-          bandpass.frequency.value = 1100;
-          bandpass.Q.value = .6;
+          bandpass.frequency.value = 350;
+          bandpass.Q.value = 2.2;
           const lowpass = c.createBiquadFilter();
           lowpass.type = "lowpass";
-          lowpass.frequency.value = 2200;
+          lowpass.frequency.value = 900;
           const gain = c.createGain();
           gain.gain.setValueAtTime(0, c.currentTime);
-          gain.gain.linearRampToValueAtTime(.16, c.currentTime + .004);
+          gain.gain.linearRampToValueAtTime(.22, c.currentTime + .003);
           gain.gain.exponentialRampToValueAtTime(.0008, c.currentTime + duration);
           noise.connect(bandpass).connect(lowpass).connect(gain).connect(c.destination);
           noise.start();
@@ -1549,26 +1549,26 @@
         }catch(e){}
       }
 
-      // A short, soft paper rustle: filtered noise with the filter sweeping
-      // gently up then down, like a page settling rather than snapping.
+      // A slow, soft paper rustle for flipping a book cover: filtered noise
+      // sweeping gently up then down over a longer, quieter stretch.
       function flip(){
         try{
           const c = getCtx();
-          const duration = .26;
+          const duration = .42;
           const noise = noiseBurst(duration);
           const bandpass = c.createBiquadFilter();
           bandpass.type = "bandpass";
-          bandpass.Q.value = .4;
-          bandpass.frequency.setValueAtTime(500, c.currentTime);
-          bandpass.frequency.linearRampToValueAtTime(1800, c.currentTime + duration * .5);
-          bandpass.frequency.linearRampToValueAtTime(650, c.currentTime + duration);
+          bandpass.Q.value = .35;
+          bandpass.frequency.setValueAtTime(450, c.currentTime);
+          bandpass.frequency.linearRampToValueAtTime(1500, c.currentTime + duration * .5);
+          bandpass.frequency.linearRampToValueAtTime(550, c.currentTime + duration);
           const lowpass = c.createBiquadFilter();
           lowpass.type = "lowpass";
-          lowpass.frequency.value = 2400;
+          lowpass.frequency.value = 2200;
           const gain = c.createGain();
           gain.gain.setValueAtTime(0, c.currentTime);
-          gain.gain.linearRampToValueAtTime(.16, c.currentTime + duration * .3);
-          gain.gain.exponentialRampToValueAtTime(.0008, c.currentTime + duration);
+          gain.gain.linearRampToValueAtTime(.1, c.currentTime + duration * .35);
+          gain.gain.exponentialRampToValueAtTime(.0006, c.currentTime + duration);
           noise.connect(bandpass).connect(lowpass).connect(gain).connect(c.destination);
           noise.start();
           noise.stop(c.currentTime + duration);
