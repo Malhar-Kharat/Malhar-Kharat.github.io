@@ -269,7 +269,7 @@
     .pages{
       height:100vh;
       overflow-y:auto;
-      scroll-snap-type:y mandatory;
+      scroll-snap-type:y proximity;
       scroll-behavior:smooth;
       -webkit-overflow-scrolling: touch;
     }
@@ -398,6 +398,80 @@
       letter-spacing:.2px;
     }
 
+    /* Spotlight carousel: cycle through books, the active one lit and centered */
+    .spotlight-carousel{position:relative; padding:34px 44px 6px; overflow:hidden}
+    .spotlight-glow{
+      position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+      width:220px; height:150px;
+      background: radial-gradient(ellipse at top, rgba(212,166,87,.5), transparent 72%);
+      filter: blur(6px); pointer-events:none;
+    }
+    .spotlight-track{
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      position:relative; z-index:1; min-height:170px;
+    }
+    .spotlight-item{
+      flex:0 0 auto; width:64px; border-radius:10px; overflow:hidden;
+      opacity:.4; filter:grayscale(.5) brightness(.75); transform:scale(.85);
+      transition: all .5s cubic-bezier(.4,.2,.2,1); cursor:pointer;
+      box-shadow:0 6px 18px rgba(58,42,26,.10);
+    }
+    .spotlight-item img{width:100%; aspect-ratio:2/3; object-fit:cover; display:block}
+    .spotlight-item.active{
+      width:132px; opacity:1; filter:none; transform:scale(1);
+      box-shadow: 0 20px 46px rgba(58,42,26,.22), 0 0 0 1px rgba(212,166,87,.4);
+    }
+    .spotlight-arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:36px; height:36px; border-radius:50%;
+      border:1px solid rgba(58,42,26,.14); background:rgba(255,255,255,.75);
+      color:var(--text); font-size:20px; line-height:1; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; z-index:2;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .spotlight-arrow:hover{transform:translateY(-50%) scale(1.08); border-color:rgba(212,166,87,.5)}
+    .spotlight-arrow.left{left:0}
+    .spotlight-arrow.right{right:0}
+    .spotlight-bar{height:4px; border-radius:999px; background:rgba(58,42,26,.10); margin-top:14px; position:relative}
+    .spotlight-bar-fill{
+      position:absolute; top:-3px; width:10px; height:10px; border-radius:50%;
+      background:var(--accent); transition:left .4s ease; left:0;
+    }
+
+    /* Pinned scroll story: "what makes these different" */
+    .pin-story{
+      display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center;
+      min-height:60vh;
+    }
+    @media(max-width:900px){ .pin-story{grid-template-columns:1fr} }
+    .pin-visual{position:relative}
+    .pin-glow{
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:280px; height:280px; border-radius:50%;
+      background: radial-gradient(circle, rgba(212,166,87,.45), transparent 70%);
+      filter: blur(6px); pointer-events:none;
+      transition: opacity .3s ease;
+    }
+    .pin-cover{
+      position:relative; z-index:1;
+      width:100%; max-width:260px; margin:0 auto; display:block;
+      border-radius:16px; aspect-ratio:2/3; object-fit:cover;
+      box-shadow: 0 24px 60px rgba(58,42,26,.22), 0 0 0 1px rgba(212,166,87,.3);
+      transition: transform .1s linear, opacity .25s ease;
+    }
+    .pin-text{position:relative; min-height:200px}
+    .pin-claim{
+      position:absolute; inset:0; opacity:0; transform:translateY(14px);
+      transition: opacity .5s ease, transform .5s ease; pointer-events:none;
+    }
+    .pin-claim.active{opacity:1; transform:none; pointer-events:auto}
+    .pin-old{
+      display:inline-block; text-decoration:line-through; color:rgba(58,42,26,.45);
+      font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;
+      background:rgba(58,42,26,.06); padding:4px 10px; border-radius:999px; margin-bottom:12px;
+    }
+    .pin-claim h3{font-size:28px; margin:0 0 10px}
+
     /* Split */
     .split{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:14px; align-items:start;}
     @media(max-width:980px){ .split{grid-template-columns:1fr} }
@@ -515,6 +589,25 @@
       overflow:hidden;
     }
     .fcover{width:100%; height:100%; object-fit:cover; display:block; background:rgba(58,42,26,.06)}
+    /* Light sweep: a soft gleam flicks across each cover, like studio product light */
+    .flip-front{position:relative}
+    .flip-front::after{
+      content:"";
+      position:absolute; top:0; left:-60%; width:35%; height:100%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,.65), transparent);
+      transform: skewX(-20deg);
+      animation: shineSweep 7s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes shineSweep{
+      0%{left:-60%}
+      18%{left:130%}
+      100%{left:130%}
+    }
+    .grid .book:nth-child(1) .flip-front::after{animation-delay:0s}
+    .grid .book:nth-child(2) .flip-front::after{animation-delay:1s}
+    .grid .book:nth-child(3) .flip-front::after{animation-delay:2s}
+    .grid .book:nth-child(4) .flip-front::after{animation-delay:3s}
     .flip-back{
       transform:rotateY(180deg);
       background: linear-gradient(160deg, rgba(212,166,87,.18), rgba(232,180,168,.16)), rgba(255,250,241,.95);
@@ -522,20 +615,6 @@
       padding:18px; text-align:center;
     }
     .flip-back p{margin:0; color:var(--text); font-weight:650; font-size:15px; line-height:1.4}
-    .rep-stamp{
-      position:absolute; bottom:12px; left:50%;
-      transform:translateX(-50%) scale(.8);
-      background: rgba(212,166,87,.92);
-      color:#2a211a;
-      font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
-      padding:4px 10px; border-radius:999px;
-      opacity:0;
-      transition: opacity .35s ease .15s, transform .35s ease .15s;
-      pointer-events:none;
-    }
-    .book:hover .rep-stamp, .book.flipped .rep-stamp{
-      opacity:1; transform:translateX(-50%) scale(1);
-    }
 
     /* Testimonial carousel */
     .carousel{position:relative; min-height:150px}
@@ -688,7 +767,7 @@
 
             <div class="streak">
               <span class="streak-num" id="streakNum">--</span>
-              <span class="streak-label">day of the year. Not a countdown, a count of reps.</span>
+              <span class="streak-label">day of the year, ticks up on its own every day. Not a countdown, a count of reps.</span>
             </div>
 
             <p>
@@ -719,22 +798,29 @@
 
           <div class="card reveal" id="startHereCard">
             <h2 style="margin:0 0 8px">Start here</h2>
-            <div class="card" style="padding:16px; background:rgba(255,255,255,.55); border:1px solid rgba(58,42,26,.10); border-radius:18px">
-              <p style="margin:0 0 10px">
-                <strong>The Unseen Work</strong> <span class="tag live">NEW</span><br>
-                <span class="sub" style="margin:0">Identity × Reps × Time: the discipline that builds self-trust.</span>
-              </p>
-              <div class="row" style="margin-top:10px">
-                <a class="btn primary" href="https://amzn.eu/d/dkzlBwT" target="_blank" rel="noopener">Buy on Amazon</a>
-                <a class="btn linklike" href="#books">See all books</a>
+            <p class="sub" style="margin:0 0 6px">Click a cover, or use the arrows.</p>
+
+            <div class="spotlight-carousel" id="spotlightCarousel">
+              <div class="spotlight-glow" aria-hidden="true"></div>
+              <button class="spotlight-arrow left" id="spotlightPrev" type="button" aria-label="Previous book">‹</button>
+              <div class="spotlight-track" id="spotlightTrack">
+                <div class="spotlight-item active" data-index="0"><img src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover"></div>
+                <div class="spotlight-item" data-index="1"><img src="assets/luck-blueprint.jpeg" alt="The Luck Blueprint cover"></div>
+                <div class="spotlight-item" data-index="2"><img src="assets/why-not-to-be-rich.jpeg" alt="Why Not To Be Rich cover"></div>
+                <div class="spotlight-item" data-index="3"><img src="assets/echoes-of-youth.jpeg" alt="Echoes Of Youth cover"></div>
               </div>
+              <button class="spotlight-arrow right" id="spotlightNext" type="button" aria-label="Next book">›</button>
             </div>
 
-            <div class="tags">
-              <span class="tag">No hype</span>
-              <span class="tag">Real systems</span>
-              <span class="tag">Quiet progress</span>
+            <h3 id="spotlightTitle" style="margin:14px 0 4px">The Unseen Work</h3>
+            <p class="sub" id="spotlightTagline" style="margin:0 0 12px">The discipline that builds self-trust, one unglamorous rep at a time.</p>
+
+            <div class="row">
+              <a class="btn primary" id="spotlightBuyLink" href="https://amzn.eu/d/dkzlBwT" target="_blank" rel="noopener">Buy on Amazon</a>
+              <a class="btn linklike" href="#books">See all books</a>
             </div>
+
+            <div class="spotlight-bar"><div class="spotlight-bar-fill" id="spotlightBarFill"></div></div>
 
             <p class="note">Tip: scroll down. Each section is a full "page".</p>
           </div>
@@ -824,6 +910,44 @@
 
           <div class="row" style="margin-top:16px">
             <a class="btn" href="#upcoming">Next: Upcoming →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT MAKES THESE DIFFERENT: pinned scroll story -->
+    <section class="page" id="different" style="scroll-snap-align:none; min-height:260vh; align-items:flex-start;">
+      <div class="wrap">
+        <div class="card reveal" id="pinCard" style="min-height:82vh; display:flex; flex-direction:column; justify-content:center;">
+          <h2 style="margin:0 0 4px">What makes these different</h2>
+          <p class="sub" style="margin:0 0 20px">Keep scrolling.</p>
+          <div class="pin-story">
+            <div class="pin-visual">
+              <div class="pin-glow" id="pinGlow" aria-hidden="true"></div>
+              <img class="pin-cover" id="pinCover" src="assets/the-unseen-work.jpeg" alt="The Unseen Work cover">
+            </div>
+            <div class="pin-text">
+              <div class="pin-claim active" data-i="0" data-cover="assets/the-unseen-work.jpeg" data-alt="The Unseen Work cover">
+                <span class="pin-old">A feeling</span>
+                <h3>A system</h3>
+                <p class="sub">Most self-help sells motivation. This is built like a system: Identity × Reps × Time.</p>
+              </div>
+              <div class="pin-claim" data-i="1" data-cover="assets/luck-blueprint.jpeg" data-alt="The Luck Blueprint cover">
+                <span class="pin-old">Getting lucky is random</span>
+                <h3>Luck is preparation, repeated</h3>
+                <p class="sub">What looks like a lucky break is usually someone who kept showing up long enough that the odds caught up with them.</p>
+              </div>
+              <div class="pin-claim" data-i="2" data-cover="assets/why-not-to-be-rich.jpeg" data-alt="Why Not To Be Rich cover">
+                <span class="pin-old">More is the goal</span>
+                <h3>Enough is a decision</h3>
+                <p class="sub">Nobody asks what you're chasing more for. That question is worth sitting with before you spend another decade chasing it.</p>
+              </div>
+              <div class="pin-claim" data-i="3" data-cover="assets/echoes-of-youth.jpeg" data-alt="Echoes Of Youth cover">
+                <span class="pin-old">Feeling different</span>
+                <h3>Being different</h3>
+                <p class="sub">Most books want you to feel inspired for an afternoon. This one wants you to actually change, quietly, on repeat.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1165,17 +1289,6 @@
       });
     })();
 
-    // "Rep logged" stamp: a small tick animates onto a book cover on hover,
-    // a literal nod to Identity x Reps x Time.
-    (function(){
-      document.querySelectorAll(".flip-back").forEach(back=>{
-        const stamp = document.createElement("span");
-        stamp.className = "rep-stamp";
-        stamp.textContent = "Rep logged";
-        back.appendChild(stamp);
-      });
-    })();
-
     // Heavier GSAP-driven motion: hero entrance + scroll-scrubbed parallax orbs
     (function(){
       if(!window.gsap) return;
@@ -1210,6 +1323,56 @@
           y: -280, ease:"none",
           scrollTrigger:{ scroller:".pages", trigger:".pages", start:"top top", end:"bottom bottom", scrub:true }
         });
+      }
+
+      // "What makes these different": the card pins in place while you scroll,
+      // and each claim swaps in as the scroll position moves through the section.
+      if(window.ScrollTrigger){
+        const diffSection = document.getElementById("different");
+        const pinCard = document.getElementById("pinCard");
+        const claims = document.querySelectorAll("#different .pin-claim");
+        const cover = document.getElementById("pinCover");
+        const glow = document.getElementById("pinGlow");
+        if(diffSection && pinCard && claims.length){
+          let lastIdx = -1;
+          ScrollTrigger.create({
+            trigger: diffSection,
+            scroller: ".pages",
+            start: "top top",
+            end: "bottom bottom",
+            pin: pinCard,
+            scrub: true,
+            onUpdate: function(self){
+              const idx = Math.min(claims.length - 1, Math.floor(self.progress * claims.length));
+              claims.forEach((c, i)=> c.classList.toggle("active", i === idx));
+
+              // Swap the cover to the book behind the current claim, and pulse
+              // the glow brighter right as it changes, like the book stepping
+              // under a light.
+              if(idx !== lastIdx){
+                lastIdx = idx;
+                const active = claims[idx];
+                const src = active.getAttribute("data-cover");
+                const alt = active.getAttribute("data-alt");
+                if(cover && src){
+                  cover.style.opacity = 0;
+                  setTimeout(()=>{
+                    cover.src = src;
+                    if(alt) cover.alt = alt;
+                    cover.style.opacity = 1;
+                  }, 120);
+                }
+                if(glow){
+                  glow.style.opacity = 1;
+                  setTimeout(()=>{ glow.style.opacity = .6; }, 350);
+                }
+              }
+
+              const within = (self.progress * claims.length) % 1;
+              if(cover) cover.style.transform = `rotate(${(within - 0.5) * 6}deg) scale(${1 + within * 0.04})`;
+            }
+          });
+        }
       }
     })();
 
@@ -1274,6 +1437,43 @@
       pagesEl.addEventListener("scroll", update, {passive:true});
       window.addEventListener("resize", update);
       update();
+    })();
+
+    // Spotlight carousel: cycle through the four published books, the active
+    // one enlarged and lit, others dimmed. Arrows and clicking a cover both work.
+    (function(){
+      const books = [
+        { title: "The Unseen Work", tagline: "The discipline that builds self-trust, one unglamorous rep at a time.", link: "https://amzn.eu/d/dkzlBwT" },
+        { title: "The Luck Blueprint", tagline: "Luck isn't random. It's what preparation looks like from the outside.", link: "https://amzn.eu/d/97oAgIP" },
+        { title: "Why Not To Be Rich", tagline: "A contrarian's case against chasing more.", link: "https://amzn.eu/d/isqC5Rg" },
+        { title: "Echoes Of Youth", tagline: "What growing up actually sounds like, before the highlight reel.", link: "https://amzn.eu/d/h0XX5MM" }
+      ];
+      const items = document.querySelectorAll("#spotlightTrack .spotlight-item");
+      const titleEl = document.getElementById("spotlightTitle");
+      const taglineEl = document.getElementById("spotlightTagline");
+      const buyEl = document.getElementById("spotlightBuyLink");
+      const barFill = document.getElementById("spotlightBarFill");
+      const prevBtn = document.getElementById("spotlightPrev");
+      const nextBtn = document.getElementById("spotlightNext");
+      if(!items.length) return;
+      let idx = 0;
+
+      function render(){
+        items.forEach((it, i)=> it.classList.toggle("active", i === idx));
+        const b = books[idx];
+        if(titleEl) titleEl.textContent = b.title;
+        if(taglineEl) taglineEl.textContent = b.tagline;
+        if(buyEl) buyEl.href = b.link;
+        if(barFill) barFill.style.left = (idx / (items.length - 1)) * 100 + "%";
+      }
+      function go(delta){
+        idx = (idx + delta + items.length) % items.length;
+        render();
+      }
+      if(prevBtn) prevBtn.addEventListener("click", ()=> go(-1));
+      if(nextBtn) nextBtn.addEventListener("click", ()=> go(1));
+      items.forEach((it, i)=> it.addEventListener("click", ()=>{ idx = i; render(); }));
+      render();
     })();
 
     // Streak counter: day of the year, honest counter, no fabricated claims
