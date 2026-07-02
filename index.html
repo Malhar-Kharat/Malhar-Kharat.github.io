@@ -1498,8 +1498,10 @@
       render();
     })();
 
-    // Tiny synthesized UI sounds (no audio files, generated on the fly), a
-    // short click for the arrows and a different soft "whoosh" for a book flip.
+    // Tiny synthesized UI sounds (no audio files, generated on the fly): a
+    // dry mechanical mouse-click for the arrows, and a paper-like page-flip
+    // rustle for flipping a book, both built from filtered noise rather than
+    // a synth tone so they read as physical, not "gamey".
     const uiSound = (function(){
       let ctx;
       function getCtx(){
@@ -1512,33 +1514,57 @@
       ["pointerdown", "keydown"].forEach(evt=>{
         document.addEventListener(evt, ()=>{ try{ getCtx(); }catch(e){} }, {once:true, passive:true});
       });
+
+      function noiseBurst(duration){
+        const c = getCtx();
+        const size = Math.max(1, Math.floor(c.sampleRate * duration));
+        const buffer = c.createBuffer(1, size, c.sampleRate);
+        const data = buffer.getChannelData(0);
+        for(let i = 0; i < size; i++) data[i] = Math.random() * 2 - 1;
+        const src = c.createBufferSource();
+        src.buffer = buffer;
+        return src;
+      }
+
+      // A short, dry, high-pitched tick, like a physical mouse button.
       function click(){
         try{
           const c = getCtx();
-          const osc = c.createOscillator();
+          const duration = .035;
+          const noise = noiseBurst(duration);
+          const bandpass = c.createBiquadFilter();
+          bandpass.type = "bandpass";
+          bandpass.frequency.value = 2800;
+          bandpass.Q.value = 1.4;
           const gain = c.createGain();
-          osc.type = "square";
-          osc.frequency.setValueAtTime(880, c.currentTime);
-          gain.gain.setValueAtTime(.06, c.currentTime);
-          gain.gain.exponentialRampToValueAtTime(.001, c.currentTime + .07);
-          osc.connect(gain).connect(c.destination);
-          osc.start();
-          osc.stop(c.currentTime + .07);
+          gain.gain.setValueAtTime(.5, c.currentTime);
+          gain.gain.exponentialRampToValueAtTime(.001, c.currentTime + duration);
+          noise.connect(bandpass).connect(gain).connect(c.destination);
+          noise.start();
+          noise.stop(c.currentTime + duration);
         }catch(e){}
       }
+
+      // A short paper rustle: filtered noise with the filter sweeping up
+      // then down, like a page catching air as it turns.
       function flip(){
         try{
           const c = getCtx();
-          const osc = c.createOscillator();
+          const duration = .22;
+          const noise = noiseBurst(duration);
+          const bandpass = c.createBiquadFilter();
+          bandpass.type = "bandpass";
+          bandpass.Q.value = .7;
+          bandpass.frequency.setValueAtTime(700, c.currentTime);
+          bandpass.frequency.linearRampToValueAtTime(3400, c.currentTime + duration * .45);
+          bandpass.frequency.linearRampToValueAtTime(1100, c.currentTime + duration);
           const gain = c.createGain();
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(520, c.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(160, c.currentTime + .22);
-          gain.gain.setValueAtTime(.08, c.currentTime);
-          gain.gain.exponentialRampToValueAtTime(.001, c.currentTime + .24);
-          osc.connect(gain).connect(c.destination);
-          osc.start();
-          osc.stop(c.currentTime + .24);
+          gain.gain.setValueAtTime(0, c.currentTime);
+          gain.gain.linearRampToValueAtTime(.4, c.currentTime + duration * .18);
+          gain.gain.exponentialRampToValueAtTime(.001, c.currentTime + duration);
+          noise.connect(bandpass).connect(gain).connect(c.destination);
+          noise.start();
+          noise.stop(c.currentTime + duration);
         }catch(e){}
       }
       return {click, flip};
