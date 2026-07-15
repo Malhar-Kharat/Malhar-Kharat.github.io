@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
+
+  <title>Custom Android ROM Guide for the OnePlus 9R (lemonadep) | Malhar Kharat</title>
+  <meta name="description" content="A realistic, step-by-step guide to installing a custom Android ROM (LineageOS, crDroid, etc.) on the OnePlus 9R, plus notes on building your own from AOSP source." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Malhar Kharat" />
+  <link rel="canonical" href="https://malhar-kharat.github.io/android-oneplus-9r.html" />
+
+  <meta property="og:title" content="Custom Android ROM Guide for the OnePlus 9R" />
+  <meta property="og:description" content="Bootloader unlock, custom recovery, flashing a ROM, and what it actually takes to build Android from source for the OnePlus 9R." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://malhar-kharat.github.io/android-oneplus-9r.html" />
+  <meta property="og:site_name" content="Malhar Kharat" />
+
+  <style>
+    :root{
+      --bg:#fbf6ec;
+      --card:#fffaf1;
+      --text:#2a211a;
+      --muted:#6b5a4a;
+      --line:#e3d5c2;
+      --accent:#d4a657;
+      --accent2:#e8b4a8;
+      --accent-ink:#8a5f26;
+      --max:880px;
+      --r:20px;
+      --shadow: 0 14px 46px rgba(58,42,26,.14);
+      --navH: 84px;
+      --warn:#b3491f;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(900px 600px at 18% 10%, rgba(232,180,168,.28), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(212,166,87,.26), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:var(--accent-ink); text-decoration:underline; text-decoration-color:rgba(212,166,87,.5)}
+    img{max-width:100%;display:block}
+
+    .nav{
+      position:fixed; left:0; right:0; top:14px; z-index:50;
+      display:flex; justify-content:center; pointer-events:none;
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-inner{
+      pointer-events:auto;
+      width:min(1100px, calc(100% - 36px));
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 16px;
+      border:1px solid rgba(58,42,26,.10);
+      background:rgba(255,250,241,.82);
+      backdrop-filter: blur(12px);
+      border-radius:999px;
+      box-shadow: 0 8px 28px rgba(58,42,26,.10);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:650}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(212,166,87,.55)}
+    .nav a{color:var(--muted); text-decoration:none; font-size:14px; padding:6px 10px; border-radius:999px}
+    .nav a:hover{color:var(--text); background:rgba(58,42,26,.06)}
+
+    main{padding: calc(var(--navH) + 40px) 18px 60px}
+    .wrap{width:min(var(--max), 100%); margin:0 auto}
+
+    .eyebrow{
+      display:inline-block; font-size:13px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--accent-ink); margin-bottom:14px;
+      border:1px solid rgba(212,166,87,.35); padding:5px 14px; border-radius:999px;
+      background:rgba(212,166,87,.08);
+    }
+    h1{font-size:clamp(32px,6vw,46px); line-height:1.1; letter-spacing:-.6px; margin:0 0 14px}
+    .lede{color:var(--muted); font-size:18px; margin:0 0 28px}
+
+    .card{
+      border:1px solid rgba(58,42,26,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,250,241,.55));
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:26px;
+      margin-bottom:22px;
+    }
+    .card h2{margin:0 0 10px; font-size:24px}
+    .card h3{margin:18px 0 8px; font-size:18px}
+    .card p{margin:0 0 12px}
+    .card ul, .card ol{margin:0 0 12px; padding-left:22px}
+    .card li{margin-bottom:6px}
+    code, pre{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: rgba(58,42,26,.06);
+      border:1px solid rgba(58,42,26,.10);
+      border-radius:8px;
+    }
+    code{padding:2px 6px; font-size:14px}
+    pre{padding:14px; overflow-x:auto; font-size:13.5px; line-height:1.5}
+    pre code{border:0; background:none; padding:0}
+
+    .warn{
+      border:1px solid rgba(179,73,31,.35);
+      background: rgba(179,73,31,.08);
+      border-radius:14px;
+      padding:14px 16px;
+      color:var(--warn);
+      font-weight:600;
+      margin:14px 0;
+    }
+    .warn strong{display:block; margin-bottom:4px; font-weight:800}
+
+    .stepnum{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:26px; height:26px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#2a211a; font-weight:800; font-size:13px;
+      margin-right:8px;
+    }
+    .toc{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 28px}
+    .toc a{
+      font-size:13px; padding:6px 12px; border-radius:999px;
+      border:1px solid rgba(58,42,26,.14); background:rgba(255,255,255,.5);
+      text-decoration:none; color:var(--muted);
+    }
+    .toc a:hover{color:var(--text); border-color:rgba(212,166,87,.4)}
+
+    table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px}
+    th,td{text-align:left; padding:8px 10px; border-bottom:1px solid rgba(58,42,26,.10)}
+    th{color:var(--muted); font-weight:700}
+
+    footer{text-align:center; padding:20px 18px 40px; color:var(--muted); font-size:13px}
+    footer a{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand"><span class="dot"></span><span>Malhar Kharat</span></div>
+      <a href="index.html#home">← Back to site</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <span class="eyebrow">Field notes</span>
+      <h1>Installing a custom Android ROM on a OnePlus 9R</h1>
+      <p class="lede">
+        "Create an Android OS" for a specific phone almost always means one of two real things:
+        flashing an existing custom ROM (LineageOS, crDroid, ArrowOS, etc.), or building Android
+        yourself from AOSP source. Below is the honest version of both, for the OnePlus 9R
+        (codename <code>lemonadep</code>).
+      </p>
+
+      <div class="toc">
+        <a href="#reality-check">Reality check</a>
+        <a href="#prep">Before you start</a>
+        <a href="#unlock">1. Unlock bootloader</a>
+        <a href="#recovery">2. Custom recovery</a>
+        <a href="#flash">3. Flash a ROM</a>
+        <a href="#root">4. Root (optional)</a>
+        <a href="#build">Building from source</a>
+        <a href="#roms">ROM options</a>
+      </div>
+
+      <div class="card" id="reality-check">
+        <h2>Reality check first</h2>
+        <p>
+          You cannot write a brand-new operating system for a OnePlus 9R from scratch in a
+          reasonable amount of time. Android on a real phone needs the Linux kernel with
+          Qualcomm's board support package, OnePlus's proprietary binary blobs (Wi-Fi, modem,
+          camera, GPU firmware), and a working bootloader/fastboot/recovery chain — none of which
+          are things you write yourself. Everyone who runs "their own OS" on a 9R is actually doing
+          one of these two things:
+        </p>
+        <table>
+          <tr><th>Path</th><th>What it is</th><th>Time / difficulty</th></tr>
+          <tr><td>Flash a custom ROM</td><td>Install a pre-built community ROM (LineageOS, crDroid, ArrowOS, Pixel Experience) over stock OxygenOS</td><td>30–60 minutes, low risk if you follow steps</td></tr>
+          <tr><td>Build from AOSP source</td><td>Compile Android yourself using the device's kernel/vendor tree, produce your own build</td><td>A full day of setup, 100+ GB disk, hours per build</td></tr>
+        </table>
+        <p>This guide covers both, in order of what's actually practical.</p>
+      </div>
+
+      <div class="card" id="prep">
+        <h2>Before you start</h2>
+        <div class="warn">
+          <strong>This will wipe your phone and voids OnePlus's warranty stance on software.</strong>
+          Unlocking the bootloader factory-resets the device and trips the warranty/knox-style
+          flags some carriers check for. Back up everything (photos, messages, app data) to
+          Google/your PC first. Do not attempt this on a phone you can't afford to lose for a day.
+        </div>
+        <ul>
+          <li>Confirm your exact model: OnePlus 9R is codename <strong>lemonadep</strong> (also seen as <code>lemonade</code>). ROMs are model-specific — a 9 or 9 Pro build will not work.</li>
+          <li>Charge to at least 60%.</li>
+          <li>Enable <strong>Developer Options</strong>: Settings → About phone → tap "Build number" 7 times.</li>
+          <li>In Developer Options, enable <strong>OEM unlocking</strong> and <strong>USB debugging</strong>.</li>
+          <li>On your PC, install <code>adb</code> and <code>fastboot</code> (part of Android SDK Platform Tools) and the OnePlus USB drivers if on Windows.</li>
+        </ul>
+      </div>
+
+      <div class="card" id="unlock">
+        <h3><span class="stepnum">1</span>Unlock the bootloader</h3>
+        <pre><code>adb reboot bootloader
+fastboot flashing unlock
+# confirm on-device with volume/power keys
+fastboot reboot</code></pre>
+        <p>The phone will factory reset itself. Set it up again (you can skip signing into accounts, it'll be wiped again shortly).</p>
+      </div>
+
+      <div class="card" id="recovery">
+        <h3><span class="stepnum">2</span>Flash a custom recovery</h3>
+        <p>
+          A custom recovery (TWRP or OrangeFox for lemonadep) lets you flash ROM zips and Magisk.
+          Download the recovery image built specifically for <code>lemonadep</code> from the
+          respective project's official site or XDA thread — never a random mirror.
+        </p>
+        <pre><code>adb reboot bootloader
+fastboot flash recovery recovery.img
+fastboot reboot recovery</code></pre>
+        <p>Boot straight into recovery (hold Power + Volume Up as the screen goes dark) so stock Android doesn't overwrite it on next boot.</p>
+      </div>
+
+      <div class="card" id="flash">
+        <h3><span class="stepnum">3</span>Flash the ROM</h3>
+        <ol>
+          <li>Download the ROM zip built for <code>lemonadep</code> (and the matching Google Apps / GApps package if the ROM doesn't include them).</li>
+          <li>Copy both zips to the phone's storage via <code>adb push</code> or a USB cable, while in recovery or a booted stock system.</li>
+          <li>In recovery: <strong>Wipe → Advanced Wipe</strong> → select Dalvik/ART Cache, Cache, System, Data (this is the actual OS wipe).</li>
+          <li><strong>Install</strong> → select the ROM zip → flash → then flash the GApps zip in the same session if used.</li>
+          <li>Reboot to system. First boot can take 5–10 minutes; that's normal.</li>
+        </ol>
+      </div>
+
+      <div class="card" id="root">
+        <h3><span class="stepnum">4</span>Root access (optional)</h3>
+        <p>
+          If you want root, flash the latest <a href="https://github.com/topjohnwu/Magisk" target="_blank" rel="noopener">Magisk</a>
+          zip in the same recovery session, or patch the ROM's <code>boot.img</code> with the Magisk app and
+          flash the patched image with <code>fastboot flash boot patched_boot.img</code>.
+        </p>
+      </div>
+
+      <div class="card" id="build">
+        <h2>If you actually want to build Android from source</h2>
+        <p>
+          This is the "real OS" path — compiling AOSP yourself against the 9R's device tree. It's a
+          legitimate weekend project if you want to learn how Android is put together, not a
+          quick task.
+        </p>
+        <h3>What you need</h3>
+        <ul>
+          <li>Linux machine (Ubuntu recommended) with <strong>250GB+ free disk</strong> and 16GB+ RAM</li>
+          <li>The device tree, kernel source, and vendor blobs for <code>lemonadep</code> — LineageOS publishes these under its <code>LineageOS</code> GitHub org for supported devices</li>
+          <li><code>repo</code> tool and a full day for the initial source sync (100GB+ download)</li>
+        </ul>
+        <h3>Rough sequence</h3>
+        <pre><code># one-time host setup
+sudo apt install repo git-core gnupg flex bison build-essential \
+  zip curl zlib1g-dev libc6-dev-i386 libncurses5 x11proto-core-dev \
+  libx11-dev lib32z1-dev
+
+mkdir android && cd android
+repo init -u https://github.com/LineageOS/android.git -b lineage-21.0
+repo sync -c -j$(nproc --all)
+
+# device-specific trees go under device/oneplus/lemonadep,
+# kernel under kernel/oneplus/sm8350, vendor blobs under vendor/oneplus
+
+source build/envsetup.sh
+breakfast lemonadep
+brunch lemonadep   # this compiles the OS; expect 1-4+ hours</code></pre>
+        <p>
+          The output <code>.zip</code> in <code>out/target/product/lemonadep/</code> is flashed exactly
+          like a ROM in step 3 above. This is genuinely how every custom ROM you'd download is made —
+          you'd just be doing it yourself instead of trusting a maintainer's build.
+        </p>
+      </div>
+
+      <div class="card" id="roms">
+        <h2>ROM options for lemonadep</h2>
+        <p>Check each project's official wiki/download page for current lemonadep support status before flashing, ROM support windows change as maintainers move on.</p>
+        <ul>
+          <li><strong>LineageOS</strong> — closest to stock Android, most actively maintained, largest device support list.</li>
+          <li><strong>crDroid</strong> — LineageOS-based with more customization (Pixel-style features, extra QS tiles).</li>
+          <li><strong>ArrowOS</strong> — lightweight, minimal, close to AOSP.</li>
+          <li><strong>Pixel Experience</strong> — stock Google Pixel look and feel.</li>
+        </ul>
+        <p>Community hub for lemonadep-specific build threads, kernels, and known issues: search "OnePlus 9R lemonadep" on XDA Forums.</p>
+      </div>
+
+      <div class="warn">
+        <strong>If anything goes wrong</strong>
+        A phone that only boots to fastboot ("bricked") is almost always recoverable via
+        OnePlus's official MSM/Qualcomm flash tool, which restores stock firmware from a raw
+        image. Keep a copy of the stock ROM for lemonadep downloaded before you start, just in case.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="index.html#home">Back to malhar-kharat.github.io</a>
+  </footer>
+</body>
+</html>
