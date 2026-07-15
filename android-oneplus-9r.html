@@ -10,14 +10,14 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
 
-  <title>Custom Android ROM Guide for the OnePlus 9R (lemonadep) | Malhar Kharat</title>
-  <meta name="description" content="A realistic, step-by-step guide to installing a custom Android ROM (LineageOS, crDroid, etc.) on the OnePlus 9R, plus notes on building your own from AOSP source." />
+  <title>Simplify or Re-ROM Your OnePlus 9R (lemonadep) | Malhar Kharat</title>
+  <meta name="description" content="A realistic guide to making a OnePlus 9R simpler and cleaner without flashing anything, plus the full custom ROM and AOSP source-build paths for going further." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="author" content="Malhar Kharat" />
   <link rel="canonical" href="https://malhar-kharat.github.io/android-oneplus-9r.html" />
 
-  <meta property="og:title" content="Custom Android ROM Guide for the OnePlus 9R" />
-  <meta property="og:description" content="Bootloader unlock, custom recovery, flashing a ROM, and what it actually takes to build Android from source for the OnePlus 9R." />
+  <meta property="og:title" content="Simplify or Re-ROM Your OnePlus 9R" />
+  <meta property="og:description" content="Stock-safe simplicity tweaks, bootloader unlock, custom recovery, flashing a ROM, and building Android from source for the OnePlus 9R." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://malhar-kharat.github.io/android-oneplus-9r.html" />
   <meta property="og:site_name" content="Malhar Kharat" />
@@ -154,16 +154,17 @@
   <main>
     <div class="wrap">
       <span class="eyebrow">Field notes</span>
-      <h1>Installing a custom Android ROM on a OnePlus 9R</h1>
+      <h1>Making a OnePlus 9R simpler, or replacing its OS entirely</h1>
       <p class="lede">
-        "Create an Android OS" for a specific phone almost always means one of two real things:
-        flashing an existing custom ROM (LineageOS, crDroid, ArrowOS, etc.), or building Android
-        yourself from AOSP source. Below is the honest version of both, for the OnePlus 9R
-        (codename <code>lemonadep</code>).
+        "Modify my phone OS" usually means one of three real things: simplifying stock OxygenOS's
+        look and feel with no flashing at all, flashing an existing custom ROM (LineageOS, crDroid,
+        ArrowOS, etc.), or building Android yourself from AOSP source. Below is the honest version
+        of all three, for the OnePlus 9R (codename <code>lemonadep</code>).
       </p>
 
       <div class="toc">
         <a href="#reality-check">Reality check</a>
+        <a href="#simplify">Simplify stock OxygenOS (no flashing)</a>
         <a href="#prep">Before you start</a>
         <a href="#unlock">1. Unlock bootloader</a>
         <a href="#recovery">2. Custom recovery</a>
@@ -180,15 +181,74 @@
           reasonable amount of time. Android on a real phone needs the Linux kernel with
           Qualcomm's board support package, OnePlus's proprietary binary blobs (Wi-Fi, modem,
           camera, GPU firmware), and a working bootloader/fastboot/recovery chain — none of which
-          are things you write yourself. Everyone who runs "their own OS" on a 9R is actually doing
-          one of these two things:
+          are things you write yourself. There are really three ways to change how the OS looks
+          and behaves on a 9R, in order of risk:
         </p>
         <table>
           <tr><th>Path</th><th>What it is</th><th>Time / difficulty</th></tr>
-          <tr><td>Flash a custom ROM</td><td>Install a pre-built community ROM (LineageOS, crDroid, ArrowOS, Pixel Experience) over stock OxygenOS</td><td>30–60 minutes, low risk if you follow steps</td></tr>
+          <tr><td>Simplify stock OxygenOS</td><td>Launcher, icon pack, theming, and de-bloating, no unlock or wipe needed</td><td>15–30 minutes, fully reversible</td></tr>
+          <tr><td>Flash a custom ROM</td><td>Install a pre-built community ROM (LineageOS, crDroid, ArrowOS, Pixel Experience) over stock OxygenOS</td><td>30–60 minutes, low risk if you follow steps, wipes the phone</td></tr>
           <tr><td>Build from AOSP source</td><td>Compile Android yourself using the device's kernel/vendor tree, produce your own build</td><td>A full day of setup, 100+ GB disk, hours per build</td></tr>
         </table>
-        <p>This guide covers both, in order of what's actually practical.</p>
+        <p>If your goal is mainly "looks and simplicity," start with the first path below, it gets you 90% of the way there with none of the risk.</p>
+      </div>
+
+      <div class="card" id="simplify">
+        <h2>Simplify the look, no flashing required</h2>
+        <p>
+          This path changes how the phone looks and feels without touching the bootloader,
+          recovery, or system partition. Nothing here can brick the phone, and everything is
+          undoable from Settings.
+        </p>
+
+        <h3><span class="stepnum">1</span>Switch launcher</h3>
+        <p>The launcher (home screen app) controls most of what makes an Android phone feel busy or calm.</p>
+        <ul>
+          <li><strong>Niagara Launcher</strong> — a single scrollable list of apps, no grid, no icons by default. The fastest way to make a phone feel radically simpler.</li>
+          <li><strong>Nova Launcher</strong> — keeps the familiar grid but gives full control over icon size, grid density, gestures, and lets you hide the app drawer clutter.</li>
+          <li><strong>Lawnchair</strong> — open-source, Pixel-style launcher with a clean default look and no ads/tracking.</li>
+          <li>Install from Play Store, then Settings → Apps → Default apps → Home app → select it.</li>
+        </ul>
+
+        <h3><span class="stepnum">2</span>Icon pack + monochrome icons</h3>
+        <p>
+          A mismatched grid of colorful icons is what makes a home screen feel cluttered.
+          Install a minimal icon pack (e.g. "Minimal Icon Pack", "Whicons", or "Papercut") and
+          apply it from your launcher's settings, most support this directly. On Android 13+,
+          stock OxygenOS also has a built-in <strong>themed (monochrome) icons</strong> toggle:
+          Settings → Wallpaper & style → Themed icons.
+        </p>
+
+        <h3><span class="stepnum">3</span>Turn on OxygenOS's built-in theming</h3>
+        <p>
+          OxygenOS already ships a full theme engine, most people never open it: Settings →
+          Customization (or Wallpaper & style) lets you set a single accent color system-wide,
+          switch icon shape, adjust always-on-display style, and toggle dark mode on a schedule.
+          Doing this alone removes most of the "busy" feeling without installing anything.
+        </p>
+
+        <h3><span class="stepnum">4</span>Remove bloatware, without root</h3>
+        <p>
+          Preinstalled apps you can't normally uninstall can be disabled per-user via ADB, no
+          root or bootloader unlock needed. This is reversible (factory reset restores them).
+        </p>
+        <pre><code>adb shell pm list packages | grep -i oneplus   # find package names
+adb shell pm uninstall --user 0 &lt;package.name&gt;   # removes it for your user only</code></pre>
+        <p>Common ones people remove this way: OnePlus's own weather/community/gallery duplicates, Facebook, Netflix, and carrier apps preloaded by the retailer. Never remove core system packages like <code>com.android.systemui</code> or anything under <code>com.qualcomm</code>.</p>
+
+        <h3><span class="stepnum">5</span>Cut down notifications and animations</h3>
+        <ul>
+          <li>Settings → Notifications → go app by app and turn off anything that isn't essential.</li>
+          <li>Settings → About device → tap Build number 7x → Developer options → set Window/Transition/Animator scale to <code>.5x</code> for a snappier, less busy feel (or off entirely for max simplicity).</li>
+          <li>Settings → Home screen → reduce grid size and turn off the search bar / suggestion row if the launcher exposes it.</li>
+        </ul>
+
+        <div class="warn">
+          <strong>This is the path most people actually want.</strong>
+          Everything in this section is stock-safe, reversible, and gets a materially calmer,
+          simpler-looking phone in under half an hour. Only go further (below) if you specifically
+          want a different Android build, not just a different look.
+        </div>
       </div>
 
       <div class="card" id="prep">
