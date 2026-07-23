@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://malharkharat.co.uk/sitemap.xml
+Sitemap: https://www.malharkharat.co.uk/sitemap.xml
